@@ -1,0 +1,10 @@
+{
+  "extends": ["eslint:recommended", "next/core-web-vitals"],
+  "rules": {
+    "eqeqeq": ["warn", "smart"],
+    "no-console": "warn",
+    "no-unused-vars": "warn",
+    "prefer-const": "warn",
+    "prefer-template": "warn"
+  }
+}
