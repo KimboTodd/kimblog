@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./chatLine";
+import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./ChatLine";
 
 const Chatbot = () => {
   const [loading, setLoading] = useState(false);

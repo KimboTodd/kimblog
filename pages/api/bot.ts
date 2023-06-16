@@ -44,7 +44,7 @@
 //   }
 // }
 
-import { type ChatGPTMessage } from "../../components/chatLine";
+import { type ChatGPTMessage } from "../../components/ChatLine";
 import { OpenAIStream, OpenAIStreamPayload } from "../../utils/OpenAIStream";
 
 // break the app if the API key is missing

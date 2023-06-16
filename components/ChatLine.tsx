@@ -12,7 +12,10 @@ export const LoadingChatLine = () => (
   <div className=" flex min-w-full animate-pulse mb-5 rounded-lg bg-white p-3 shadow-sm shadow-orange-500/10 ring-1 ring-orange-600/20 hover:ring-2 sm:px-6">
     <div className="flex flex-grow space-x-3">
       <div className="min-w-0 flex-1">
-        <Avatar name={"kimbot"} picture={"/assets/blog/kimbotAvatarSmall.png"} />
+        <Avatar
+          name={"kimbot"}
+          picture={"/assets/blog/kimbotAvatarSmall.png"}
+        />
         <div className="space-y-4 pt-4">
           <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2 h-2 rounded bg-zinc-300"></div>
@@ -45,7 +48,10 @@ export function ChatLine({ role = "assistant", content }: ChatGPTMessage) {
       <div className="mb-5 rounded-lg bg-white p-3 shadow-sm shadow-orange-500/10 ring-1 ring-orange-600/20 hover:ring-2 sm:px-6">
         <div className="flex space-x-3">
           <div className="flex-1 gap-4">
-            <Avatar name={"kimbot"} picture={"/assets/blog/kimbotAvatarSmall.png"} />
+            <Avatar
+              name={"kimbot"}
+              picture={"/assets/blog/kimbotAvatarSmall.png"}
+            />
             <p className={"text font- "}>{formattedMessage}</p>
           </div>
         </div>
