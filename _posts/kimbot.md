@@ -1,13 +1,13 @@
 ---
 title: "Tuning OpenAI Chatbot"
 excerpt: "Learning how to train OpenAI Chatbot with custom data"
-coverImage: "/assets/blog/hello-world/cover.jpg"
+coverImage: "/assets/blog/kimbotAvatarCover.png"
 date: "2020-06-16T05:35:07.322Z"
 author:
   name: Kim Todd
   picture: "/assets/blog/authors/KimPossibleAvatar.jpeg"
 ogImage:
-  url: "/assets/blog/hello-world/cover.jpg"
+  url: "/assets/blog/kimbotAvatar.png"
 ---
 
 ⚠️ this article is a work in progress

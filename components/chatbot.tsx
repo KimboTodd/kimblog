@@ -60,18 +60,12 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6 m-9">
+    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6 md:border md:p-5 shadow-inner shadow-orange-600/20">
       {messages.map(({ content, role }, index) => (
         <ChatLine key={index} role={role} content={content} />
       ))}
 
       {loading && <LoadingChatLine />}
-
-      {messages.length < 2 && (
-        <span className="mx-auto flex flex-grow text-gray-600 clear-both">
-          Type a message to start the conversation
-        </span>
-      )}
 
       <div className="mt-6 flex clear-both">
         <input
@@ -79,8 +73,8 @@ const Chatbot = () => {
           aria-label="chat input"
           required
           className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10
-      bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5
-      placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 sm:text-sm"
+      bg-white px-2 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5
+      placeholder:text-zinc-400 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/10 sm:text-sm"
           value={input}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -91,13 +85,14 @@ const Chatbot = () => {
           onChange={(e) => {
             setInput(e.target.value);
           }}
+          placeholder="Type a message to start the conversation"
         />
         <button
           type="submit"
           className="ml-4 flex-none inline-flex items-center gap-2 justify-center 
       rounded-md py-2 px-3 text-sm outline-offset-2 transition 
       active:transition-none bg-zinc-600 font-semibold text-zinc-100
-      hover:bg-zinc-400 active:bg-zinc-800 active:text-zinc-100/70"
+      hover:bg-zinc-400 hover:ring-4 hover:ring-purple-500/10 active:bg-zinc-800 active:text-zinc-100/70"
           onClick={() => {
             sendMessage(input);
             setInput("");

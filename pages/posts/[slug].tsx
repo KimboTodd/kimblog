@@ -22,7 +22,7 @@ type Props = {
 
 export default function Post({ post, morePosts, preview }: Props) {
   const router = useRouter();
-  const title = `${post.title} | ${BLOG_NAME}`;
+  const title = `${post.title}`;
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
@@ -31,7 +31,7 @@ export default function Post({ post, morePosts, preview }: Props) {
       <Container>
         <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
           <Link href="/" className="hover:underline">
-            /..
+            kimblog /..
           </Link>
         </h2>{" "}
         {router.isFallback ? (
@@ -53,9 +53,11 @@ export default function Post({ post, morePosts, preview }: Props) {
               <div className="hidden md:block md:mb-12">
                 <Avatar name={post.author.name} picture={post.author.picture} />
               </div>
-              <div className="mb-8 md:mb-16 sm:mx-0">
-                <CoverImage title={title} src={post.coverImage} />
-              </div>
+              {post.coverImage && (
+                <div className="mb-8 md:mb-16 sm:mx-0">
+                  <CoverImage title={title} src={post.coverImage} />
+                </div>
+              )}
               <div className="max-w-2xl mx-auto">
                 <div className="block md:hidden mb-6">
                   <Avatar
