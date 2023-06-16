@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Container from "./container";
 import { useState } from "react";
 import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./ChatLine";
 
@@ -27,13 +25,16 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
     />
     <button
       type="submit"
-      className="ml-4 flex-none"
+      className="ml-4 flex-none inline-flex items-center gap-2 justify-center 
+      rounded-md py-2 px-3 text-sm outline-offset-2 transition 
+      active:transition-none bg-zinc-600 font-semibold text-zinc-100
+      hover:bg-zinc-400 active:bg-zinc-800 active:text-zinc-100/70"
       onClick={() => {
         sendMessage(input);
         setInput("");
       }}
     >
-      Say
+      Send
     </button>
   </div>
 );
@@ -369,7 +370,7 @@ const Chatbot = ({ preview }: Props) => {
 
   return (
     <div>
-      <div className="rounded-2xl border-zinc-100  lg:border lg:p-6">
+      <div className="rounded-2xl border-zinc-100  lg:border lg:p-6 m-9">
         {messages.map(({ content, role }, index) => (
           <ChatLine key={index} role={role} content={content} />
         ))}

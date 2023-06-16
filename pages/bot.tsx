@@ -1,46 +1,12 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
-import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
-import Head from 'next/head'
-import { BLOG_NAME } from '../lib/constants'
-import Post from '../interfaces/post'
-import Chatbot from '../components/chatbot'
+import Layout from "../components/layout";
+import Chatbot from "../components/chatbot";
 
-type Props = {
-  allPosts: Post[]
-}
-
-export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index() {
   return (
-    <>
+    <div className="max-w-2xl shadow-sm m-auto">
       <Layout>
-        <Head>
-          <title>Testing Out the chatbot</title>
-        </Head>
-        <Container>
-          <Chatbot />
-        </Container>
+        <Chatbot />
       </Layout>
-    </>
-  )
-}
-
-export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
-  return {
-    props: { allPosts },
-  }
+    </div>
+  );
 }
