@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./chatLine";
 
-type Props = {
-  preview?: boolean;
-};
-
-const Chatbot = ({ preview }: Props) => {
+const Chatbot = () => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatGPTMessage[]>([
