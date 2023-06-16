@@ -12,10 +12,10 @@ ogImage:
 
 ⚠️ this article is a work in progress
 
-
 ## dotnet take two
 
 Back to c# after a couple years in typescript and javascript, nestjs, web tooling.
+
 - learning in open source
 - momentum
 - variety of docs

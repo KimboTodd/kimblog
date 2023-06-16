@@ -12,7 +12,6 @@ ogImage:
 
 ⚠️ this article is a work in progress
 
-
 ## learning a language - the 4th time around
 
 In the spirit of sponsorship, I was encouraged to apply to speak at the Santa Barbara Women In STEM talk by my manager. In the spirit of Learning in Public, I applied and was selected to speak. Little did I know, but this was actually unveiled to be a competition at the prep meeting.

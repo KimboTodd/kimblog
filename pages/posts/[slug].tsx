@@ -4,7 +4,6 @@ import Container from "../../components/container";
 import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/posts";
 import Head from "next/head";
-import { BLOG_NAME } from "../../lib/constants";
 import type PostType from "../../interfaces/post";
 import Link from "next/link";
 import markdownStyles from "../../components/markdown-styles.module.css";
@@ -31,7 +30,7 @@ export default function Post({ post, morePosts, preview }: Props) {
       <Container>
         <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
           <Link href="/" className="hover:underline">
-            kimblog /..
+            kimblog
           </Link>
         </h2>{" "}
         {router.isFallback ? (
