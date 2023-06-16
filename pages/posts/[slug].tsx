@@ -2,17 +2,18 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "../../components/container";
 import Layout from "../../components/layout";
-import { getPostBySlug, getAllPosts } from "../../lib/api";
+import { getPostBySlug, getAllPosts } from "../../lib/posts";
 import Head from "next/head";
 import { BLOG_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
 import markdownStyles from "../../components/markdown-styles.module.css";
 import Avatar from "../../components/avatar";
 import CoverImage from "../../components/cover-image";
 import DateFormatter from "../../components/date-formatter";
+import Chatbot from "../../components/chatbot";
+import Markdown from "markdown-to-jsx";
 
 type Props = {
   post: PostType;
@@ -70,10 +71,21 @@ export default function Post({ post, morePosts, preview }: Props) {
 
               {/* body */}
               <div className="max-w-2xl mx-auto">
-                <div
+                <Markdown
+                  options={{
+                    overrides: {
+                      Chatbot: {
+                        component: () => <Chatbot />,
+                      },
+                    },
+                  }}
+                >
+                  {post.content}
+                </Markdown>
+                {/* <div
                   className={markdownStyles["markdown"]}
                   dangerouslySetInnerHTML={{ __html: post.content }}
-                />
+                /> */}
               </div>
             </article>
           </>
@@ -99,13 +111,11 @@ export async function getStaticProps({ params }: Params) {
     "ogImage",
     "coverImage",
   ]);
-  const content = await markdownToHtml(post.content || "");
 
   return {
     props: {
       post: {
         ...post,
-        content,
       },
     },
   };
