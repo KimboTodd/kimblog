@@ -1,3 +1,5 @@
+import Avatar from "./avatar";
+
 type ChatGPTAgent = "user" | "system" | "assistant";
 
 export interface ChatGPTMessage {
@@ -45,21 +47,32 @@ export function ChatLine({ role = "assistant", content }: ChatGPTMessage) {
   return (
     <div
       className={
-        role != "assistant" ? "float-right clear-both" : "float-left clear-both"
+        role === "assistant"
+          ? "float-left clear-both"
+          : "float-right clear-both"
       }
     >
-      <div className="float-right mb-5 rounded-lg bg-white px-4 py-5 shadow-lg ring-1 ring-zinc-100 sm:px-6">
+      <div className="mb-5 rounded-lg bg-white p-3 shadow-lg ring-1 ring-zinc-100 sm:px-6">
         <div className="flex space-x-3">
           <div className="flex-1 gap-4">
-            <p className="font-large text-xxl text-gray-900">
-              <a href="#" className="hover:underline">
-                {role === "assistant" ? "AI" : "You"}
-              </a>
+            <p className="font-large text-xxl text-gray-900 m-0">
+              {role === "assistant" ? (
+                <Avatar
+                  name={"kimbot"}
+                  picture={"/assets/blog/authors/KimbotAvatar.png"}
+                />
+              ) : (
+                <></>
+              )}
+
+              {/* <a href="#" className="hover:underline text-gray-600">
+                {role === "assistant" ? "Kimbot" : "You"}
+              </a> */}
             </p>
             {role === "assistant" ? (
-              <p className={"text font-semibold font- "}>{formatteMessage}</p>
+              <p className={"text font- "}>{formatteMessage}</p>
             ) : (
-              <p className={"text text-gray-400"}>{formatteMessage}</p>
+              <p className={"text text-gray-700 m-0"}>{formatteMessage}</p>
             )}
           </div>
         </div>

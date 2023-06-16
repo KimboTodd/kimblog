@@ -5,7 +5,6 @@ import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/posts";
 import Head from "next/head";
 import { BLOG_NAME } from "../../lib/constants";
-import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
 import Link from "next/link";
 import markdownStyles from "../../components/markdown-styles.module.css";
@@ -71,21 +70,19 @@ export default function Post({ post, morePosts, preview }: Props) {
 
               {/* body */}
               <div className="max-w-2xl mx-auto">
-                <Markdown
-                  options={{
-                    overrides: {
-                      Chatbot: {
-                        component: () => <Chatbot />,
+                <div className={markdownStyles["markdown"]}>
+                  <Markdown
+                    // eslint-disable-next-line react/no-children-prop
+                    children={post.content}
+                    options={{
+                      overrides: {
+                        Chatbot: {
+                          component: () => <Chatbot />,
+                        },
                       },
-                    },
-                  }}
-                >
-                  {post.content}
-                </Markdown>
-                {/* <div
-                  className={markdownStyles["markdown"]}
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                /> */}
+                    }}
+                  />
+                </div>
               </div>
             </article>
           </>
