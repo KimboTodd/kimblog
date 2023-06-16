@@ -1,16 +1,18 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "../../components/container";
-import PostBody from "../../components/post-body";
-import PostHeader from "../../components/post-header";
 import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/api";
-import PostTitle from "../../components/post-title";
 import Head from "next/head";
 import { BLOG_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import markdownStyles from "../../components/markdown-styles.module.css";
+import Avatar from "../../components/avatar";
+import CoverImage from "../../components/cover-image";
+import DateFormatter from "../../components/date-formatter";
 
 type Props = {
   post: PostType;
@@ -33,7 +35,9 @@ export default function Post({ post, morePosts, preview }: Props) {
           </Link>
         </h2>{" "}
         {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+            Loading…
+          </h1>
         ) : (
           <>
             <article className="mb-32">
@@ -41,13 +45,36 @@ export default function Post({ post, morePosts, preview }: Props) {
                 <title>{title}</title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} />
+
+              {/* header */}
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+                {title}
+              </h1>
+              <div className="hidden md:block md:mb-12">
+                <Avatar name={post.author.name} picture={post.author.picture} />
+              </div>
+              <div className="mb-8 md:mb-16 sm:mx-0">
+                <CoverImage title={title} src={post.coverImage} />
+              </div>
+              <div className="max-w-2xl mx-auto">
+                <div className="block md:hidden mb-6">
+                  <Avatar
+                    name={post.author.name}
+                    picture={post.author.picture}
+                  />
+                </div>
+                <div className="mb-6 text-lg">
+                  <DateFormatter dateString={post.date} />
+                </div>
+              </div>
+
+              {/* body */}
+              <div className="max-w-2xl mx-auto">
+                <div
+                  className={markdownStyles["markdown"]}
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
             </article>
           </>
         )}

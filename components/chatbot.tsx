@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./ChatLine";
+import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./chatLine";
 
 type Props = {
   preview?: boolean;

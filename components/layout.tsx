@@ -1,5 +1,5 @@
 import Alert from "./alert";
-import Footer from "./footer";
+import Container from "./container";
 import Meta from "./meta";
 import * as React from "react";
 
@@ -16,7 +16,11 @@ const Layout = ({ preview, children }: Props) => {
         <Alert preview={preview} />
         <main>{children}</main>
       </div>
-      <Footer />
+      <footer className="bg-neutral-50 border-t border-neutral-200">
+        <Container>
+          <div className="py-28 flex flex-col lg:flex-row items-center"></div>
+        </Container>
+      </footer>
     </>
   );
 };
