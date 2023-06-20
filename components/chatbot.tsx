@@ -1,26 +1,26 @@
-import { useState } from "react";
-import { type ChatGPTMessage, ChatLine, LoadingChatLine } from "./ChatLine";
+import { useState } from 'react';
+import { type ChatGPTMessage, ChatLine, LoadingChatLine } from './ChatLine';
 
 const Chatbot = () => {
   const [loading, setLoading] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatGPTMessage[]>([
-    { role: "assistant", content: "How can I help you?" },
+    { role: 'assistant', content: 'How can I help you?' },
   ]);
 
   const sendMessage = async (message: string) => {
     setLoading(true);
     const newMessages = [
       ...messages,
-      { role: "user", content: message } as ChatGPTMessage,
+      { role: 'user', content: message } as ChatGPTMessage,
     ];
     setMessages(newMessages);
     const last10messages = newMessages.slice(-10); // remember last 10 messages
 
-    const response = await fetch("/api/bot", {
-      method: "POST",
+    const response = await fetch('/api/bot', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         messages: last10messages,
@@ -41,7 +41,7 @@ const Chatbot = () => {
     const decoder = new TextDecoder();
     let done = false;
 
-    let lastMessage = "";
+    let lastMessage = '';
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
@@ -52,7 +52,7 @@ const Chatbot = () => {
 
       setMessages([
         ...newMessages,
-        { role: "assistant", content: lastMessage } as ChatGPTMessage,
+        { role: 'assistant', content: lastMessage } as ChatGPTMessage,
       ]);
 
       setLoading(false);
@@ -60,7 +60,7 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6 md:border md:p-5 shadow-inner shadow-orange-600/20">
+    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6 md:border md:p-5 p-3 shadow-inner shadow-orange-600/20">
       {messages.map(({ content, role }, index) => (
         <ChatLine key={index} role={role} content={content} />
       ))}
@@ -76,13 +76,13 @@ const Chatbot = () => {
       bg-white px-2 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5
       placeholder:text-zinc-400 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/10 sm:text-sm"
           value={input}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
               sendMessage(input);
-              setInput("");
+              setInput('');
             }
           }}
-          onChange={(e) => {
+          onChange={e => {
             setInput(e.target.value);
           }}
           placeholder="Type a message to start the conversation"
@@ -95,7 +95,7 @@ const Chatbot = () => {
       hover:bg-zinc-400 hover:ring-4 hover:ring-purple-500/10 active:bg-zinc-800 active:text-zinc-100/70"
           onClick={() => {
             sendMessage(input);
-            setInput("");
+            setInput('');
           }}
         >
           Send
