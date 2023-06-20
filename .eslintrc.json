@@ -1,5 +1,7 @@
 {
-  "extends": ["eslint:recommended", "next/core-web-vitals"],
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "extends": ["eslint:recommended", "prettier", "next/core-web-vitals"],
+  "plugins": ["tailwindcss"],
   "rules": {
     "eqeqeq": ["warn", "smart"],
     "no-console": "warn",
