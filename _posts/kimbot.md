@@ -1,13 +1,13 @@
 ---
-title: 'Tuning OpenAI Chatbot'
-excerpt: 'Learning how to train OpenAI Chatbot with custom data'
+title: 'OpenAI Chatbot'
+excerpt: 'OpenAI, easy to learn, hard to master.'
 coverImage: '/assets/blog/kimbotAvatarCover.png'
-date: '2020-06-16T05:35:07.322Z'
+date: '2020-06-21T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/kimbotAvatar.png'
+  url: '/assets/blog/kimbotAvatarSmall.png'
 ---
 
 ## AI, So Hot Right Now
