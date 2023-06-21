@@ -1,19 +1,19 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Layout from '../components/layout'
-import { getAllPosts } from '../lib/posts'
-import Head from 'next/head'
-import { BLOG_NAME } from '../lib/constants'
-import Post from '../interfaces/post'
+import Container from '../components/container';
+import MoreStories from '../components/more-stories';
+import HeroPost from '../components/hero-post';
+import Layout from '../components/layout';
+import { getAllPosts } from '../lib/posts';
+import Head from 'next/head';
+import { BLOG_NAME } from '../lib/constants';
+import Post from '../interfaces/post';
 
 type Props = {
-  allPosts: Post[]
-}
+  allPosts: Post[];
+};
 
 export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+  const heroPost = allPosts[0];
+  const morePosts = allPosts.slice(1);
   return (
     <>
       <Layout>
@@ -22,16 +22,16 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           {/* intro */}
-          <section className=" md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12 flex-col">
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
+          <section className=" mb-16 mt-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
+            <h1 className="text-5xl font-bold leading-tight tracking-tighter md:pr-8 md:text-8xl">
               {BLOG_NAME}
             </h1>
-            <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">
+            <h4 className="mt-5 text-center text-lg md:pl-8 md:text-left">
               Making the thing I wish I had found.
             </h4>
           </section>
 
-          <hr className="border-neutral-200 mt-1 mb-1 md:mt-24 md:mb-24" />
+          <hr className="mb-1 mt-1 border-neutral-200 md:mb-24 md:mt-24" />
 
           {heroPost && (
             <HeroPost
@@ -44,14 +44,14 @@ export default function Index({ allPosts }: Props) {
             />
           )}
 
-          <hr className="border-neutral-200 mt-1 mb-6 md:mt-24 md:mb-24" />
+          <hr className="mb-6 mt-1 border-neutral-200 md:mb-24 md:mt-24" />
 
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
           {/* projects */}
         </Container>
       </Layout>
     </>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
@@ -61,10 +61,10 @@ export const getStaticProps = async () => {
     'slug',
     'author',
     'coverImage',
-    'excerpt'
-  ])
+    'excerpt',
+  ]);
 
   return {
-    props: { allPosts }
-  }
-}
+    props: { allPosts },
+  };
+};

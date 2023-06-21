@@ -10,9 +10,7 @@ ogImage:
   url: "/assets/blog/hello-world/cover.jpg"
 ---
 
-⚠️ this article is a work in progress
-
-## learning a language - the 4th time around
+# learning a language - the 4th time around
 
 In the spirit of sponsorship, I was encouraged to apply to speak at the Santa Barbara Women In STEM talk by my manager. In the spirit of Learning in Public, I applied and was selected to speak. Little did I know, but this was actually unveiled to be a competition at the prep meeting.
 
@@ -26,7 +24,7 @@ When I wrote this talk, I had been a Software Engineer for four-ish and I was ab
 
 And if you’d rather watch me give these tips, there is a youtube video at the bottom. I’m happy to share that my mentee, Juliana Hernandez, gave the first talk and I gave the last talk. She won the People's Choice award and I won the Judges Choice award.
 
-### Number 1: Be intentional with how you spend your time
+## 1: Be intentional with how you spend your time
 
 I recently spent not-a-small-amount of time on zoom with a few coworkers learning something new. This zoom based group learning worked for them, but after reflecting and listening to my own self, I realized that there was too much going on for me in these sessions. My brain was not calm enough to learn. So I switched it up to invest my time where I was learning better - through reading, watching tutorials and one on one pairing sessions writing code and discussing.
 
@@ -36,18 +34,18 @@ If you're not particularly introspective, here's an idea to start this conversat
 
 You'll learn more effectively by being intentional and investing time in the ways that maximize your return.
 
-### Number 2: Commit to learning consistently
+## 2: Commit to learning consistently
 
 If you don't consistently use your new language skill you're going to lose it. At the start of a new project I was excited and spent a lot of energy upfront learning TypeScript - reading articles, watching tutorials, and completing challenges on exercism.io. This was engaging and effective for me and I learned quickly! But then a different project came up at work and I didn't use TypeScript for a month. When I began working on the TypeScript project again, it turned out I had to relearn a lot.
 
 Next time, I'll complete practice problems on a weekly cadence. I may also pace myself on the upfront learning, knowing that I will carve out time each day or week. In the end I am sure I will end up spending less time being consistent than learning once, forgetting, and relearning again. So I recommend you commit to learning consistently even if it is only a small amount of time, or one practice problem per day.
 
-### Number 3: Teach others
+## 3: Teach others
 
 Research shows that teaching others will help to improve your own understanding. One of the reasons this is so effective is because the act of preparing helps to ensure you know what you're trying to teach. And combined with the interaction with the person you are teaching, this helps to find any missing gaps in your knowledge and truly solidify the lesson.
 I recommend finding someone to teach! It could be a mentee, or a partner to learn with (you can teach each-other), or find someone in a meetup group like SB Learn To Code. Or you can write a blog post and teach the internet.
 
-### Number 4: Communicate with others that know more than you
+## 4: Communicate with others that know more than you
 
 You don't know what you don't know. By communicating with others that know more than you, they will help to point out techniques you don't know, and pitfalls you might be able to avoid. I use the word communicate as a broad term that could be applied to requesting code review, having someone take a look at an entire project you've written, or just a specific function, or try to work alongside colleagues that know more than you, or even just start a casual conversation to understand something tricky that someone else wrote.
 An added benefit is that you'll likely feel some social pressure to do your due diligence and make the conversation worthwhile.

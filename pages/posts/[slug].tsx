@@ -6,7 +6,6 @@ import { getPostBySlug, getAllPosts } from '../../lib/posts';
 import Head from 'next/head';
 import type PostType from '../../interfaces/post';
 import Link from 'next/link';
-import markdownStyles from '../../components/markdown-styles.module.css';
 import Avatar from '../../components/avatar';
 import CoverImage from '../../components/cover-image';
 import DateFormatter from '../../components/date-formatter';

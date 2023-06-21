@@ -1,7 +1,7 @@
 ---
 title: 'Learn in Public'
 excerpt: 'The inspiration for this blog.'
-coverImage:
+coverImage: "/assets/blog/hello-world/cover.jpg"
 date: '2020-06-22T05:35:07.322Z'
 author:
   name: Kim Todd
