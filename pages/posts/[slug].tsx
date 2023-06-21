@@ -48,25 +48,19 @@ export default function Post({ post, morePosts, preview }: Props) {
               <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
                 {title}
               </h1>
-              <div className="hidden md:mb-12 md:block">
+              <div className="mb-6 block">
                 <Avatar name={post.author.name} picture={post.author.picture} />
               </div>
-              {post.coverImage && (
+              <div className="mb-2 text-lg md:mb-6">
+                <DateFormatter dateString={post.date} />
+              </div>
+              {post.coverImage ? (
                 <div className="mb-8 sm:mx-0 md:mb-16">
                   <CoverImage title={title} src={post.coverImage} />
                 </div>
+              ) : (
+                <hr></hr>
               )}
-              <div className="mx-auto max-w-2xl">
-                <div className="mb-6 block md:hidden">
-                  <Avatar
-                    name={post.author.name}
-                    picture={post.author.picture}
-                  />
-                </div>
-                <div className="mb-2 text-lg md:mb-6">
-                  <DateFormatter dateString={post.date} />
-                </div>
-              </div>
 
               {/* body */}
               <div className="mx-auto max-w-3xl">

@@ -1,7 +1,7 @@
 ---
 title: 'Learning a Language'
 excerpt: 'The 4th Time Around'
-coverImage: '/assets/blog/hello-world/cover.jpg'
+coverImage:
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
