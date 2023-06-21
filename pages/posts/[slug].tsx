@@ -28,13 +28,13 @@ export default function Post({ post, morePosts, preview }: Props) {
   return (
     <Layout preview={preview}>
       <Container>
-        <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-9 mt-5 md:mb-20 md:mt-8">
+        <h2 className="mb-9 mt-5 text-2xl font-bold leading-tight tracking-tight md:mb-20 md:mt-8 md:text-4xl md:tracking-tighter">
           <Link href="/" className="hover:underline">
             kimblog
           </Link>
         </h2>{' '}
         {router.isFallback ? (
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+          <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
             Loading…
           </h1>
         ) : (
@@ -46,32 +46,32 @@ export default function Post({ post, morePosts, preview }: Props) {
               </Head>
 
               {/* header */}
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+              <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
                 {title}
               </h1>
-              <div className="hidden md:block md:mb-12">
+              <div className="hidden md:mb-12 md:block">
                 <Avatar name={post.author.name} picture={post.author.picture} />
               </div>
               {post.coverImage && (
-                <div className="mb-8 md:mb-16 sm:mx-0">
+                <div className="mb-8 sm:mx-0 md:mb-16">
                   <CoverImage title={title} src={post.coverImage} />
                 </div>
               )}
-              <div className="max-w-2xl mx-auto">
-                <div className="block md:hidden mb-6">
+              <div className="mx-auto max-w-2xl">
+                <div className="mb-6 block md:hidden">
                   <Avatar
                     name={post.author.name}
                     picture={post.author.picture}
                   />
                 </div>
-                <div className="mb-2 md:mb-6 text-lg">
+                <div className="mb-2 text-lg md:mb-6">
                   <DateFormatter dateString={post.date} />
                 </div>
               </div>
 
               {/* body */}
-              <div className="max-w-2xl mx-auto">
-                <div className={markdownStyles['markdown']}>
+              <div className="mx-auto max-w-3xl">
+                <div className="prose lg:prose-xl">
                   <Markdown
                     // eslint-disable-next-line react/no-children-prop
                     children={post.content}
