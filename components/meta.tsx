@@ -1,5 +1,5 @@
-import Head from "next/head";
-import { BLOG_NAME } from "../lib/constants";
+import Head from 'next/head';
+import { BLOG_NAME } from '../lib/constants';
 
 const Meta = () => {
   return (
@@ -34,7 +34,7 @@ const Meta = () => {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta
         name="description"
-        content={`${BLOG_NAME}. Kim keeping a log of learnings and pre-learnings.`}
+        content={`${BLOG_NAME}, making the thing I wish I had found.`}
       />
       <meta
         property="og:image"
