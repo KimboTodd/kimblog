@@ -16,4 +16,24 @@ Wouldn't it be cool when you bookmark a link to know how many other people have 
 
 In lieu of that, here are some links to articles that were interesting to me.
 
+### Improvement
+
 - https://www.swyx.io/learn-in-public
+- Developer Effectiveness, feedback loops [https://martinfowler.com/articles/developer-effectiveness.html](https://martinfowler.com/articles/developer-effectiveness.html)
+
+- [A simple emoji legend to help convey intention and added meaning in code review comments.](https://github.com/erikthedeveloper/code-review-emoji-guide)
+
+### Career Development
+
+- [Being Glue](https://noidea.dog/glue)
+
+
+### Psychology
+
+- Surprising Human Emotions: [BICEPS model for explaining desk moves](https://larahogan.me/blog/desk-moves/)
+
+### Just for Fun
+
+- [Classic Programmer Paintings](https://classicprogrammerpaintings.com/)
+
+
