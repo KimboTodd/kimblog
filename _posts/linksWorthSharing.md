@@ -1,13 +1,13 @@
 ---
 title: 'Links'
 excerpt: 'A place to store links worth sharing.'
-coverImage: '/assets/blog/hello-world/cover.jpg'
+coverImage: '/assets/blog/sharedBooks.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/hello-world/cover.jpg'
+  url: '/assets/blog/sharedBooks.jpg'
 ---
 
 ## Bookmarks Worth Sharing

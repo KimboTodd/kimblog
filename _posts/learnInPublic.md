@@ -1,13 +1,13 @@
 ---
 title: 'Learn in Public'
 excerpt: 'The inspiration for this blog.'
-coverImage: "/assets/blog/hello-world/cover.jpg"
+coverImage: '/assets/blog/classCover.jpg'
 date: '2020-06-22T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/hello-world/cover.jpg'
+  url: '/assets/blog/classCover.jpg'
 ---
 
 ## Why I'm Making This Blog
@@ -46,3 +46,5 @@ The following is for myself, but to stretch my learning-in-public muscles I'm go
 - [ ] Clone stuff you like, from scratch, to see how they work.
 
 A check doesn't mean I'm finished, but it feels good to check things and track progress.
+
+##### Credit: Photo by <a href="https://unsplash.com/@neonbrand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kenny Eliason</a> on <a href="https://unsplash.com/photos/1-aA2Fadydc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

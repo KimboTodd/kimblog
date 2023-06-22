@@ -1,13 +1,13 @@
 ---
 title: 'See Sharp .NET'
 excerpt: 'C# and .NET through new lenses'
-coverImage: '/assets/blog/hello-world/cover.jpg'
+coverImage: '/assets/blog/windowsCover.png'
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/hello-world/cover.jpg'
+  url: '/assets/blog/windowsCover.png'
 ---
 
 ## In the Beginning

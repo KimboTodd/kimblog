@@ -1,13 +1,13 @@
 ---
 title: 'Learning a Language'
 excerpt: 'The 4th Time Around'
-coverImage:
+coverImage: '/assets/blog/fourCover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/hello-world/cover.jpg'
+  url: '/assets/blog/fourCover.jpg'
 ---
 
 ## The 4th Time Around
@@ -50,3 +50,5 @@ An added benefit is that you'll likely feel some social pressure to do your due 
 By communicating with others that know more than you, you're going to not only learn the language, but learn good habits and best practices in the process.
 
 I hope these four tips to be intentional, commit to learning consistently, teach others, and communicate with those that know more than you help you on the next programming language you learn.
+
+#### Credit: Photo by <a href="https://unsplash.com/@zenchic?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jennefer Zacarias</a> on <a href="https://unsplash.com/photos/l4bNjEUmLUQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
