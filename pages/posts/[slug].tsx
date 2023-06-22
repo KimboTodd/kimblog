@@ -7,10 +7,10 @@ import Head from 'next/head';
 import type PostType from '../../interfaces/post';
 import Link from 'next/link';
 import Avatar from '../../components/avatar';
-import CoverImage from '../../components/cover-image';
 import DateFormatter from '../../components/date-formatter';
 import Chatbot from '../../components/chatbot';
 import Markdown from 'markdown-to-jsx';
+import Image from 'next/image';
 
 type Props = {
   post: PostType;
@@ -45,22 +45,34 @@ export default function Post({ post, morePosts, preview }: Props) {
               </Head>
 
               {/* header */}
-              <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
-                {title}
-              </h1>
-              <div className="mb-6 block">
-                <Avatar name={post.author.name} picture={post.author.picture} />
-              </div>
-              <div className="mb-2 text-lg md:mb-6">
-                <DateFormatter dateString={post.date} />
-              </div>
-              {post.coverImage ? (
-                <div className="mb-8 sm:mx-0 md:mb-16">
-                  <CoverImage title={title} src={post.coverImage} />
+              <div className="mx-auto max-w-6xl">
+                <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
+                  {title}
+                </h1>
+                <div className="mb-6 block">
+                  <Avatar
+                    name={post.author.name}
+                    picture={post.author.picture}
+                  />
                 </div>
-              ) : (
-                <hr></hr>
-              )}
+                <div className="mb-2 text-lg md:mb-6">
+                  <DateFormatter dateString={post.date} />
+                </div>
+                {post.coverImage ? (
+                  <div className="relative mb-8 h-96 overflow-hidden sm:mx-0 md:mb-16 shadow-lg">
+                    <Image
+                      src={post.coverImage}
+                      className="w-full "
+                      alt={`Cover Image for ${title}`}
+                      fill={true}
+                      style={{ objectFit: 'cover' }}
+                      sizes="66vw"
+                    />
+                  </div>
+                ) : (
+                  <hr></hr>
+                )}
+              </div>
 
               {/* body */}
               <div className="mx-auto max-w-3xl">

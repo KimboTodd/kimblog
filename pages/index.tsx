@@ -1,11 +1,11 @@
 import Container from '../components/container';
-import MoreStories from '../components/more-stories';
 import HeroPost from '../components/hero-post';
 import Layout from '../components/layout';
 import { getAllPosts } from '../lib/posts';
 import Head from 'next/head';
 import { BLOG_NAME } from '../lib/constants';
 import Post from '../interfaces/post';
+import PostPreview from '../components/post-preview';
 
 type Props = {
   allPosts: Post[];
@@ -46,7 +46,26 @@ export default function Index({ allPosts }: Props) {
 
           <hr className="mb-6 mt-1 border-neutral-200 md:mb-24 md:mt-24" />
 
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {morePosts.length > 0 && (
+            <section>
+              <h2 className="mb-8 text-5xl font-bold leading-tight tracking-tighter md:text-7xl">
+                More Stories
+              </h2>
+              <div className="mb-32 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-16 md:gap-y-32 lg:gap-x-32">
+                {morePosts.map(post => (
+                  <PostPreview
+                    key={post.slug}
+                    title={post.title}
+                    coverImage={post.coverImage}
+                    date={post.date}
+                    author={post.author}
+                    slug={post.slug}
+                    excerpt={post.excerpt}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
           {/* projects */}
         </Container>
       </Layout>

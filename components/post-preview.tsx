@@ -1,5 +1,5 @@
 import DateFormatter from './date-formatter';
-import CoverImage from './cover-image';
+import Image from 'next/image';
 import Link from 'next/link';
 import type Author from '../interfaces/author';
 
@@ -16,11 +16,20 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
   return (
     <div>
       <div className="mb-5">
-        {coverImage && (
-          <CoverImage slug={slug} title={title} src={coverImage} />
-        )}
+        <div className="relative h-96 overflow-hidden shadow-sm transition-shadow duration-200 hover:shadow-lg sm:mx-0">
+          <Link as={`/posts/${slug}`} href="/posts/[slug]" aria-label={title}>
+            <Image
+              src={coverImage}
+              className="w-full"
+              alt={`Cover Image for ${title}`}
+              fill={true}
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </Link>
+        </div>
       </div>
-      <h3 className="mb-3 text-3xl leading-snug">
+      <h3 className="mb-1 md:mb-3 text-3xl leading-snug">
         <Link
           as={`/posts/${slug}`}
           href="/posts/[slug]"
@@ -29,7 +38,7 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
           {title}
         </Link>
       </h3>
-      <div className="mb-4 text-lg">
+      <div className="mb-1 md:mb-4 text-lg">
         <DateFormatter dateString={date} />
       </div>
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
