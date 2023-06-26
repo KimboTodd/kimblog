@@ -2,7 +2,7 @@
 title: 'Links'
 excerpt: 'A place to store links worth sharing.'
 coverImage: '/assets/blog/sharedBooks.jpg'
-date: '2020-03-16T05:35:07.322Z'
+date: '2023-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'

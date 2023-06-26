@@ -2,7 +2,7 @@
 title: 'Learn in Public'
 excerpt: 'The inspiration for this blog.'
 coverImage: '/assets/blog/classCover.jpg'
-date: '2020-06-22T05:35:07.322Z'
+date: '2023-06-22T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
