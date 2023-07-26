@@ -48,16 +48,6 @@ const Cell = ({ fill, cell }) => {
         setAnimating(false);
       }, 500);
       setAnimationTimeoutId(newTimeoutId);
-    } else if (
-      cellState.state === CellState.Score &&
-      cell[1] !== CellState.Score
-    ) {
-      setCellState(prevState => ({
-        ...prevState,
-        content: CHAINS_ARRAY[fill]?.content,
-        state: cell[1],
-        color: CHAINS_ARRAY[fill].color,
-      }));
     } else {
       setCellState(prevState => ({
         ...prevState,
