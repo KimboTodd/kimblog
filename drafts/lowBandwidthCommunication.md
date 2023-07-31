@@ -1,13 +1,13 @@
 ---
 title: "Low Bandwidth Communication"
 excerpt: "WIP"
-coverImage: "/assets/blog/hello-world/cover.jpg"
+coverImage: "/assets/blog/placeholderCover.jpg"
 date: "2020-03-16T05:35:07.322Z"
 author:
   name: Kim Todd
   picture: "/assets/blog/authors/KimPossibleAvatar.jpeg"
 ogImage:
-  url: "/assets/blog/hello-world/cover.jpg"
+  url: "/assets/blog/placeholderCover.jpg"
 ---
 
 ⚠️ This article is a work in progress.
