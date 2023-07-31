@@ -1,13 +1,13 @@
 ---
 title: 'SVGs and Github READMEs'
 excerpt: 'A little about SVGs and a little about using them in a your github profile'
-coverImage: '/assets/blog/alohamora.svg'
+coverImage: '/assets/blog/alohomora.svg'
 date: '2023-06-26T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/alohamora.svg'
+  url: '/assets/blog/alohomora.svg'
 ---
 
 ## What is an SVG?
@@ -55,7 +55,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
 
 ## How To
 
-1. In VSCode, create a file and give it a name with the extension `.svg`. This example will be: `alohamora.svg`
+1. In VSCode, create a file and give it a name with the extension `.svg`. This example will be: `alohomora.svg`
 1. Copy and paste this code into the file to create the initial content:
 
 ```css
@@ -64,7 +64,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
     <div xmlns="http://www.w3.org/1999/xhtml">
       <div>
         <h1>
-          Alohamora!
+          Alohomora!
         </h1>
       </div>
     </div>
@@ -90,7 +90,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
 
     <div class="container">
       <h1>
-        Alohamora!
+        Alohomora!
       </h1>
     </div>
   ...
@@ -154,7 +154,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
 
       <div class="container">
         <h1>
-          Alohamora!
+          Alohomora!
           <div class="wave">🪄</div>
         </h1>
       </div>
@@ -180,7 +180,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
 
       <div class="container">
         <h1>
-          Alohamora!
+          Alohomora!
           <div class="wave">🪄</div>
         </h1>
       </div>
@@ -221,11 +221,11 @@ Or if you want to use this as an image in your personal github profile do the fo
 1. After your repository is created, either clone the repo, or just edit the markdown file in github by going to your own url that looks like: github.com/yourusename/yourusername.
 1. We now need to do two things. Add the svg we created to the repository and reference the svg from the README.md file.
 1. To do this in the github UI, click the dropdown button that says `Add File`, add a commit message like "added a custom svg", then click `Upload Files`.
-1. Click into the README and click the edit pencil icon. Add this below code to your readme, but update the `alohamora.svg` file name to whatever your file actually named.
+1. Click into the README and click the edit pencil icon. Add this below code to your readme, but update the `alohomora.svg` file name to whatever your file actually named.
 
 ```html
 <div style="width: 100%;">
-  <img src="alohamora.svg" style="width: 100%;" alt="A fun image I made" />
+  <img src="alohomora.svg" style="width: 100%;" alt="A fun image I made" />
 </div>
 ```
 
