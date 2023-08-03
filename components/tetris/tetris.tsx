@@ -3,14 +3,15 @@ import Stage from './stage';
 import Display from './display';
 import StartButton from './startButton';
 import backgroundStars from '../../public/assets/blog/tetris/backgroundStars.png';
-import { usePlayer } from '../../lib/tetrisHooks/usePlayer';
-import { useStage } from '../../lib/tetrisHooks/useStage';
-import { checkCollision, createStage } from './gameHelpers';
+import { usePlayer } from '../../lib/tetris/usePlayer';
+import { useStage } from '../../lib/tetris/useStage';
+import { createStage } from '../../lib/tetris/stage';
+import { checkCollision } from '../../lib/tetris/checkCollision';
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage] = useStage(player, resetPlayer);
 
   const startGame = () => {
@@ -34,6 +35,9 @@ const Tetris = () => {
         break;
       case 40:
         dropPlayer();
+        break;
+      case 38:
+        playerRotate(stage, 1);
         break;
       default:
         break;

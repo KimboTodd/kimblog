@@ -1,12 +1,4 @@
-import { Player, Position, Stage } from '../../lib/tetrisHooks/types';
-
-export const STAGE_WIDTH = 12;
-export const STAGE_HEIGHT = 20;
-
-export const createStage = (): Stage =>
-  Array.from(Array(STAGE_HEIGHT), () =>
-    Array(STAGE_WIDTH).fill(['X', 'clear'])
-  );
+import { Player, Position, Stage } from './types';
 
 export const checkCollision = (
   player: Player,
@@ -14,9 +6,9 @@ export const checkCollision = (
   { x: moveX, y: moveY }: Position
 ): boolean => {
   for (let y = 0; y < player.tetromino.length; y++) {
-    for (let x = 0; x < player.tetromino[y].length; x++) {
-      const tetrominoIsNotBlank = player.tetromino[y][x] !== 'X';
-      if (tetrominoIsNotBlank) {
+    const row = player.tetromino[y];
+    for (let x = 0; x < row.length; x++) {
+      if (row[x] !== 0) {
         const moveWithinBoardHeight = stage[y + player.pos.y + moveY];
         const moveWithinBoardWidth =
           stage[y + player.pos.y + moveY][x + player.pos.x + moveX];
@@ -33,4 +25,5 @@ export const checkCollision = (
       }
     }
   }
+  return false;
 };
