@@ -63,8 +63,8 @@ export const TETROMINOS: Record<CellValue, Tetromino> = {
 };
 
 export const randomTetromino = (): Tetromino => {
-  const tetrominos = 'IJL)STZ';
+  const cellValues = Object.keys(TETROMINOS);
   const randomTetromino =
-    tetrominos[Math.floor(Math.random() * tetrominos.length)];
+    cellValues[Math.floor(Math.random() * cellValues.length)];
   return TETROMINOS[randomTetromino];
 };
