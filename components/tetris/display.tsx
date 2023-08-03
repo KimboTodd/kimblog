@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const Display = ({ gameOver, text }) => (
   <div
@@ -10,4 +10,4 @@ const Display = ({ gameOver, text }) => (
   </div>
 );
 
-export default Display;
+export default memo(Display);

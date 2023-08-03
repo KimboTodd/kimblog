@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const StartButton = ({ callback }) => (
   <button
@@ -9,4 +9,4 @@ const StartButton = ({ callback }) => (
   </button>
 );
 
-export default StartButton;
+export default memo(StartButton);
