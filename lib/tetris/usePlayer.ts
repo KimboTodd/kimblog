@@ -3,15 +3,15 @@ import {
   TETROMINOS,
   randomTetromino,
 } from '../../components/tetris/tetrominos';
-import { STAGE_WIDTH } from './stage';
+import { GRID_WIDTH } from './grid';
 import { checkCollision } from './checkCollision';
-import { Player, Stage, TetrominoShape } from './types';
+import { Player, Grid, TetrominoShape } from './types';
 
 export const usePlayer = (): [
   Player,
   (args: { x: number; y: number; collided: boolean }) => void,
   () => void,
-  (stage: Stage, dir: number) => void
+  (grid: Grid, dir: number) => void
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
@@ -35,7 +35,7 @@ export const usePlayer = (): [
     }
   };
 
-  const playerRotate = (stage: Stage, dir: number) => {
+  const playerRotate = (grid: Grid, dir: number) => {
     const clonedPlayer = JSON.parse(JSON.stringify(player));
     clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, dir);
 
@@ -43,7 +43,7 @@ export const usePlayer = (): [
     // it will get pushed if it would move through another wall or tetromino
     const pos = clonedPlayer.pos;
     let offset = 1;
-    while (checkCollision(clonedPlayer, stage, { x: 0, y: 0 })) {
+    while (checkCollision(clonedPlayer, grid, { x: 0, y: 0 })) {
       clonedPlayer.pos.x += offset;
       // create back and forth movement
       offset = -(offset + (offset > 0 ? 1 : -1));
@@ -79,7 +79,7 @@ export const usePlayer = (): [
 
   const resetPlayer = useCallback(() => {
     setPlayer({
-      pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+      pos: { x: GRID_WIDTH / 2 - 2, y: 0 },
       tetromino: randomTetromino().shape,
       collided: false,
     });
