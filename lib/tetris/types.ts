@@ -16,7 +16,7 @@ export type Tetromino = {
 
 export type TetrominoShape = (string | number)[][];
 
-export type Stage = Cell[][];
+export type Grid = Cell[][];
 
 export type Cell = [shape: CellValue, needsClearing: CellState];
 
