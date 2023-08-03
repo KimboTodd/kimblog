@@ -31,13 +31,20 @@ export const useGrid = (
       }, []);
 
     const updatedGrid = (prevGrid: Grid) => {
-      // First flush the grid,
-      // TODO: convert to for loop
-      const newGrid: Grid = prevGrid.map((row: Cell[]) =>
-        row.map((cell: Cell) =>
-          cell[1] === CellState.Clear ? [0, CellState.Clear] : cell
-        )
-      );
+      // First clear the grid of any cells set to clear
+      const newGrid: Grid = [];
+      for (let y = 0; y < prevGrid.length; y++) {
+        const newRow: Cell[] = [];
+        for (let x = 0; x < prevGrid[y].length; x++) {
+          const cell = prevGrid[y][x];
+          if (cell[1] === CellState.Clear) {
+            newRow.push([0, CellState.Clear]);
+          } else {
+            newRow.push(cell);
+          }
+        }
+        newGrid.push(newRow);
+      }
 
       // Then draw new tetrominos
       player.tetromino.forEach((row: (string | number)[], y: number) => {
@@ -46,12 +53,6 @@ export const useGrid = (
             const cellState = player.collided
               ? CellState.Merged
               : CellState.Clear;
-            // check that fill is a type of TetrominoName
-            console.log('newGrid', newGrid);
-            console.log('y', y);
-            console.log('x', x);
-            console.log('player.pos.y', player.pos.y);
-            console.log('player x', player.pos.x);
             newGrid[y + player.pos.y][x + player.pos.x] = [fill, cellState];
           }
         });
