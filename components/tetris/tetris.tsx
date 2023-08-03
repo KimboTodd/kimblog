@@ -95,7 +95,7 @@ const Tetris = () => {
     drop();
   };
 
-  console.log('re-render');
+  console.log('re-render tetris');
   return (
     <div
       role="button"
@@ -109,15 +109,12 @@ const Tetris = () => {
       <div className="mx-auto flex max-w-6xl items-start p-10">
         <Board grid={grid} />
         <aside className="max-w-200 block w-full px-20">
-          {gameOver ? (
-            <Display gameOver={true} text="Game Over" />
-          ) : (
-            <div>
-              <Display text={`Score: ${score}`} gameOver={false} />
-              <Display text={`Rows: ${rows}`} gameOver={false} />
-              <Display text={`Level: ${level}`} gameOver={false} />
-            </div>
-          )}
+          {gameOver && <Display gameOver={gameOver} text="Game Over" />}
+          <div>
+            <Display text={`Score: ${score}`} gameOver={gameOver} />
+            <Display text={`Rows: ${rows}`} gameOver={gameOver} />
+            <Display text={`Level: ${level}`} gameOver={gameOver} />
+          </div>
           <StartButton callback={startGame} />
         </aside>
       </div>
