@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { createStage } from '../../components/tetris/gameHelpers';
+import { createStage } from './stage';
 import { Cell, Player, Stage } from './types';
 import React from 'react';
+
+
 
 export const useStage = (
   player: Player,
@@ -21,9 +23,11 @@ export const useStage = (
       player.tetromino.forEach((row, y) => {
         row.forEach((value, x) => {
           if (value !== 'X') {
+            const cellValue = value as CellValue;
+            const cellState = player.collided ? 'merged' : 'clear';
             newStage[y + player.pos.y][x + player.pos.x] = [
-              value.toString(),
-              `${player.collided ? 'merged' : 'clear'}`,
+              cellValue,
+              cellState,
             ];
           }
         });
