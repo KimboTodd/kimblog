@@ -6,7 +6,7 @@ const Display = ({ gameOver, text }) => (
       gameOver ? 'text-red' : 'text-gray-600'
     } bg-black text-sm`}
   >
-    {text}:
+    {text}
   </div>
 );
 
