@@ -3,7 +3,6 @@ import { TETROMINOS } from './tetrominos';
 
 const Cell = ({ type }) => {
   const color = TETROMINOS[type]?.color ?? '1,1,1';
-  console.log('Type and Color:', type, color);
   return (
     <div
       className={` aspect-square ${

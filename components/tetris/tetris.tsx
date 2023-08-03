@@ -50,18 +50,19 @@ const Tetris = () => {
   const drop = () => {
     // check moving down one step
     if (checkCollision(player, stage, { x: 0, y: 1 })) {
-      updatePlayerPos({ x: 0, y: 0, collided: true });
-    } else {
       if (player.pos.y < 1) {
         console.log('Game Over');
         setGameOver(true);
         setDropTime(null);
       }
+      updatePlayerPos({ x: 0, y: 0, collided: true });
+    } else {
       updatePlayerPos({ x: 0, y: 1, collided: false });
     }
   };
 
   const dropPlayer = () => {
+    setDropTime(null);
     drop();
   };
 
