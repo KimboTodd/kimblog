@@ -2,15 +2,12 @@ import React from 'react';
 import { TETROMINOS } from './tetrominos';
 import { TetrominoName } from '../../lib/tetris/types';
 
-const Cell = ({
-  tetrominoName: tetrominoName,
-}: {
-  tetrominoName: TetrominoName | number;
-}) => {
-  const color = TETROMINOS[tetrominoName]?.color ?? '1,1,1';
+const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
+  const color =
+    TETROMINOS[tetrominoName]?.color ?? TETROMINOS[TetrominoName.X].color;
   return (
     <div
-      className={` aspect-square ${
+      className={`aspect-square ${
         tetrominoName === TetrominoName.X ? 'border-0' : 'border-4'
       } border-b-opacity-10 border-r-opacity-100 border-t-opacity-100 border-l-opacity-30 border-0`}
       style={{
