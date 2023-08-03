@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createGrid, newRow } from './grid';
-import {
-  Cell,
-  CellState,
-  TetrominoName,
-  Player,
-  Grid,
-  isTetrominoName,
-} from './types';
+import { Cell, CellState, Player, Grid } from './types';
 import React from 'react';
+import { isTetrominoName } from '../../components/tetris/tetrominos';
 
 export const useGrid = (
   player: Player,

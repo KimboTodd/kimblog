@@ -12,7 +12,6 @@ export type Position = {
 export type Grid = Cell[][];
 
 // Can we work towards a number only?
-// The fill should be TetrominoName or 0.
 export type Cell = [fill: number | TetrominoName, needsClearing: CellState];
 
 export type Tetromino = {
@@ -33,9 +32,6 @@ export enum TetrominoName {
   T = 'T',
   Z = 'Z',
 }
-
-export const isTetrominoName = (name: (string | number)): name is TetrominoName =>
-  Object.values(TetrominoName).includes(name as TetrominoName);
 
 export enum CellState {
   Clear = 'clear',
