@@ -1,4 +1,8 @@
-export const TETROMINOS = {
+import { CellValue, Tetromino } from '../../lib/tetris/types';
+
+// TODO: change this to a binary array, no need to use chars
+// Not: The shape need to be 1:1 or square so that the rotation function works correctly
+export const TETROMINOS: Record<CellValue, Tetromino> = {
   X: { shape: [[0]], color: '0,0,0' },
   I: {
     shape: [
@@ -36,6 +40,7 @@ export const TETROMINOS = {
     shape: [
       [0, 'S', 'S'],
       ['S', 'S', 0],
+      [0, 0, 0],
     ],
     color: '223, 217, 36',
   },
@@ -43,6 +48,7 @@ export const TETROMINOS = {
     shape: [
       ['T', 'T', 'T'],
       [0, 'T', 0],
+      [0, 0, 0],
     ],
     color: '132,61, 198',
   },
@@ -50,12 +56,13 @@ export const TETROMINOS = {
     shape: [
       ['Z', 'Z', 0],
       [0, 'Z', 'Z'],
+      [0, 0, 0],
     ],
     color: '226, 78, 78',
   },
 };
 
-export const randomTetromino = () => {
+export const randomTetromino = (): Tetromino => {
   const tetrominos = 'IJL)STZ';
   const randomTetromino =
     tetrominos[Math.floor(Math.random() * tetrominos.length)];
