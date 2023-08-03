@@ -7,7 +7,9 @@ const Board = ({ grid }: { grid: Grid }) => {
     <div
       className={`grid w-full max-w-md grid-cols-12 gap-1 border-2 border-solid border-gray-700 bg-gray-900`}
     >
-      {grid.map(row => row.map((cell, x) => <Cell key={x} shape={cell[0]} />))}
+      {grid.map(row =>
+        row.map((cell, x) => <Cell key={x} tetrominoName={cell[0]} />)
+      )}
     </div>
   );
 };

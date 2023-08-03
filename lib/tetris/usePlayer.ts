@@ -5,7 +5,7 @@ import {
 } from '../../components/tetris/tetrominos';
 import { GRID_WIDTH } from './grid';
 import { checkCollision } from './checkCollision';
-import { Player, Grid, Shape } from './types';
+import { Player, Grid, TetrominoName, Shape } from './types';
 
 export const usePlayer = (): [
   Player,
@@ -15,7 +15,7 @@ export const usePlayer = (): [
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
-    tetromino: TETROMINOS['X'].shape,
+    tetromino: TETROMINOS[TetrominoName.X].shape,
     collided: false,
   });
 

@@ -7,4 +7,4 @@ export const createGrid = (): Grid =>
   Array.from(Array(GRID_HEIGHT), () => newRow());
 
 export const newRow = (): Cell[] =>
-  new Array(GRID_WIDTH).fill(['X', CellState.Clear]);
+  new Array(GRID_WIDTH).fill([0, CellState.Clear]);
