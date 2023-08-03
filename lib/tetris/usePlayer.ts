@@ -5,7 +5,7 @@ import {
 } from '../../components/tetris/tetrominos';
 import { GRID_WIDTH } from './grid';
 import { checkCollision } from './checkCollision';
-import { Player, Grid, TetrominoShape } from './types';
+import { Player, Grid, Shape } from './types';
 
 export const usePlayer = (): [
   Player,
@@ -19,7 +19,7 @@ export const usePlayer = (): [
     collided: false,
   });
 
-  const rotate = (tetromino: TetrominoShape, dir: number) => {
+  const rotate = (tetromino: Shape, dir: number) => {
     // Transpose rows and columns
     const rotatedTetromino = tetromino.map((_, index) =>
       tetromino.map(col => col[index])

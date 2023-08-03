@@ -1,8 +1,8 @@
-import { CellValue, Tetromino } from '../../lib/tetris/types';
+import { TetrominoName, Tetromino } from '../../lib/tetris/types';
 
 // TODO: change this to a binary array, no need to use chars
 // Not: The shape need to be 1:1 or square so that the rotation function works correctly
-export const TETROMINOS: Record<CellValue, Tetromino> = {
+export const TETROMINOS: Record<TetrominoName, Tetromino> = {
   X: { shape: [[0]], color: '0,0,0' },
   I: {
     shape: [

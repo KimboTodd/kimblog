@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createGrid, newRow } from './grid';
-import { Cell, CellState, CellValue, Player, Grid } from './types';
+import { Cell, CellState, TetrominoName, Player, Grid } from './types';
 import React from 'react';
 
 export const useGrid = (
@@ -41,7 +41,7 @@ export const useGrid = (
       player.tetromino.forEach((row, y) => {
         row.forEach((value, x) => {
           if (value !== 'X') {
-            const cellValue = value as CellValue;
+            const cellValue = value as TetrominoName;
             const cellState = player.collided
               ? CellState.Merged
               : CellState.Clear;

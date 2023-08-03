@@ -1,8 +1,8 @@
 import React from 'react';
 import { TETROMINOS } from './tetrominos';
-import { CellValue } from '../../lib/tetris/types';
+import { TetrominoName } from '../../lib/tetris/types';
 
-const Cell = ({ shape }: { shape: CellValue }) => {
+const Cell = ({ shape }: { shape: TetrominoName }) => {
   const color = TETROMINOS[shape]?.color ?? '1,1,1';
   return (
     <div

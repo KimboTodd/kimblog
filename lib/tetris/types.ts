@@ -1,6 +1,6 @@
 export type Player = {
   pos: Position;
-  tetromino: TetrominoShape;
+  tetromino: Shape;
   collided: boolean;
 };
 
@@ -9,19 +9,19 @@ export type Position = {
   y: number;
 };
 
+export type Grid = Cell[][];
+
+export type Cell = [shape: TetrominoName, needsClearing: CellState];
+
+export type TetrominoName = 'X' | 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
+
 export type Tetromino = {
-  shape: TetrominoShape;
+  shape: Shape;
   color: string;
 };
 
-export type TetrominoShape = (string | number)[][];
+export type Shape = (string | number)[][];
 
-export type Grid = Cell[][];
-
-export type Cell = [shape: CellValue, needsClearing: CellState];
-
-// TODO: Decide to use type or enum
-export type CellValue = 'X' | 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
 export enum CellState {
   Clear = 'clear',
   Merged = 'merged',
