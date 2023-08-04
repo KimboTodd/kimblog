@@ -79,7 +79,7 @@ export const usePlayer = (): [
 
   const resetPlayer = useCallback(() => {
     setPlayer({
-      pos: { x: GRID_WIDTH / 2 - 2, y: 0 },
+      pos: { x: Math.floor(GRID_WIDTH / 2), y: 0 },
       tetromino: randomChain().shape,
       collided: false,
     });

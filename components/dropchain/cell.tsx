@@ -20,7 +20,7 @@ const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
     CHAINS_ARRAY[tetrominoName]?.shape[0][0] ?? CHAINS_ARRAY[0].shape[0][0];
   return (
     <div
-      className={`aspect-square ${color} border-2 border-gray-800 text-center align-middle text-lg`}
+      className={`aspect-square ${color} flex items-center justify-center border-2 border-gray-800 text-lg`}
     >
       {content}
     </div>
