@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 export type Player = {
   pos: Position;
-  tetromino: Shape;
+  content: number;
   collided: boolean;
 };
 
@@ -13,14 +13,12 @@ export type Position = {
 export type Grid = Cell[][];
 
 // Can we work towards a number only?
-export type Cell = [fill: number, needsClearing: CellState];
+export type Cell = [content: number, needsClearing: CellState];
 
-export type Tetromino = {
-  shape: Shape;
+export type Chain = {
+  content: number;
   color: string;
 };
-
-export type Shape = (string | number)[][];
 
 export enum CellState {
   Clear = 'clear',
