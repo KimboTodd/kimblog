@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { createGrid, newRow } from './grid';
 import { Cell, CellState, Player, Grid } from './types';
 import React from 'react';
-import { isChainName } from '../../components/dropchain/chains';
 
-export const useGrid = (
+export const useBoard = (
   player: Player,
   resetPlayer: () => void
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
