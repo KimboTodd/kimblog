@@ -1,8 +1,8 @@
 import React from 'react';
 import { CHAINS_ARRAY } from './chains';
-import { TetrominoName } from '../../lib/dropchain/types';
+import { CellState } from '../../lib/dropchain/types';
 
-const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
+const Cell = ({ fill, cell }) => {
   // To prevent tailwind tre-shaking these colors again, we must include them here
   const CHAIN_COLORS = [
     'text-yellow-400',
@@ -12,15 +12,16 @@ const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
     'text-purple-400',
     'text-orange-400',
     'text-teal-400',
+    'animate-ping',
   ];
 
-  const color: string =
-    CHAINS_ARRAY[tetrominoName]?.color ?? CHAINS_ARRAY[0].color;
-  const content =
-    CHAINS_ARRAY[tetrominoName]?.shape[0][0] ?? CHAINS_ARRAY[0].shape[0][0];
+  const color: string = CHAINS_ARRAY[fill]?.color ?? CHAINS_ARRAY[0].color;
+  const content = CHAINS_ARRAY[fill]?.content ?? CHAINS_ARRAY[0].content;
   return (
     <div
-      className={`aspect-square ${color} flex items-center justify-center border-2 border-gray-800 text-3xl`}
+      className={`aspect-square ${color} ${
+        cell[1] === CellState.Score ? 'animate-ping' : ''
+      } flex items-center justify-center border-2 border-gray-800 text-3xl`}
     >
       {content}
     </div>
