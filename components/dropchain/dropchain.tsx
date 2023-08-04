@@ -25,7 +25,7 @@ const DropChain = () => {
     return Math.max(speed, minSpeed);
   };
 
-  const dropDownSpeed = (level: number): number => {
+  const fastDropSpeed = (level: number): number => {
     var floatDown = floatDownSpeed(level);
     const minSpeed = 5;
     return Math.max(minSpeed, floatDown / 20);
@@ -59,10 +59,8 @@ const DropChain = () => {
         }
         break;
       case 40:
-        setDropTime(dropDownSpeed(level));
-
+        setDropTime(fastDropSpeed(level));
         dropLink();
-
         break;
       default:
         break;
