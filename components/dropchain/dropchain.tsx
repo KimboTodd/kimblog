@@ -14,9 +14,10 @@ const DropChain = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [grid, setGrid, rowsCleared] = useBoard(player, resetPlayer);
+  const [grid, setGrid, chainsCleared] = useBoard(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] =
-    useGameStatus(rowsCleared);
+    useGameStatus(chainsCleared);
+  
   const floatDownSpeed = (level: number): number => {
     const minSpeed = 100;
     const maxSpeed = 2000;
