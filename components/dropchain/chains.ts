@@ -6,34 +6,33 @@ export const CHAINS: Record<TetrominoName, Tetromino> = {
   X: { shape: [[0]], color: 'text-black-100' },
   I: {
     shape: [[1]],
-    color: 'text-yellow-300',
+    color: 'text-yellow-400',
   },
   J: {
     shape: [[2]],
-    color: 'text-green-300',
+    color: 'text-green-400',
   },
   L: {
     shape: [[3]],
-    color: 'text-blue-300',
+    color: 'text-blue-400',
   },
   O: {
     shape: [[4]],
-    color: 'text-red-300',
+    color: 'text-red-400',
   },
   S: {
     shape: [[5]],
-    color: 'text-purple-300',
+    color: 'text-purple-400',
   },
   T: {
     shape: [[6]],
-    color: 'text-orange-300',
+    color: 'text-orange-400',
   },
   Z: {
     shape: [[7]],
-    color: 'text-teal-300',
+    color: 'text-teal-400',
   },
 };
-
 
 export const CHAINS_ARRAY = Object.values(CHAINS);
 
@@ -42,9 +41,5 @@ export const randomChain = (): Tetromino => {
   // Get a random tetromino, except for the first which is the placeholder
   const randomTetromino =
     cellValues[Math.floor(Math.random() * (cellValues.length - 1) + 1)];
-  console.log('randomTetromino', randomTetromino);
   return CHAINS[randomTetromino];
 };
-
-export const isChainName = (name: string | number): name is TetrominoName =>
-  Object.values(TetrominoName).includes(name as TetrominoName);

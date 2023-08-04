@@ -5,13 +5,13 @@ import { TetrominoName } from '../../lib/dropchain/types';
 const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
   // To prevent tailwind tre-shaking these colors again, we must include them here
   const CHAIN_COLORS = [
-    'text-yellow-300',
-    'text-green-300',
-    'text-blue-300',
-    'text-red-300',
-    'text-purple-300',
-    'text-orange-300',
-    'text-teal-300',
+    'text-yellow-400',
+    'text-green-400',
+    'text-blue-400',
+    'text-red-400',
+    'text-purple-400',
+    'text-orange-400',
+    'text-teal-400',
   ];
 
   const color: string =
@@ -20,7 +20,7 @@ const Cell = ({ tetrominoName }: { tetrominoName: TetrominoName | number }) => {
     CHAINS_ARRAY[tetrominoName]?.shape[0][0] ?? CHAINS_ARRAY[0].shape[0][0];
   return (
     <div
-      className={`aspect-square ${color} flex items-center justify-center border-2 border-gray-800 text-lg`}
+      className={`aspect-square ${color} flex items-center justify-center border-2 border-gray-800 text-3xl`}
     >
       {content}
     </div>
