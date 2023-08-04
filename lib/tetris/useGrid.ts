@@ -18,7 +18,7 @@ export const useGrid = (
     const sweepRows = (newGrid: Grid) =>
       newGrid.reduce((acc: Grid, row: Cell[]) => {
         // check if all cells within a row are filled
-        if (row.findIndex(cell => cell[0] !== 0) === -1) {
+        if (row.findIndex(cell => cell[0] === 0) === -1) {
           setRowsCleared(prev => prev + 1);
 
           // Add a new row to top

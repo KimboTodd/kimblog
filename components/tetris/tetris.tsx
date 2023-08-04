@@ -95,7 +95,6 @@ const Tetris = () => {
     drop();
   };
 
-  console.log('re-render tetris');
   return (
     <div
       role="button"
