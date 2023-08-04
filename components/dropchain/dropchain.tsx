@@ -3,7 +3,7 @@ import Display from './display';
 import StartButton from './startButton';
 import backgroundStars from '../../public/assets/blog/tetris/backgroundStars.png';
 import { usePlayer } from '../../lib/dropchain/usePlayer';
-import { useGrid } from '../../lib/dropchain/useGrid';
+import { useBoard } from '../../lib/dropchain/useBoard';
 import { createGrid } from '../../lib/dropchain/grid';
 import { useInterval } from '../../lib/dropchain/useInterval';
 import { checkCollision } from '../../lib/dropchain/checkCollision';
@@ -13,16 +13,28 @@ import Board from './board';
 const DropChain = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-  const [grid, setGrid, rowsCleared] = useGrid(player, resetPlayer);
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [grid, setGrid, rowsCleared] = useBoard(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
-  const dropSpeedFunction = () => 1000 / (level + 1) + 200;
+  const floatDownSpeed = (level: number): number => {
+    const minSpeed = 100;
+    const maxSpeed = 2000;
+    const speedRange = maxSpeed - minSpeed;
+    const speed = maxSpeed - speedRange * level;
+    return Math.max(speed, minSpeed);
+  };
+
+  const dropDownSpeed = (level: number): number => {
+    var floatDown = floatDownSpeed(level);
+    const minSpeed = 5;
+    return Math.max(minSpeed, floatDown / 20);
+  };
 
   const startGame = () => {
     // Reset everything
     setGrid(createGrid());
-    setDropTime(1000);
+    setDropTime(floatDownSpeed(level));
     resetPlayer();
     setGameOver(false);
     setScore(0);
@@ -37,44 +49,30 @@ const DropChain = () => {
 
     switch (keyCode) {
       case 37:
-        movePlayerLeftRight(-1);
+        if (checkCollision(player, grid, { x: -1, y: 0 }) === false) {
+          updatePlayerPos({ x: -1, y: 0, collided: false });
+        }
         break;
       case 39:
-        movePlayerLeftRight(1);
+        if (checkCollision(player, grid, { x: 1, y: 0 }) === false) {
+          updatePlayerPos({ x: 1, y: 0, collided: false });
+        }
         break;
       case 40:
-        dropPlayer();
-        break;
-      case 38:
-        playerRotate(grid, 1);
+        setDropTime(dropDownSpeed(level));
+
+        dropLink();
+
         break;
       default:
         break;
     }
   };
 
-  const keyUp = (e: React.KeyboardEvent) => {
-    if (gameOver === false && e.code === 'ArrowDown') {
-      setDropTime(dropSpeedFunction());
-    }
-  };
-
-  useInterval(() => {
-    drop();
-  }, dropTime);
-
-  const movePlayerLeftRight = dir => {
-    if (checkCollision(player, grid, { x: dir, y: 0 })) {
-      return;
-    }
-    updatePlayerPos({ x: dir, y: 0, collided: false });
-  };
-
-  const drop = () => {
-    // increase level when player has cleared 10 rows
+  const dropLink = () => {
     if (rows >= (level + 1) * 10) {
       setLevel(prev => prev + 1);
-      setDropTime(dropSpeedFunction());
+      setDropTime(floatDownSpeed(level));
     }
 
     // check collisions from moving down one step
@@ -84,22 +82,24 @@ const DropChain = () => {
         setDropTime(null);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
+      var res = floatDownSpeed(level);
+      setDropTime(res);
     } else {
       updatePlayerPos({ x: 0, y: 1, collided: false });
     }
   };
 
-  const dropPlayer = () => {
-    setDropTime(null);
-    drop();
-  };
+  useInterval(() => {
+    // TODO: can we move this to only check when a level is cleared?
+    // increase level when player has cleared 10 rows
+    dropLink();
+  }, dropTime);
 
   return (
     <div
       role="button"
       tabIndex={0}
       onKeyDown={e => move(e)}
-      onKeyUp={e => keyUp(e)}
       id="dropchain"
       className="h-screen w-screen overflow-hidden bg-cover"
       style={{ backgroundImage: `url(${backgroundStars.src})` }}
