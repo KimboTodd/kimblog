@@ -72,15 +72,14 @@ const Tetris = () => {
 
   const drop = () => {
     // increase level when player has cleared 10 rows
-    if (rows > (level + 1) * 10) {
-      setLevel(prev => prev++);
+    if (rows >= (level + 1) * 10) {
+      setLevel(prev => prev + 1);
       setDropTime(dropSpeedFunction());
     }
 
     // check collisions from moving down one step
     if (checkCollision(player, grid, { x: 0, y: 1 })) {
       if (player.pos.y < 1) {
-        console.log('Game Over');
         setGameOver(true);
         setDropTime(null);
       }
