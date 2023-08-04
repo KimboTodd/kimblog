@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { createGrid, newRow } from './grid';
 import { Cell, CellState, Player, Grid } from './types';
 import React from 'react';
-import { isTetrominoName } from '../../components/tetris/tetrominos';
+import { isChainName } from '../../components/dropchain/chains';
 
 export const useGrid = (
   player: Player,
@@ -49,11 +49,14 @@ export const useGrid = (
       // Then draw new tetrominos
       player.tetromino.forEach((row: (string | number)[], y: number) => {
         row.forEach((fill: string | number, x: number) => {
-          if (fill !== 0 && isTetrominoName(fill)) {
+          if (fill !== 0) {
             const cellState = player.collided
               ? CellState.Merged
               : CellState.Clear;
-            newGrid[y + player.pos.y][x + player.pos.x] = [fill, cellState];
+            newGrid[y + player.pos.y][x + player.pos.x] = [
+              fill as number,
+              cellState,
+            ];
           }
         });
       });

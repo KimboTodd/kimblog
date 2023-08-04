@@ -34,13 +34,17 @@ export const CHAINS: Record<TetrominoName, Tetromino> = {
   },
 };
 
-export const randomTetromino = (): Tetromino => {
+
+export const CHAINS_ARRAY = Object.values(CHAINS);
+
+export const randomChain = (): Tetromino => {
   const cellValues = Object.keys(CHAINS);
   // Get a random tetromino, except for the first which is the placeholder
   const randomTetromino =
     cellValues[Math.floor(Math.random() * (cellValues.length - 1) + 1)];
+  console.log('randomTetromino', randomTetromino);
   return CHAINS[randomTetromino];
 };
 
-export const isTetrominoName = (name: string | number): name is TetrominoName =>
+export const isChainName = (name: string | number): name is TetrominoName =>
   Object.values(TetrominoName).includes(name as TetrominoName);

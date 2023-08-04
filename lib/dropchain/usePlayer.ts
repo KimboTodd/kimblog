@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import {
-  TETROMINOS,
-  randomTetromino,
-} from '../../components/tetris/tetrominos';
 import { GRID_WIDTH } from './grid';
 import { checkCollision } from './checkCollision';
 import { Player, Grid, TetrominoName, Shape } from './types';
+import {
+  CHAINS,
+  randomChain as randomChain,
+} from '../../components/dropchain/chains';
 
 export const usePlayer = (): [
   Player,
@@ -15,7 +15,7 @@ export const usePlayer = (): [
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
-    tetromino: TETROMINOS[TetrominoName.X].shape,
+    tetromino: CHAINS[TetrominoName.X].shape,
     collided: false,
   });
 
@@ -80,7 +80,7 @@ export const usePlayer = (): [
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: GRID_WIDTH / 2 - 2, y: 0 },
-      tetromino: randomTetromino().shape,
+      tetromino: randomChain().shape,
       collided: false,
     });
   }, []);
