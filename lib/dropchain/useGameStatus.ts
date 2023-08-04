@@ -10,7 +10,7 @@ type UseGameStatusReturnType = [
   React.Dispatch<React.SetStateAction<number>>
 ];
 
-export const useGameStatus = (chainsCleared: number): UseGameStatusReturnType => {
+export const useGameStatus = (chainsScored: number): UseGameStatusReturnType => {
   const [score, setScore] = useState<number>(0);
   const [rows, setRows] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);
@@ -19,15 +19,15 @@ export const useGameStatus = (chainsCleared: number): UseGameStatusReturnType =>
   const calculateScore = useCallback(() => {
     const linePoints: number[] = [40, 100, 300, 1200];
 
-    if (chainsCleared > 0) {
-      setScore(prev => prev + linePoints[chainsCleared - 1] * (level + 1));
-      setRows(prev => prev + chainsCleared);
+    if (chainsScored > 0) {
+      setScore(prev => prev + linePoints[chainsScored - 1] * (level + 1));
+      setRows(prev => prev + chainsScored);
     }
-  }, [level, chainsCleared]);
+  }, [level, chainsScored]);
 
   useEffect(() => {
     calculateScore();
-  }, [calculateScore, chainsCleared, score]);
+  }, [calculateScore, chainsScored, score]);
 
   return [score, setScore, rows, setRows, level, setLevel];
 };

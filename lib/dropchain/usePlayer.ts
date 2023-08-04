@@ -10,7 +10,7 @@ export const usePlayer = (): [
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
-    tetromino: CHAINS_ARRAY[0].shape,
+    content: CHAINS_ARRAY[0].content,
     collided: false,
   });
 
@@ -36,7 +36,7 @@ export const usePlayer = (): [
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: Math.floor(GRID_WIDTH / 2), y: 0 },
-      tetromino: randomChain().shape,
+      content: randomChain().content,
       collided: false,
     });
   }, []);
