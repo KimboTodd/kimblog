@@ -1,8 +1,8 @@
-import { TetrominoName, Tetromino } from '../../lib/dropchain/types';
+import { Tetromino } from '../../lib/dropchain/types';
 
 // TODO: change this to a binary array, no need to use chars
 // Not: The shape need to be 1:1 or square so that the rotation function works correctly
-export const CHAINS: Record<TetrominoName, Tetromino> = {
+export const CHAINS: Record<string, Tetromino> = {
   X: { shape: [[0]], color: 'text-black-100' },
   I: {
     shape: [[1]],
