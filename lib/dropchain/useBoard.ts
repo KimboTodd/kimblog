@@ -15,8 +15,9 @@ export const useBoard = (
     setChainsScored(0);
 
     const updatedGrid = (prevGrid: Grid) => {
-      // First clear the grid of any cells set to clear (due to movement)
       const newGrid: Grid = [];
+
+      // 1. Clear the grid of any cells set to clear or score
       for (let y = 0; y < prevGrid.length; y++) {
         const newRow: Cell[] = [];
         for (let x = 0; x < prevGrid[y].length; x++) {
@@ -31,19 +32,24 @@ export const useBoard = (
         newGrid.push(newRow);
       }
 
-      // Then draw new link in position
+      // 2. Draw new link in position
       if (player.content !== 0) {
         const cellState = player.collided ? CellState.Merged : CellState.Clear;
         newGrid[player.pos.y][player.pos.x] = [player.content, cellState];
       }
 
+      // 3. If gravity is on, shift any non-null cells down
+      // TODO:
+
+      // 4. If the player has collided, check for chains and scoring
       if (player.collided) {
         resetPlayer();
+
         // handle chain clearing
 
         // Row by row, handle clearing horizontal chains
-        var chainStart = null;
-        var chainEnd = null;
+        var rowChainStart = null;
+        var rowChainEnd = null;
         for (let y = 0; y < newGrid.length; y++) {
           const row = newGrid[y];
           for (let x = 0; x < row.length; x++) {
@@ -51,19 +57,19 @@ export const useBoard = (
 
             // a filled cell is found
             if (fill && fill !== 0) {
-              chainStart = chainStart === null ? x : chainStart;
-              chainEnd = x + 1;
+              rowChainStart = rowChainStart === null ? x : rowChainStart;
+              rowChainEnd = x + 1;
             }
 
             // an empty cell is found, or we are at the last element in the row
             if (!fill || fill === 0 || x === row.length - 1) {
-              if (chainStart === null) {
+              if (rowChainStart === null) {
                 // if we have not started a chain, return early
                 continue;
               }
 
-              const contiguousLength = chainEnd - chainStart;
-              for (let chainI = chainStart; chainI < chainEnd; chainI++) {
+              const contiguousLength = rowChainEnd - rowChainStart;
+              for (let chainI = rowChainStart; chainI < rowChainEnd; chainI++) {
                 const contiguousElement = row[chainI];
                 if (contiguousElement[0] === contiguousLength) {
                   // mark for scoring
@@ -73,8 +79,48 @@ export const useBoard = (
                 }
               }
 
-              chainStart = null;
-              chainEnd = null;
+              rowChainStart = null;
+              rowChainEnd = null;
+            }
+          }
+        }
+
+        var colChainStart = null;
+        var colChainEnd = null;
+        const colPlayableHeight = newGrid.length;
+        // Clear column by column, handle clearing vertical chains
+        for (let x = 0; x < newGrid[0].length; x++) {
+          for (let y = 0; y < colPlayableHeight; y++) {
+            console.log(`x: ${x}, y: ${y}`);
+            console.log(newGrid[y][x]);
+            const fill = newGrid[y][x][0];
+
+            // a filled cell is found
+            if (fill && fill !== 0) {
+              colChainStart = colChainStart === null ? y : colChainStart;
+              colChainEnd = y + 1;
+            }
+
+            // an empty cell is found, or we are at the last element in the row
+            if (!fill || fill === 0 || y === colPlayableHeight - 1) {
+              if (colChainStart === null) {
+                // if we have not started a chain, return early
+                continue;
+              }
+
+              const contiguousLength = colChainEnd - colChainStart;
+              for (let chainI = colChainStart; chainI < colChainEnd; chainI++) {
+                const contiguousElement = newGrid[chainI][x];
+                if (contiguousElement[0] === contiguousLength) {
+                  // mark for scoring
+                  setChainsScored(prev => prev++);
+
+                  contiguousElement[1] = CellState.Score;
+                }
+              }
+
+              colChainStart = null;
+              colChainEnd = null;
             }
           }
         }
@@ -97,6 +143,7 @@ export const useBoard = (
     player.pos.y,
     player.content,
     resetPlayer,
+    chainsScored,
   ]);
 
   return [grid, setGrid, chainsScored];
