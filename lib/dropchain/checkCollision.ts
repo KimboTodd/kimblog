@@ -10,11 +10,11 @@ const isMoveBlocked = (grid: Grid, nextY: number, nextX: number) =>
 export const checkCollision = (
   player: Player,
   grid: Grid,
-  { x: moveX, y: moveY }: Position
+  nextPosition: Position
 ): boolean => {
   if (player.content !== 0) {
-    const nextY = player.pos.y + moveY;
-    const nextX = player.pos.x + moveX;
+    const nextY = player.pos.y + nextPosition.y;
+    const nextX = player.pos.x + nextPosition.x;
 
     if (
       isMoveOutOfBounds(grid, nextY, nextX) ||

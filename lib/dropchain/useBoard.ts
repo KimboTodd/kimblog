@@ -91,8 +91,6 @@ export const useBoard = (
         // Clear column by column, handle clearing vertical chains
         for (let x = 0; x < newGrid[0].length; x++) {
           for (let y = 0; y < colPlayableHeight; y++) {
-            console.log(`x: ${x}, y: ${y}`);
-            console.log(newGrid[y][x]);
             const fill = newGrid[y][x][0];
 
             // a filled cell is found
@@ -124,12 +122,6 @@ export const useBoard = (
             }
           }
         }
-
-        // consider transposing and running this funciton again to handle vertical chains
-        // function transposeArray<T>(array: T[][]): T[][] {
-        //   return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
-        // }
-
         return newGrid;
       }
 
