@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 
-type UseGameStatusReturnType = [
+type UseScoreReturnType = [
   number,
   React.Dispatch<React.SetStateAction<number>>,
   number,
@@ -10,7 +10,7 @@ type UseGameStatusReturnType = [
   React.Dispatch<React.SetStateAction<number>>
 ];
 
-export const useGameStatus = (chainsScored: number): UseGameStatusReturnType => {
+export const useScore = (chainsScored: number): UseScoreReturnType => {
   const [score, setScore] = useState<number>(0);
   const [rows, setRows] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);

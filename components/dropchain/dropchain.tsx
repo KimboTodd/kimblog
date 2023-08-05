@@ -7,17 +7,19 @@ import { useBoard } from '../../lib/dropchain/useBoard';
 import { createGrid } from '../../lib/dropchain/grid';
 import { useInterval } from '../../lib/dropchain/useInterval';
 import { checkCollision } from '../../lib/dropchain/checkCollision';
-import { useGameStatus } from '../../lib/dropchain/useGameStatus';
+import { useScore } from '../../lib/dropchain/useScore';
 import Board from './board';
+import Toggle from './toggle';
 
 const DropChain = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [grid, setGrid, chainsCleared] = useBoard(player, resetPlayer);
+  const [Gravity, setGravity] = useState(false);
   const [score, setScore, rows, setRows, level, setLevel] =
-    useGameStatus(chainsCleared);
-  
+    useScore(chainsCleared);
+
   const floatDownSpeed = (level: number): number => {
     const minSpeed = 100;
     const maxSpeed = 2000;
@@ -111,6 +113,7 @@ const DropChain = () => {
             <Display text={`Score: ${score}`} gameOver={gameOver} />
             <Display text={`Rows: ${rows}`} gameOver={gameOver} />
             <Display text={`Level: ${level}`} gameOver={gameOver} />
+            <Toggle label="Gravity" checked={Gravity} setChecked={setGravity} />
           </div>
           <StartButton callback={startGame} />
         </aside>
