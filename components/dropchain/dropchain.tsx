@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Display from './display';
 import StartButton from './startButton';
 import backgroundStars from '../../public/assets/blog/tetris/backgroundStars.png';
@@ -12,13 +12,18 @@ import Board from './board';
 import Toggle from './toggle';
 
 const DropChain = () => {
-  const [dropTime, setDropTime] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer);
-  const [Gravity, setGravity] = useState(false);
-  const [score, setScore, rows, setRows, level, setLevel] =
-    useScore(chainsScored);
+  const [score, rows, level, resetScore] = useScore(chainsScored);
+  const [dropTime, setDropTime] = useState(null);
+  const [gameOver, setGameOver] = useState(false);
+  const [gravity, setGravity] = useState(false);
+
+  useEffect(() => {
+    if (gameOver) {
+      setDropTime(null);
+    }
+  }, [gameOver]);
 
   const floatDownSpeed = (level: number): number => {
     const minSpeed = 100;
@@ -40,9 +45,7 @@ const DropChain = () => {
     setDropTime(floatDownSpeed(level));
     resetPlayer();
     setGameOver(false);
-    setScore(0);
-    setRows(0);
-    setLevel(0);
+    resetScore();
   };
 
   const move = ({ keyCode }) => {
@@ -71,16 +74,11 @@ const DropChain = () => {
   };
 
   const dropLink = () => {
-    if (rows >= (level + 1) * 10) {
-      setLevel(prev => prev + 1);
-      setDropTime(floatDownSpeed(level));
-    }
-
-    // check collisions from moving down one step
     if (checkCollision(player, grid, { x: 0, y: 1 })) {
       if (player.pos.y < 1) {
         setGameOver(true);
         setDropTime(null);
+        return;
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
       var res = floatDownSpeed(level);

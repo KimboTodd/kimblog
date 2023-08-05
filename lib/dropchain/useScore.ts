@@ -1,33 +1,38 @@
 import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
 
-type UseScoreReturnType = [
-  number,
-  React.Dispatch<React.SetStateAction<number>>,
-  number,
-  React.Dispatch<React.SetStateAction<number>>,
-  number,
-  React.Dispatch<React.SetStateAction<number>>
-];
-
-export const useScore = (chainsScored: number): UseScoreReturnType => {
+export const useScore = (
+  chainsScored: number
+): [number, number, number, () => void] => {
   const [score, setScore] = useState<number>(0);
   const [rows, setRows] = useState<number>(0);
-  const [level, setLevel] = useState<number>(0);
+  const [level, setLevel] = useState<number>(1);
 
-  // Can we inline this?
-  const calculateScore = useCallback(() => {
-    const linePoints: number[] = [40, 100, 300, 1200];
+  console.log('0. UseScore - Main Function');
+
+  const resetScore = useCallback(() => {
+    setScore(0);
+    setRows(0);
+    setLevel(1);
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      '1. UseScore - UseEffect, triggered on calculateScore, chainsScored, score'
+    );
 
     if (chainsScored > 0) {
+      // Increment level every 10 chains broken
+      if (rows + chainsScored >= (level + 1) * 7) {
+        console.log('2. UseScore - Incrementing level', (level + 1) * 7);
+        setLevel(prev => prev + 1);
+      }
+
+      const linePoints: number[] = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
       setScore(prev => prev + linePoints[chainsScored - 1] * (level + 1));
       setRows(prev => prev + chainsScored);
     }
-  }, [level, chainsScored]);
+    // calculateLevel();
+  }, [chainsScored, level, rows]);
 
-  useEffect(() => {
-    calculateScore();
-  }, [calculateScore, chainsScored, score]);
-
-  return [score, setScore, rows, setRows, level, setLevel];
+  return [score, rows, level, resetScore];
 };
