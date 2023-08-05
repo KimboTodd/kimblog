@@ -15,10 +15,10 @@ const DropChain = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [grid, setGrid, chainsCleared] = useBoard(player, resetPlayer);
+  const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer);
   const [Gravity, setGravity] = useState(false);
   const [score, setScore, rows, setRows, level, setLevel] =
-    useScore(chainsCleared);
+    useScore(chainsScored);
 
   const floatDownSpeed = (level: number): number => {
     const minSpeed = 100;
@@ -109,13 +109,11 @@ const DropChain = () => {
         <Board grid={grid} />
         <aside className="max-w-200 block w-full px-20">
           {gameOver && <Display gameOver={gameOver} text="Game Over" />}
-          <div>
-            <Display text={`Score: ${score}`} gameOver={gameOver} />
-            <Display text={`Rows: ${rows}`} gameOver={gameOver} />
-            <Display text={`Level: ${level}`} gameOver={gameOver} />
-            <Toggle label="Gravity" checked={Gravity} setChecked={setGravity} />
-          </div>
+          <Display text={`Score: ${score}`} gameOver={gameOver} />
+          <Display text={`Rows: ${rows}`} gameOver={gameOver} />
+          <Display text={`Level: ${level}`} gameOver={gameOver} />
           <StartButton callback={startGame} />
+          <Toggle label="Gravity" checked={Gravity} setChecked={setGravity} />
         </aside>
       </div>
     </div>
