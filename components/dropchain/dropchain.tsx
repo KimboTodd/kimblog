@@ -15,34 +15,26 @@ const DropChain = () => {
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer);
   const [score, rows, level, resetScore] = useScore(chainsScored);
-  const [dropTime, setDropTime] = useState(null);
+  const [dropTime, setDropTime] = useState<number>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gravity, setGravity] = useState(false);
 
   useEffect(() => {
+    // if the level changes, update the drop speed
     if (gameOver) {
       setDropTime(null);
+    } else {
+      setDropTime(floatSpeed(level));
     }
-  }, [gameOver]);
+  }, [level, gameOver]);
 
-  const floatDownSpeed = (level: number): number => {
-    const minSpeed = 100;
-    const maxSpeed = 2000;
-    const speedRange = maxSpeed - minSpeed;
-    const speed = maxSpeed - speedRange * level;
-    return Math.max(speed, minSpeed);
-  };
-
-  const fastDropSpeed = (level: number): number => {
-    var floatDown = floatDownSpeed(level);
-    const minSpeed = 5;
-    return Math.max(minSpeed, floatDown / 20);
-  };
+  const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
+  const fallSpeed = (): number => 40;
 
   const startGame = () => {
     // Reset everything
     setGrid(createGrid());
-    setDropTime(floatDownSpeed(level));
+    setDropTime(floatSpeed(level));
     resetPlayer();
     setGameOver(false);
     resetScore();
@@ -65,7 +57,7 @@ const DropChain = () => {
         }
         break;
       case 40:
-        setDropTime(fastDropSpeed(level));
+        setDropTime(fallSpeed());
         dropLink();
         break;
       default:
@@ -77,20 +69,16 @@ const DropChain = () => {
     if (checkCollision(player, grid, { x: 0, y: 1 })) {
       if (player.pos.y < 1) {
         setGameOver(true);
-        setDropTime(null);
         return;
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
-      var res = floatDownSpeed(level);
-      setDropTime(res);
+      setDropTime(floatSpeed(level));
     } else {
       updatePlayerPos({ x: 0, y: 1, collided: false });
     }
   };
 
   useInterval(() => {
-    // TODO: can we move this to only check when a level is cleared?
-    // increase level when player has cleared 10 rows
     dropLink();
   }, dropTime);
 
@@ -111,7 +99,7 @@ const DropChain = () => {
           <Display text={`Rows: ${rows}`} gameOver={gameOver} />
           <Display text={`Level: ${level}`} gameOver={gameOver} />
           <StartButton callback={startGame} />
-          <Toggle label="Gravity" checked={Gravity} setChecked={setGravity} />
+          <Toggle label="Gravity" checked={gravity} setChecked={setGravity} />
         </aside>
       </div>
     </div>
