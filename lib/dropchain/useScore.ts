@@ -21,8 +21,8 @@ export const useScore = (
     );
 
     if (chainsScored > 0) {
-      // Increment level every 10 chains broken
-      if (rows + chainsScored >= (level + 1) * 7) {
+      // Increment level every 7 chains broken
+      if (rows + chainsScored >= level * 7) {
         console.log('2. UseScore - Incrementing level', (level + 1) * 7);
         setLevel(prev => prev + 1);
       }
