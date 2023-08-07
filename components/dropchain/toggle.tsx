@@ -10,7 +10,6 @@ const Toggle = ({ label, checked, setChecked }) => (
       id="flexSwitchCheckDefault"
       onChange={() => setChecked(!checked)}
       checked={checked}
-      disabled={true}
     />
     <label className="inline-block pl-[0.15rem] text-neutral-500 hover:cursor-pointer">
       {label}
