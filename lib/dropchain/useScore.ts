@@ -5,7 +5,7 @@ export const useScore = (
 ): [number, number, number, () => void] => {
   const [score, setScore] = useState<number>(0);
   const [rows, setRows] = useState<number>(0);
-  const [level, setLevel] = useState<number>(1);
+  const [level, setLevel] = useState<number>(0);
 
   const resetScore = useCallback(() => {
     setScore(0);
