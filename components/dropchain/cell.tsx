@@ -17,6 +17,9 @@ const Cell = ({ fill, cell }) => {
 
   const color: string = CHAINS_ARRAY[fill]?.color ?? CHAINS_ARRAY[0].color;
   const content = CHAINS_ARRAY[fill]?.content ?? CHAINS_ARRAY[0].content;
+  if (cell[1] === CellState.Score) {
+    console.log('cell score 🔥');
+  }
   return (
     <div
       className={`aspect-square ${color} ${

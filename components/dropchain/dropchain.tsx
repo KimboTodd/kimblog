@@ -13,7 +13,12 @@ import Toggle from './toggle';
 
 const DropChain = () => {
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer);
+  const [scoringAnimation, setScoringAnimation] = useState(false);
+  const [grid, setGrid, chainsScored] = useBoard(
+    player,
+    resetPlayer,
+    scoringAnimation
+  );
   const [score, rows, level, resetScore] = useScore(chainsScored);
   const [dropTime, setDropTime] = useState<number>(null);
   const [gameOver, setGameOver] = useState(false);
@@ -28,6 +33,18 @@ const DropChain = () => {
     }
   }, [level, gameOver]);
 
+  // when chains are scored, pause the game for a moment and set animating  to true for half a second
+  useEffect(() => {
+    if (chainsScored > 0) {
+      console.log('🕕');
+      setScoringAnimation(true);
+      setTimeout(() => {
+        console.log('⏰');
+        setScoringAnimation(false);
+      }, 2000);
+    }
+  }, [chainsScored, level]);
+
   const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
   const fallSpeed = (): number => 40;
 
@@ -37,6 +54,7 @@ const DropChain = () => {
     setDropTime(floatSpeed(level));
     resetPlayer();
     setGameOver(false);
+    setScoringAnimation(false);
     resetScore();
   };
 

@@ -7,8 +7,6 @@ export const useScore = (
   const [rows, setRows] = useState<number>(0);
   const [level, setLevel] = useState<number>(1);
 
-  console.log('0. UseScore - Main Function');
-
   const resetScore = useCallback(() => {
     setScore(0);
     setRows(0);
@@ -17,7 +15,7 @@ export const useScore = (
 
   useEffect(() => {
     console.log(
-      '1. UseScore - UseEffect, triggered on calculateScore, chainsScored, score'
+      'Calculating scores - UseEffect, triggered on calculateScore, chainsScored, score'
     );
 
     if (chainsScored > 0) {

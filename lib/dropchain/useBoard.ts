@@ -5,7 +5,8 @@ import React from 'react';
 
 export const useBoard = (
   player: Player,
-  resetPlayer: () => void
+  resetPlayer: () => void,
+  scoringAnimation: boolean
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
   const initialGrid: Grid = createGrid();
   const [grid, setGrid] = useState<Grid>(initialGrid);
@@ -16,7 +17,9 @@ export const useBoard = (
 
     const updatedGrid = (prevGrid: Grid) => {
       const newGrid: Grid = [];
-
+      console.log('🥪 useboard');
+      console.log('🥪 useBoard: removing clear or score from grid"');
+      console.log('🥪 player collided', player.collided);
       // 1. Clear the grid of any cells set to clear or score
       for (let y = 0; y < prevGrid.length; y++) {
         const newRow: Cell[] = [];
@@ -43,7 +46,7 @@ export const useBoard = (
 
       // 4. If the player has collided, check for chains and scoring
       if (player.collided) {
-        resetPlayer();
+        // resetPlayer(); 
 
         // handle chain clearing
 
@@ -73,7 +76,11 @@ export const useBoard = (
                 const contiguousElement = row[chainI];
                 if (contiguousElement[0] === contiguousLength) {
                   // mark for scoring
-                  setChainsScored(prev => prev++);
+                  console.log('🥪 useBoard: Marking for scoring');
+                  setChainsScored(prev => {
+                    console.log('🥪 useBoard: Setting chains scored');
+                    return prev + 1;
+                  });
 
                   contiguousElement[1] = CellState.Score;
                 }
@@ -111,8 +118,11 @@ export const useBoard = (
                 const contiguousElement = newGrid[chainI][x];
                 if (contiguousElement[0] === contiguousLength) {
                   // mark for scoring
-                  setChainsScored(prev => prev++);
-
+                  console.log('🥪 useBoard: Marking for scoring');
+                  setChainsScored(prev => {
+                    console.log('🥪 useBoard: Setting chains scored');
+                    return prev + 1;
+                  });
                   contiguousElement[1] = CellState.Score;
                 }
               }
@@ -122,21 +132,43 @@ export const useBoard = (
             }
           }
         }
+
+        // 5. If we have scored, animate the scoring
+        // by pausing this function
+        console.log('end collided section 🥪');
         return newGrid;
       }
+
+      console.log('🥪');
 
       return newGrid;
     };
 
-    setGrid(prev => updatedGrid(prev));
+    if (scoringAnimation === false) {
+      setGrid(prev => updatedGrid(prev));
+    } else {
+      console.log(
+        `🥪 Skipping seBoard: scoring animation: ${scoringAnimation} 🥪 `
+      );
+    }
   }, [
-    player.collided,
-    player.pos.x,
-    player.pos.y,
-    player.content,
-    resetPlayer,
-    chainsScored,
+    // player.collided,
+    // player.pos.x,
+    // player.pos.y,
+    // player.content,
+    player,
+    // resetPlayer,
+    scoringAnimation,
+    // chainsScored,
   ]);
 
   return [grid, setGrid, chainsScored];
 };
+
+// if we scored
+// calculate new score ✅
+// pause drop time?
+// don't create next chain until we have finished scoring
+// animate scoring
+// rerun above loop to clear and check for new chains
+// but what about collisions?
