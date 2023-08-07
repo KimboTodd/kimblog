@@ -13,7 +13,7 @@ export type Position = {
 export type Grid = Cell[][];
 
 // Can we work towards a number only?
-export type Cell = [content: number, needsClearing: CellState];
+export type Cell = [content: number, cellState: CellState];
 
 export type Chain = {
   content: number;
