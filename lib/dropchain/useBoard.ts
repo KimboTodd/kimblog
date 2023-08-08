@@ -56,28 +56,28 @@ export const useBoard = (
 
   // every 7 drops, add a new row to the bottom
   // and push everything up one row
-  useEffect(() => {
-    if (links !== 0 && links % 7 === 0) {
-      setGrid(prev => {
-        const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
-          // if the first row of the board has contents, game over
-          if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
-            setGameOver(true);
-            return prev;
-          }
-          // if this is the first row of the grid, disregard (remove)
-          if (i !== 1) {
-            return row.map((cell: Cell) => cell);
-          }
-        });
+  // useEffect(() => {
+  //   if (links !== 0 && links % 7 === 0) {
+  //     setGrid(prev => {
+  //       const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
+  //         // if the first row of the board has contents, game over
+  //         if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
+  //           setGameOver(true);
+  //           return prev;
+  //         }
+  //         // if this is the first row of the grid, disregard (remove)
+  //         if (i !== 1) {
+  //           return row.map((cell: Cell) => cell);
+  //         }
+  //       });
 
-        // add a new row at the end
-        const row: Cell[] = newMergedRow();
-        newGrid[prev.length - 1] = row;
-        return newGrid;
-      });
-    }
-  }, [links, setGameOver, setGrid]);
+  //       // add a new row at the end
+  //       const row: Cell[] = newMergedRow();
+  //       newGrid[prev.length - 1] = row;
+  //       return newGrid;
+  //     });
+  //   }
+  // }, [links, setGameOver, setGrid]);
 
   return [grid, setGrid, chainsScored];
 };
