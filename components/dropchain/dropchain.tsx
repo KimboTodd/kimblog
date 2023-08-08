@@ -11,17 +11,22 @@ import InverseDisplay from './inverseDisplay';
 import RowCounter from './rowCounter';
 
 const DropChain = () => {
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [gravity, setGravity] = useState(true);
-  const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer, gravity);
-  const [dropTime, setDropTime] = useState<number>(null);
-  const [gameOver, setGameOver] = useState(null);
-  const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
-  const [scoreSound, setScoreSound] = useState(null);
-
   const [score, setScore] = useState<number>(0);
   const [links, setLinks] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);
+  const [gameOver, setGameOver] = useState(null);
+  const [dropTime, setDropTime] = useState<number>(null);
+  const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
+  const [scoreSound, setScoreSound] = useState(null);
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [gravity, setGravity] = useState(true);
+  const [grid, setGrid, chainsScored] = useBoard(
+    player,
+    resetPlayer,
+    gravity,
+    links,
+    setGameOver
+  );
 
   const resetScore = useCallback(() => {
     setScore(0);

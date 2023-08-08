@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { createGrid } from './grid';
+import { createGrid, newMergedRow, newRow } from './grid';
 import { Cell, CellState, Player, Grid } from './types';
 import React from 'react';
 
 export const useBoard = (
   player: Player,
   resetPlayer: () => void,
-  gravity: boolean
+  gravity: boolean,
+  links: number,
+  setGameOver: React.Dispatch<React.SetStateAction<boolean>>
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
   const initialGrid: Grid = createGrid();
   const [grid, setGrid] = useState<Grid>(initialGrid);
@@ -51,6 +53,31 @@ export const useBoard = (
     // TODO: revisit this idea for chained busting
     setGrid(prev => updatedGrid(prev));
   }, [gravity, player, resetPlayer]);
+
+  // every 7 drops, add a new row to the bottom
+  // and push everything up one row
+  useEffect(() => {
+    if (links !== 0 && links % 7 === 0) {
+      setGrid(prev => {
+        const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
+          // if the first row of the board has contents, game over
+          if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
+            setGameOver(true);
+            return prev;
+          }
+          // if this is the first row of the grid, disregard (remove)
+          if (i !== 1) {
+            return row.map((cell: Cell) => cell);
+          }
+        });
+
+        // add a new row at the end
+        const row: Cell[] = newMergedRow();
+        newGrid[prev.length - 1] = row;
+        return newGrid;
+      });
+    }
+  }, [links, setGameOver, setGrid]);
 
   return [grid, setGrid, chainsScored];
 };

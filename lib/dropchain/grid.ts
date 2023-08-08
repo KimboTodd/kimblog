@@ -8,3 +8,6 @@ export const createGrid = (): Grid =>
 
 export const newRow = (): Cell[] =>
   new Array(GRID_WIDTH).fill([0, CellState.Clear]);
+
+export const newMergedRow = (): Cell[] =>
+  new Array(GRID_WIDTH).fill([8, CellState.Merged]);
