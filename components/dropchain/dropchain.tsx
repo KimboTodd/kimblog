@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Display from './display';
 import StartButton from './startButton';
 import { usePlayer } from '../../lib/dropchain/usePlayer';
@@ -9,76 +9,35 @@ import { checkCollision } from '../../lib/dropchain/checkCollision';
 import Board from './board';
 import InverseDisplay from './inverseDisplay';
 import RowCounter from './rowCounter';
+import { useScore } from '../../lib/dropchain/useScore';
 
 const DropChain = () => {
-  const [score, setScore] = useState<number>(0);
-  const [links, setLinks] = useState<number>(0);
-  const [level, setLevel] = useState<number>(0);
+  const [linksDropped, setLinksDropped] = useState<number>(0);
   const [gameOver, setGameOver] = useState(null);
   const [dropTime, setDropTime] = useState<number>(null);
-  const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
-  const [scoreSound, setScoreSound] = useState(null);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [gravity, setGravity] = useState(true);
   const [grid, setGrid, chainsScored] = useBoard(
     player,
     resetPlayer,
     gravity,
-    links,
+    linksDropped,
     setGameOver
   );
-
-  const resetScore = useCallback(() => {
-    setScore(0);
-    setLinks(0);
-    setLevel(1);
-  }, []);
+  const [score, level, resetScore] = useScore(chainsScored, linksDropped);
 
   useEffect(() => {
-    setLinks(prev => prev + 1);
+    setLinksDropped(prev => prev + 1);
   }, [player.content]);
-
-  useEffect(() => {
-    if (chainsScored > 0) {
-      if (links >= level * 7) {
-        setLevel(prev => prev + 1);
-      }
-
-      const linePoints: number[] = [
-        10, 20, 30, 50, 80, 130, 210, 340, 550, 890,
-      ];
-      setScore(prev => prev + linePoints[chainsScored - 1] * level);
-    }
-  }, [chainsScored, level, links]);
 
   useEffect(() => {
     if (gameOver) {
       setDropTime(null);
-      setTitleText('* * * * * * GAME OVER');
       new Audio('/assets/blog/dropchain/score-waw.wav').play();
     } else if (level > 0) {
       setDropTime(floatSpeed(level));
     }
   }, [level, gameOver]);
-
-  useEffect(() => {
-    if (chainsScored > 0) {
-      const sound = new Audio(
-        '/assets/blog/dropchain/audio/confirmation_001.ogg'
-      );
-      sound.play();
-      setScoreSound(sound);
-    }
-  }, [chainsScored]);
-
-  useEffect(() => {
-    if (scoreSound) {
-      scoreSound.addEventListener('ended', () => {
-        scoreSound.remove();
-        setScoreSound(null);
-      });
-    }
-  }, [scoreSound]);
 
   const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
   const fallSpeed = (): number => 40;
@@ -90,7 +49,7 @@ const DropChain = () => {
     resetPlayer();
     setGameOver(false);
     resetScore();
-    setTitleText('* * * DROPCHAIN * * *');
+    setLinksDropped(0);
   };
 
   const move = ({ keyCode }) => {
@@ -156,14 +115,17 @@ const DropChain = () => {
       className="h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
     >
       <div className="mx-auto max-w-6xl">
-        <InverseDisplay text={titleText} gameOver={gameOver} />
+        <InverseDisplay
+          text={gameOver ? 'GAME OVER' : '*  * * DROPCHAIN * * *'}
+          gameOver={gameOver}
+        />
 
         <div className="mx-auto flex justify-between">
           <Board grid={grid} />
           <aside className="flex w-full flex-col justify-between  px-10">
             <Display text={`SCORE: ${score}`} flash={true} />
             <Display text={`LEVEL: ${level}`} flash={true} />
-            <RowCounter links={links} />
+            <RowCounter links={linksDropped} />
 
             <Display
               flash={false}
@@ -178,7 +140,9 @@ const DropChain = () => {
             <Display
               flash={false}
               text={`LINKS: ${
-                dropTime ? `SENDING ${links}` : 'READY - PRESS [S] TO START'
+                dropTime
+                  ? `SENDING ${linksDropped}`
+                  : 'READY - PRESS [S] TO START'
               }`}
             />
 
