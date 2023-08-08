@@ -41,24 +41,26 @@ const DropChain = () => {
   };
 
   const move = ({ keyCode }) => {
-    if (gameOver === true) {
-      return;
-    }
-
     switch (keyCode) {
       case 37:
-        if (checkCollision(player, grid, { x: -1, y: 0 }) === false) {
-          updatePlayerPos({ x: -1, y: 0, collided: false });
+        if (gameOver !== true) {
+          if (checkCollision(player, grid, { x: -1, y: 0 }) === false) {
+            updatePlayerPos({ x: -1, y: 0, collided: false });
+          }
         }
         break;
       case 39:
-        if (checkCollision(player, grid, { x: 1, y: 0 }) === false) {
-          updatePlayerPos({ x: 1, y: 0, collided: false });
+        if (gameOver !== true) {
+          if (checkCollision(player, grid, { x: 1, y: 0 }) === false) {
+            updatePlayerPos({ x: 1, y: 0, collided: false });
+          }
         }
         break;
       case 40:
-        setDropTime(fallSpeed());
-        dropLink();
+        if (gameOver !== true) {
+          setDropTime(fallSpeed());
+          dropLink();
+        }
         break;
       case 83:
         startGame();
@@ -91,22 +93,32 @@ const DropChain = () => {
   return (
     <div
       role="button"
+      autoFocus
       tabIndex={0}
       onKeyDown={e => move(e)}
       id="dropchain"
-      className="mx-auto h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
-      // style={{ backgroundImage: `url(${backgroundStars.src})` }}
+      className="h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
     >
-      <div>
+      <div className="mx-auto max-w-6xl">
         <InverseDisplay text={titleText} gameOver={gameOver} />
 
-        <div className="mx-auto flex max-w-6xl items-start">
+        <div className="mx-auto flex items-start">
           <Board grid={grid} />
           <aside className="w-full px-10">
             <Display text={`SCORE: ${score}`} />
             <Display text={`ROWS: ${rows}`} />
             <Display text={`LEVEL: ${level}`} />
             <StartButton callback={startGame} />
+            <div
+              className="mb-6 box-border flex w-full animate-crtBlurText border-2 border-dashed 
+    border-green-700 p-2 text-center font-mono text-xl text-green-500"
+            >
+              TO SCORE: FORM A CHAIN OF LINKS THE SAME LENGTH AS THE NUMBER THAT
+              APPEARS ON A LINK.
+              <br />
+              EX: [1], OR [*][3][*]...
+              <br />
+            </div>
           </aside>
         </div>
 

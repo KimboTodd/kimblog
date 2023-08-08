@@ -14,13 +14,13 @@ const Cell = ({ fill, cell, stagingRow }) => {
   // To prevent tailwind tree-shaking these colors again, we must include them here
   // eslint-disable-next-line no-unused-vars
   const CHAIN_COLORS = [
-    'text-yellow-400',
-    'text-green-400',
-    'text-blue-400',
-    'text-red-400',
-    'text-purple-400',
-    'text-orange-400',
-    'text-teal-400',
+    'text-yellow-600',
+    'text-green-600',
+    'text-blue-600',
+    'text-red-600',
+    'text-purple-600',
+    'text-orange-600',
+    'text-teal-600',
     'animate-ping',
   ];
 
@@ -60,7 +60,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
 
   return stagingRow ? (
     <div
-      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-2xl`}
+      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-3xl`}
     >
       {cellState.content}
     </div>
@@ -68,9 +68,9 @@ const Cell = ({ fill, cell, stagingRow }) => {
     <div
       className={`aspect-square font-mono ${cellState.color} ${
         cellState.state === CellState.Score ? 'animate-ping' : ''
-      } flex items-center justify-center border-2 border-green-600 text-2xl drop-shadow-lg`}
+      } flex items-center justify-center border-2 border-green-600 text-3xl`}
     >
-      {cellState.content}
+      ({cellState.content})
     </div>
   );
 };
