@@ -33,13 +33,14 @@ const DropChain = () => {
   useEffect(() => {
     if (gameOver) {
       setDropTime(null);
-      new Audio('/assets/blog/dropchain/score-waw.wav').play();
+      // new Audio('/assets/blog/dropchain/score-waw.wav').play();
     } else if (level > 0) {
-      setDropTime(floatSpeed(level));
+      // setDropTime(floatSpeed(level));
     }
   }, [level, gameOver]);
 
-  const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
+  // const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
+  const floatSpeed = (level: number): number => 2000;
   const fallSpeed = (): number => 40;
 
   const startGame = () => {
