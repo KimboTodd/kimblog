@@ -113,9 +113,18 @@ module.exports = {
               '2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5), -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px',
           },
         },
+        flashWhite: {
+          from: {
+            color: 'white',
+          },
+          to: {
+            color: 'inherit',
+          },
+        },
       },
       animation: {
         crtBlurText: 'textShadow 1.6s infinite',
+        flashWhite: 'flashWhite .1s infinite',
       },
       spacing: {
         28: '7rem',
