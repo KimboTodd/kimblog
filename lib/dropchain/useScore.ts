@@ -14,14 +14,9 @@ export const useScore = (
   }, []);
 
   useEffect(() => {
-    console.log(
-      'Calculating scores - UseEffect, triggered on calculateScore, chainsScored, score'
-    );
-
     if (chainsScored > 0) {
       // Increment level every 7 chains broken
       if (rows + chainsScored >= level * 7) {
-        console.log('2. UseScore - Incrementing level', (level + 1) * 7);
         setLevel(prev => prev + 1);
       }
 

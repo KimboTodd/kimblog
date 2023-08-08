@@ -18,6 +18,7 @@ const DropChain = () => {
   const [dropTime, setDropTime] = useState<number>(null);
   const [gameOver, setGameOver] = useState(null);
   const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
+  const [scoreSound, setScoreSound] = useState(null);
 
   useEffect(() => {
     if (gameOver) {
@@ -27,6 +28,25 @@ const DropChain = () => {
       setDropTime(floatSpeed(level));
     }
   }, [level, gameOver]);
+
+  useEffect(() => {
+    if (chainsScored > 0) {
+      const sound = new Audio(
+        '/assets/blog/dropchain/audio/confirmation_001.ogg'
+      );
+      sound.play();
+      setScoreSound(sound);
+    }
+  }, [chainsScored]);
+
+  useEffect(() => {
+    if (scoreSound) {
+      scoreSound.addEventListener('ended', () => {
+        scoreSound.remove();
+        setScoreSound(null);
+      });
+    }
+  }, [scoreSound]);
 
   const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
   const fallSpeed = (): number => 40;
@@ -75,6 +95,8 @@ const DropChain = () => {
 
   const dropLink = () => {
     if (checkCollision(player, grid, { x: 0, y: 1 })) {
+      new Audio('/assets/blog/dropchain/audio/glass_006.ogg').play();
+
       if (player.pos.y < 1) {
         setGameOver(true);
         return;
@@ -87,6 +109,7 @@ const DropChain = () => {
   };
 
   useInterval(() => {
+    new Audio('/assets/blog/dropchain/audio/glass_002.ogg').play();
     dropLink();
   }, dropTime);
 
