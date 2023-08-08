@@ -87,7 +87,7 @@ const DropChain = () => {
 
   const dropLink = () => {
     if (checkCollision(player, grid, { x: 0, y: 1 })) {
-      new Audio('/assets/blog/dropchain/audio/glass_006.ogg').play();
+      new Audio('/assets/blog/dropchain/glass_006.ogg').play();
 
       if (player.pos.y < 1) {
         setGameOver(true);
@@ -101,7 +101,7 @@ const DropChain = () => {
   };
 
   useInterval(() => {
-    new Audio('/assets/blog/dropchain/audio/glass_002.ogg').play();
+    new Audio('/assets/blog/dropchain/glass_002.ogg').play();
     dropLink();
   }, dropTime);
 
@@ -114,15 +114,22 @@ const DropChain = () => {
       id="dropchain"
       className="h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="visible md:hidden">
+        <Display
+          text={`This game isn't ready for mobile play just yet. Instead, check it out with a keyboard and a larger screen.`}
+          flash={false}
+        />
+      </div>
+
+      <div className="invisible mx-auto max-w-7xl md:visible">
         <InverseDisplay
           text={gameOver ? 'GAME OVER' : '*  * * DROPCHAIN * * *'}
           gameOver={gameOver}
         />
 
-        <div className="mx-auto flex justify-between">
+        <div className="mx-auto flex flex-col justify-between md:flex-row">
           <Board grid={grid} />
-          <aside className="flex w-full flex-col justify-between  px-10">
+          <aside className="flex w-full flex-col justify-between px-4 lg:px-10 ">
             <Display text={`SCORE: ${score}`} flash={true} />
             <Display text={`LEVEL: ${level}`} flash={true} />
             <RowCounter links={linksDropped} />

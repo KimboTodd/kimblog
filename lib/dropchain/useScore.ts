@@ -16,7 +16,7 @@ export const useScore = (
   useEffect(() => {
     if (chainsScored > 0) {
       const sound = new Audio(
-        '/assets/blog/dropchain/audio/confirmation_001.ogg'
+        '/assets/blog/dropchain/confirmation_001.ogg'
       );
       sound.play();
       setScoreSound(sound);

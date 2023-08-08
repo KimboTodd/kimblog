@@ -61,7 +61,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
 
   return stagingRow ? (
     <div
-      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-3xl`}
+      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-xl lg:text-3xl`}
     >
       ({cellState.content})
     </div>
@@ -69,12 +69,11 @@ const Cell = ({ fill, cell, stagingRow }) => {
     <div
       className={`aspect-square font-mono ${cellState.color} ${
         cellState.state === CellState.Score ? 'animate-ping' : ''
-      } flex items-center justify-center border-2 border-green-600 text-3xl`}
+      } flex items-center justify-center border-2 border-green-600 text-xl lg:text-3xl`}
     >
       ({cellState.content})
     </div>
   );
 };
 
-// Only re-render the cells when they change
 export default React.memo(Cell);
