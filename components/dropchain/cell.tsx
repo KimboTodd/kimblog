@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CHAINS_ARRAY } from './chains';
 import { CellState } from '../../lib/dropchain/types';
 
-const Cell = ({ fill, cell }) => {
+const Cell = ({ fill, cell, stagingRow }) => {
   const [animationTimeoutId, setAnimationTimeoutId] = useState(null);
   const [animating, setAnimating] = useState(false);
   const [cellState, setCellState] = useState({
@@ -58,11 +58,17 @@ const Cell = ({ fill, cell }) => {
     }
   }, [cell, animationTimeoutId, fill, animating, cellState.state]);
 
-  return (
+  return stagingRow ? (
     <div
-      className={`aspect-square ${cellState.color} ${
+      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-2xl`}
+    >
+      {cellState.content}
+    </div>
+  ) : (
+    <div
+      className={`aspect-square font-mono ${cellState.color} ${
         cellState.state === CellState.Score ? 'animate-ping' : ''
-      } flex items-center justify-center border-2 border-gray-800 text-3xl`}
+      } flex items-center justify-center border-2 border-green-600 text-2xl drop-shadow-lg`}
     >
       {cellState.content}
     </div>

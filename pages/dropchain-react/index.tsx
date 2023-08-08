@@ -1,5 +1,12 @@
 import DropChain from '../../components/dropchain/dropchain';
+import styles from './styles.module.css';
 
 export default function Index() {
-  return <DropChain />;
+  return (
+    <div>
+      <div className={styles.crt}>
+        <DropChain />;
+      </div>
+    </div>
+  );
 }

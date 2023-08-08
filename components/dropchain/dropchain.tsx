@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Display from './display';
 import StartButton from './startButton';
-import backgroundStars from '../../public/assets/blog/tetris/backgroundStars.png';
 import { usePlayer } from '../../lib/dropchain/usePlayer';
 import { useBoard } from '../../lib/dropchain/useBoard';
 import { createGrid } from '../../lib/dropchain/grid';
@@ -9,7 +8,7 @@ import { useInterval } from '../../lib/dropchain/useInterval';
 import { checkCollision } from '../../lib/dropchain/checkCollision';
 import { useScore } from '../../lib/dropchain/useScore';
 import Board from './board';
-import Toggle from './toggle';
+import InverseDisplay from './inverseDisplay';
 
 const DropChain = () => {
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
@@ -18,11 +17,12 @@ const DropChain = () => {
   const [score, rows, level, resetScore] = useScore(chainsScored);
   const [dropTime, setDropTime] = useState<number>(null);
   const [gameOver, setGameOver] = useState(null);
+  const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
 
   useEffect(() => {
-    // if the level changes, update the drop speed
     if (gameOver) {
       setDropTime(null);
+      setTitleText('   GAME OVER * * *');
     } else if (level > 0) {
       setDropTime(floatSpeed(level));
     }
@@ -60,6 +60,12 @@ const DropChain = () => {
         setDropTime(fallSpeed());
         dropLink();
         break;
+      case 83:
+        startGame();
+        break;
+      case 71:
+        setGravity(!gravity);
+        break;
       default:
         break;
     }
@@ -88,19 +94,31 @@ const DropChain = () => {
       tabIndex={0}
       onKeyDown={e => move(e)}
       id="dropchain"
-      className="h-screen w-screen overflow-hidden bg-cover"
-      style={{ backgroundImage: `url(${backgroundStars.src})` }}
+      className="mx-auto h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
+      // style={{ backgroundImage: `url(${backgroundStars.src})` }}
     >
-      <div className="mx-auto flex max-w-6xl items-start p-10">
-        <Board grid={grid} />
-        <aside className="max-w-200 block w-full px-20">
-          {gameOver && <Display gameOver={gameOver} text="Game Over" />}
-          <Display text={`Score: ${score}`} gameOver={gameOver} />
-          <Display text={`Rows: ${rows}`} gameOver={gameOver} />
-          <Display text={`Level: ${level}`} gameOver={gameOver} />
-          <StartButton callback={startGame} />
-          <Toggle label="Gravity" checked={gravity} setChecked={setGravity} />
-        </aside>
+      <div>
+        <InverseDisplay text={titleText} gameOver={gameOver} />
+
+        <div className="mx-auto flex max-w-6xl items-start">
+          <Board grid={grid} />
+          <aside className="w-full px-10">
+            <Display text={`SCORE: ${score}`} />
+            <Display text={`ROWS: ${rows}`} />
+            <Display text={`LEVEL: ${level}`} />
+            <StartButton callback={startGame} />
+          </aside>
+        </div>
+
+        <Display
+          text={`GRAVITY: ${gravity ? 'ON' : 'OFF'} - PRESS [G] TO TOGGLE`}
+        />
+
+        <Display
+          text={`CHAINS: ${
+            dropTime ? 'DROPPING' : 'READY - PRESS [S] TO START'
+          }`}
+        />
       </div>
     </div>
   );
