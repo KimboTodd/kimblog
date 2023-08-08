@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 const StartButton = ({ callback }) => (
   <button
-    className="mb-6 box-border w-full animate-crtBlurText cursor-pointer border-2 border-green-600 p-2 font-mono text-2xl text-green-500"
+    className="box-border w-full animate-crtBlurText cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-2xl text-green-500"
     onClick={callback}
   >
     START

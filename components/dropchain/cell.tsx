@@ -21,6 +21,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
     'text-purple-600',
     'text-orange-600',
     'text-teal-600',
+    'text-pink-600',
     'animate-ping',
   ];
 
@@ -62,7 +63,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
     <div
       className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-3xl`}
     >
-      {cellState.content}
+      ({cellState.content})
     </div>
   ) : (
     <div

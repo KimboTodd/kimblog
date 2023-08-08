@@ -6,7 +6,7 @@ import React from 'react';
 export const useBoard = (
   player: Player,
   resetPlayer: () => void,
-  gravity
+  gravity: boolean
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
   const initialGrid: Grid = createGrid();
   const [grid, setGrid] = useState<Grid>(initialGrid);

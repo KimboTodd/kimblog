@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Display from './display';
 import StartButton from './startButton';
 import { usePlayer } from '../../lib/dropchain/usePlayer';
@@ -6,24 +6,51 @@ import { useBoard } from '../../lib/dropchain/useBoard';
 import { createGrid } from '../../lib/dropchain/grid';
 import { useInterval } from '../../lib/dropchain/useInterval';
 import { checkCollision } from '../../lib/dropchain/checkCollision';
-import { useScore } from '../../lib/dropchain/useScore';
 import Board from './board';
 import InverseDisplay from './inverseDisplay';
+import RowCounter from './rowCounter';
 
 const DropChain = () => {
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [gravity, setGravity] = useState(true);
   const [grid, setGrid, chainsScored] = useBoard(player, resetPlayer, gravity);
-  const [score, rows, level, resetScore] = useScore(chainsScored);
   const [dropTime, setDropTime] = useState<number>(null);
   const [gameOver, setGameOver] = useState(null);
   const [titleText, setTitleText] = useState('*  * * DROPCHAIN * * *');
   const [scoreSound, setScoreSound] = useState(null);
 
+  const [score, setScore] = useState<number>(0);
+  const [links, setLinks] = useState<number>(0);
+  const [level, setLevel] = useState<number>(0);
+
+  const resetScore = useCallback(() => {
+    setScore(0);
+    setLinks(0);
+    setLevel(1);
+  }, []);
+
+  useEffect(() => {
+    setLinks(prev => prev + 1);
+  }, [player.content]);
+
+  useEffect(() => {
+    if (chainsScored > 0) {
+      if (links >= level * 7) {
+        setLevel(prev => prev + 1);
+      }
+
+      const linePoints: number[] = [
+        10, 20, 30, 50, 80, 130, 210, 340, 550, 890,
+      ];
+      setScore(prev => prev + linePoints[chainsScored - 1] * level);
+    }
+  }, [chainsScored, level, links]);
+
   useEffect(() => {
     if (gameOver) {
       setDropTime(null);
-      setTitleText('   GAME OVER * * *');
+      setTitleText('* * * * * * GAME OVER');
+      new Audio('/assets/blog/dropchain/score-waw.wav').play();
     } else if (level > 0) {
       setDropTime(floatSpeed(level));
     }
@@ -58,6 +85,7 @@ const DropChain = () => {
     resetPlayer();
     setGameOver(false);
     resetScore();
+    setTitleText('* * * DROPCHAIN * * *');
   };
 
   const move = ({ keyCode }) => {
@@ -125,35 +153,33 @@ const DropChain = () => {
       <div className="mx-auto max-w-6xl">
         <InverseDisplay text={titleText} gameOver={gameOver} />
 
-        <div className="mx-auto flex items-start">
+        <div className="mx-auto flex justify-between">
           <Board grid={grid} />
-          <aside className="w-full px-10">
-            <Display text={`SCORE: ${score}`} />
-            <Display text={`ROWS: ${rows}`} />
-            <Display text={`LEVEL: ${level}`} />
+          <aside className="flex w-full flex-col justify-between  px-10">
+            <Display text={`SCORE: ${score}`} flash={true} />
+            <Display text={`LEVEL: ${level}`} flash={true} />
+            <RowCounter links={links} />
+
+            <Display
+              flash={false}
+              text={`TO SCORE: FORM A CHAIN OF LINKS THE SAME LENGTH AS THE NUMBER THAT APPEARS ON A LINK.`}
+            />
+
+            <Display
+              flash={false}
+              text={`GRAVITY: ${gravity ? 'ON' : 'OFF'} - PRESS [G] TO TOGGLE`}
+            />
+
+            <Display
+              flash={false}
+              text={`LINKS: ${
+                dropTime ? `SENDING ${links}` : 'READY - PRESS [S] TO START'
+              }`}
+            />
+
             <StartButton callback={startGame} />
-            <div
-              className="mb-6 box-border flex w-full animate-crtBlurText border-2 border-dashed 
-    border-green-700 p-2 text-center font-mono text-xl text-green-500"
-            >
-              TO SCORE: FORM A CHAIN OF LINKS THE SAME LENGTH AS THE NUMBER THAT
-              APPEARS ON A LINK.
-              <br />
-              EX: [1], OR [*][3][*]...
-              <br />
-            </div>
           </aside>
         </div>
-
-        <Display
-          text={`GRAVITY: ${gravity ? 'ON' : 'OFF'} - PRESS [G] TO TOGGLE`}
-        />
-
-        <Display
-          text={`CHAINS: ${
-            dropTime ? 'DROPPING' : 'READY - PRESS [S] TO START'
-          }`}
-        />
       </div>
     </div>
   );
