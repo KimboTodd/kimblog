@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { GRID_WIDTH } from './grid';
 import { Player } from './types';
-import { CHAINS_ARRAY, randomChain } from '../../components/dropchain/chains';
+import { LINK, randomChain } from '../../components/dropchain/chains';
 
 export const usePlayer = (): [
   Player,
@@ -10,7 +10,7 @@ export const usePlayer = (): [
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
-    content: CHAINS_ARRAY[0].content,
+    content: LINK[0].content,
     collided: false,
   });
 

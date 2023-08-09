@@ -15,7 +15,7 @@ export type Grid = Cell[][];
 // Can we work towards a number only?
 export type Cell = [content: number, cellState: CellState];
 
-export type Chain = {
+export type Link = {
   content: number;
   color: string;
 };

@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { createGrid, newMergedRow, newRow } from './grid';
-import { Cell, CellState, Player, Grid } from './types';
+import { Cell, CellState, Player, Grid, Position } from './types';
 import React from 'react';
+import {
+  UNBREAKABLE,
+  chainGenerator,
+  randomChain,
+} from '../../components/dropchain/chains';
 
 export const useBoard = (
   player: Player,
@@ -56,28 +61,28 @@ export const useBoard = (
 
   // every 7 drops, add a new row to the bottom
   // and push everything up one row
-  // useEffect(() => {
-  //   if (links !== 0 && links % 7 === 0) {
-  //     setGrid(prev => {
-  //       const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
-  //         // if the first row of the board has contents, game over
-  //         if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
-  //           setGameOver(true);
-  //           return prev;
-  //         }
-  //         // if this is the first row of the grid, disregard (remove)
-  //         if (i !== 1) {
-  //           return row.map((cell: Cell) => cell);
-  //         }
-  //       });
+  useEffect(() => {
+    if (links !== 0 && links % 7 === 0) {
+      setGrid(prev => {
+        const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
+          // if the first row of the board has contents, game over
+          if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
+            setGameOver(true);
+            return prev;
+          }
+          // if this is the first row of the grid, disregard (remove)
+          if (i !== 1) {
+            return row.map((cell: Cell) => cell);
+          }
+        });
 
-  //       // add a new row at the end
-  //       const row: Cell[] = newMergedRow();
-  //       newGrid[prev.length - 1] = row;
-  //       return newGrid;
-  //     });
-  //   }
-  // }, [links, setGameOver, setGrid]);
+        // add a new row at the end
+        const row: Cell[] = newMergedRow();
+        newGrid[prev.length - 1] = row;
+        return newGrid;
+      });
+    }
+  }, [links, setGameOver, setGrid]);
 
   return [grid, setGrid, chainsScored];
 };
@@ -109,10 +114,11 @@ function gravitizeGrid(grid: Grid): Grid {
  * @returns The number of chains scored.
  */
 function markScoringChains(newGrid: Grid): number {
+  const scoredCoordinates: Position[] = [];
+
   // Row by row, handle clearing horizontal chains
   let rowChainStart = null;
   let rowChainEnd = null;
-  let chainsScored = 0;
   for (let y = 0; y < newGrid.length; y++) {
     const row = newGrid[y];
     for (let x = 0; x < row.length; x++) {
@@ -131,12 +137,11 @@ function markScoringChains(newGrid: Grid): number {
           continue;
         }
 
+        // If we have a chain, mark it for scoring
         const contiguousLength = rowChainEnd - rowChainStart;
         for (let chainI = rowChainStart; chainI < rowChainEnd; chainI++) {
           if (row[chainI][0] === contiguousLength) {
-            // mark for scoring
-            chainsScored++;
-            row[chainI] = [row[chainI][0], CellState.Score];
+            scoredCoordinates.push({ x: chainI, y });
           }
         }
 
@@ -167,12 +172,11 @@ function markScoringChains(newGrid: Grid): number {
           continue;
         }
 
+        // If we have a chain, mark it for scoring
         const contiguousLength = colChainEnd - colChainStart;
         for (let chainI = colChainStart; chainI < colChainEnd; chainI++) {
           if (newGrid[chainI][x][0] === contiguousLength) {
-            // mark for scoring
-            chainsScored++;
-            newGrid[chainI][x] = [newGrid[chainI][x][0], CellState.Score];
+            scoredCoordinates.push({ x, y: chainI });
           }
         }
 
@@ -182,7 +186,30 @@ function markScoringChains(newGrid: Grid): number {
     }
   }
 
-  return chainsScored;
+  scoredCoordinates.forEach(({ x, y }: Position) => {
+    // Mark each set coordinate as scored
+    newGrid[y][x][1] = CellState.Score;
+
+    // Convert neighboring unbreakable links to breakable links
+    const left = x - 1;
+    if (left >= 0 && newGrid[y][left][0] === UNBREAKABLE) {
+      newGrid[y][left][0] = chainGenerator().next().value.content;
+    }
+    const right = x + 1;
+    if (right < newGrid[y].length && newGrid[y][right][0] === UNBREAKABLE) {
+      newGrid[y][right][0] = chainGenerator().next().value.content;
+    }
+    const above = y - 1;
+    if (above > 0 && newGrid[above][x][0] === UNBREAKABLE) {
+      newGrid[above][x][0] = chainGenerator().next().value.content;
+    }
+    const below = y + 1;
+    if (below < newGrid.length && newGrid[below][x][0] === UNBREAKABLE) {
+      newGrid[below][x][0] = chainGenerator().next().value.content;
+    }
+  });
+
+  return scoredCoordinates.length;
 }
 
 /**

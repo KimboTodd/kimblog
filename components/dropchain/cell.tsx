@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CHAINS_ARRAY } from './chains';
+import { LINK } from './chains';
 import { CellState } from '../../lib/dropchain/types';
 
 const Cell = ({ fill, cell, stagingRow }) => {
@@ -7,8 +7,8 @@ const Cell = ({ fill, cell, stagingRow }) => {
   const [animating, setAnimating] = useState(false);
   const [cellState, setCellState] = useState({
     state: cell[1],
-    content: CHAINS_ARRAY[fill].content ?? CHAINS_ARRAY[0].content,
-    color: CHAINS_ARRAY[fill]?.color ?? CHAINS_ARRAY[0].color,
+    content: LINK[fill].content ?? LINK[0].content,
+    color: LINK[fill]?.color ?? LINK[0].color,
   });
 
   // To prevent tailwind tree-shaking these colors again, we must include them here
@@ -33,7 +33,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
     if (cell[1] === CellState.Score) {
       setCellState(prevState => ({
         ...prevState,
-        content: CHAINS_ARRAY[fill]?.content,
+        content: LINK[fill]?.content,
         state: CellState.Score,
       }));
       setAnimating(true);
@@ -42,9 +42,9 @@ const Cell = ({ fill, cell, stagingRow }) => {
       const newTimeoutId = setTimeout(() => {
         setCellState(prevState => ({
           ...prevState,
-          content: CHAINS_ARRAY[fill]?.content,
+          content: LINK[fill]?.content,
           state: cell[1],
-          color: CHAINS_ARRAY[fill].color,
+          color: LINK[fill].color,
         }));
         setAnimating(false);
       }, 500);
@@ -52,9 +52,9 @@ const Cell = ({ fill, cell, stagingRow }) => {
     } else {
       setCellState(prevState => ({
         ...prevState,
-        content: CHAINS_ARRAY[fill]?.content,
+        content: LINK[fill]?.content,
         state: cell[1],
-        color: CHAINS_ARRAY[fill].color,
+        color: LINK[fill].color,
       }));
     }
   }, [cell, animationTimeoutId, fill, animating, cellState.state]);
