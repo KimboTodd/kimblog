@@ -20,6 +20,7 @@ const DropChain = () => {
   const [gravity, setGravity] = useState(true);
   const [grid, setGrid, chainsScored] = useBoard(
     player,
+    updatePlayerPos,
     resetPlayer,
     gravity,
     linksDropped,

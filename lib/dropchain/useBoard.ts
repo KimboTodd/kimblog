@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
-import { createGrid, newMergedRow, newRow } from './grid';
+import { createGrid, newMergedRow } from './grid';
 import { Cell, CellState, Player, Grid, Position } from './types';
 import React from 'react';
 import {
+  EMPTY,
   UNBREAKABLE,
-  chainGenerator,
   randomChain,
 } from '../../components/dropchain/links';
 
 export const useBoard = (
   player: Player,
+  updatePlayerPos: (args: {
+    x: number;
+    y: number;
+    collided: boolean;
+    content: number;
+  }) => void,
   resetPlayer: () => void,
   gravity: boolean,
   links: number,
@@ -31,7 +37,7 @@ export const useBoard = (
       }
 
       // Draw new active player link in position
-      if (player.content !== 0) {
+      if (player.content !== EMPTY) {
         const cellState = player.collided ? CellState.Merged : CellState.Clear;
         newGrid[player.pos.y][player.pos.x] = [player.content, cellState];
       }
@@ -40,16 +46,16 @@ export const useBoard = (
       if (player.collided) {
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
+          // if there were chains, reset the player position but not collided
+          updatePlayerPos({ x: 3, y: 0, collided: true, content: EMPTY });
+
           setChainsScored(prev => {
             return prev + 1;
           });
+        } else {
+          // if there were no chains formed, reset the player position and collided
+          resetPlayer();
         }
-
-        // TODO: fix chaining
-        // check for chains again
-        // if chains, repeat
-
-        resetPlayer();
       }
 
       return newGrid;
@@ -57,8 +63,9 @@ export const useBoard = (
 
     // TODO: revisit this idea for chained busting
     setGrid(prev => updatedGrid(prev));
-  }, [gravity, player, resetPlayer]);
+  }, [gravity, player, resetPlayer, updatePlayerPos]);
 
+  // TODO: make sure this scores any chains that are formed
   // every 7 drops, add a new row to the bottom
   // and push everything up one row
   useEffect(() => {
@@ -116,22 +123,22 @@ function gravitizeGrid(grid: Grid): Grid {
 function markScoringChains(newGrid: Grid): number {
   const scoredCoordinates: Position[] = [];
 
-  // Row by row, handle clearing horizontal chains
-  let rowChainStart = null;
-  let rowChainEnd = null;
+  // Find contiguous cells in rows
   for (let y = 0; y < newGrid.length; y++) {
-    const row = newGrid[y];
-    for (let x = 0; x < row.length; x++) {
-      const fill = row[x][0];
+    let rowChainStart = null;
+    let rowChainEnd = null;
 
+    for (let x = 0; x < newGrid[y].length; x++) {
       // a filled cell is found
-      if (fill && fill !== 0) {
-        rowChainStart = rowChainStart === null ? x : rowChainStart;
+      if (newGrid[y][x][0] !== EMPTY) {
+        if (rowChainStart === null) {
+          rowChainStart = x;
+        }
         rowChainEnd = x + 1;
       }
 
       // an empty cell is found, or we are at the last element in the row
-      if (!fill || fill === 0 || x === row.length - 1) {
+      if (newGrid[y][x][0] === EMPTY || x === newGrid[y].length - 1) {
         if (rowChainStart === null) {
           // if we have not started a chain, return early
           continue;
@@ -140,7 +147,7 @@ function markScoringChains(newGrid: Grid): number {
         // If we have a chain, mark it for scoring
         const contiguousLength = rowChainEnd - rowChainStart;
         for (let chainI = rowChainStart; chainI < rowChainEnd; chainI++) {
-          if (row[chainI][0] === contiguousLength) {
+          if (newGrid[y][chainI][0] === contiguousLength) {
             scoredCoordinates.push({ x: chainI, y });
           }
         }
@@ -151,22 +158,22 @@ function markScoringChains(newGrid: Grid): number {
     }
   }
 
-  var colChainStart = null;
-  var colChainEnd = null;
-  const colPlayableHeight = newGrid.length;
-  // Clear column by column, handle clearing vertical chains
+  // Find contiguous cells in columns
   for (let x = 0; x < newGrid[0].length; x++) {
-    for (let y = 0; y < colPlayableHeight; y++) {
-      const fill = newGrid[y][x][0];
+    let colChainStart: number | null = null;
+    let colChainEnd: number | null = null;
 
+    for (let y = 0; y < newGrid.length; y++) {
       // a filled cell is found
-      if (fill && fill !== 0) {
-        colChainStart = colChainStart === null ? y : colChainStart;
+      if (newGrid[y][x][0] !== EMPTY) {
+        if (colChainStart === null) {
+          colChainStart = y;
+        }
         colChainEnd = y + 1;
       }
 
-      // an empty cell is found, or we are at the last element in the row
-      if (!fill || fill === 0 || y === colPlayableHeight - 1) {
+      // an empty cell is found, or we are at the last element in the col
+      if (newGrid[y][x][0] === EMPTY || y === newGrid.length - 1) {
         if (colChainStart === null) {
           // if we have not started a chain, return early
           continue;
@@ -193,19 +200,19 @@ function markScoringChains(newGrid: Grid): number {
     // Convert neighboring unbreakable links to breakable links
     const left = x - 1;
     if (left >= 0 && newGrid[y][left][0] === UNBREAKABLE) {
-      newGrid[y][left][0] = chainGenerator().next().value.content;
+      newGrid[y][left][0] = randomChain().content;
     }
     const right = x + 1;
     if (right < newGrid[y].length && newGrid[y][right][0] === UNBREAKABLE) {
-      newGrid[y][right][0] = chainGenerator().next().value.content;
+      newGrid[y][right][0] = randomChain().content;
     }
     const above = y - 1;
     if (above > 0 && newGrid[above][x][0] === UNBREAKABLE) {
-      newGrid[above][x][0] = chainGenerator().next().value.content;
+      newGrid[above][x][0] = randomChain().content;
     }
     const below = y + 1;
     if (below < newGrid.length && newGrid[below][x][0] === UNBREAKABLE) {
-      newGrid[below][x][0] = chainGenerator().next().value.content;
+      newGrid[below][x][0] = randomChain().content;
     }
   });
 
@@ -221,7 +228,7 @@ function clearBoard(prevGrid: Grid): Grid {
   const newGrid: Grid = [];
   for (let y = 0; y < prevGrid.length; y++) {
     const newRow: Cell[] = [];
-    for (let x = 0; x < prevGrid[y].length; x++) {
+    for (let x = 0; x < prevGrid[0].length; x++) {
       const cell = prevGrid[y][x];
       if (cell[1] === CellState.Clear || cell[1] === CellState.Score) {
         newRow.push([0, CellState.Clear]);

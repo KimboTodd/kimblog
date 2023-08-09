@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 
 const InverseDisplay = ({ gameOver, text }) => {
   return (

@@ -5,7 +5,7 @@ import { LINK, randomChain } from '../../components/dropchain/links';
 
 export const usePlayer = (): [
   Player,
-  (args: { x: number; y: number; collided: boolean }) => void,
+  (args: { x: number; y: number; collided: boolean; content?: number }) => void,
   () => void
 ] => {
   const [player, setPlayer] = useState<Player>({
@@ -18,10 +18,12 @@ export const usePlayer = (): [
     x,
     y,
     collided,
+    content,
   }: {
     x: number;
     y: number;
-    collided?: boolean;
+    collided: boolean;
+    content?: number;
   }) => {
     setPlayer(prev => ({
       ...prev,
@@ -30,6 +32,7 @@ export const usePlayer = (): [
         y: (prev.pos.y += y),
       },
       collided,
+      content: content !== undefined ? content : prev.content,
     }));
   };
 

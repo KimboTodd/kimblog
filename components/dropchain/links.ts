@@ -19,17 +19,3 @@ export const EMPTY = 0;
 // and the last which is the merged chain
 export const randomChain = (): Link =>
   LINK[Math.floor(Math.random() * (LINK.length - 2) + 1)];
-
-export function* chainGenerator(): Generator<Link> {
-  while (true) {
-    let rnd = Math.random();
-    console.log('chainGenerator rnd', rnd);
-    let floorArg = rnd * (LINK.length - 2) + 1;
-    console.log('chainGenerator floorArg', floorArg);
-    let linkArg = Math.floor(floorArg);
-    console.log('chainGenerator linkArg', linkArg);
-    let linkResult = LINK[linkArg];
-    console.log('chainGenerator linkResult', linkResult);
-    yield linkResult;
-  }
-}
