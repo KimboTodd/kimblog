@@ -31,7 +31,7 @@ export default function Post({ post, morePosts, preview }: Props) {
           <Link href="/" className="hover:underline">
             kimblog
           </Link>
-        </h2>{' '}
+        </h2>
         {router.isFallback ? (
           <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
             Loading…
@@ -59,15 +59,30 @@ export default function Post({ post, morePosts, preview }: Props) {
                   <DateFormatter dateString={post.date} />
                 </div>
                 {post.coverImage ? (
-                  <div className="relative mb-8 h-96 overflow-hidden sm:mx-0 md:mb-16 shadow-lg">
-                    <Image
-                      src={post.coverImage}
-                      className="w-full "
-                      alt={`Cover Image for ${title}`}
-                      fill={true}
-                      style={{ objectFit: 'cover' }}
-                      sizes="66vw"
-                    />
+                  <div className="relative mb-8 h-96 overflow-hidden shadow-lg sm:mx-0 md:mb-16">
+                    {post?.coverLink ? (
+                      <Link href={post.coverLink} aria-label={title}>
+                        <Image
+                          priority
+                          src={post.coverImage}
+                          className="w-full "
+                          alt={`Cover Image for ${title}`}
+                          fill={true}
+                          style={{ objectFit: 'cover' }}
+                          sizes="66vw"
+                        />
+                      </Link>
+                    ) : (
+                      <Image
+                        priority
+                        src={post.coverImage}
+                        className="w-full "
+                        alt={`Cover Image for ${title}`}
+                        fill={true}
+                        style={{ objectFit: 'cover' }}
+                        sizes="66vw"
+                      />
+                    )}
                   </div>
                 ) : (
                   <hr></hr>
@@ -113,6 +128,7 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
     'coverImage',
+    'coverLink',
   ]);
 
   return {
