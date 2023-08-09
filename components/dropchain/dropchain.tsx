@@ -33,15 +33,15 @@ const DropChain = () => {
   useEffect(() => {
     if (gameOver) {
       setDropTime(null);
-      // new Audio('/assets/blog/dropchain/score-waw.wav').play();
+      new Audio('/assets/blog/dropchain/error_003.ogg').play();
     } else if (level > 0) {
-      // setDropTime(floatSpeed(level));
+      setDropTime(floatSpeed(level));
     }
   }, [level, gameOver]);
 
-  // const floatSpeed = (level: number): number => Math.max(2000 / level, 200);
-  const floatSpeed = (level: number): number => 2000;
   const fallSpeed = (): number => 40;
+  const floatSpeed = (level: number): number =>
+    Math.max(500, 2000 - level * 20);
 
   const startGame = () => {
     // Reset everything
@@ -147,10 +147,10 @@ const DropChain = () => {
 
             <Display
               flash={false}
-              text={`LINKS: ${
+              text={`${
                 dropTime
-                  ? `SENDING ${linksDropped}`
-                  : 'READY - PRESS [S] TO START'
+                  ? `LINK: ${linksDropped}`
+                  : 'LINKS: READY - PRESS [S] TO START'
               }`}
             />
 

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 const RowCounter = ({ links }) => {
-  const chars = ['⠑', '⢿', '⠀', '⣧', '⡇', '⣧', '⢴'];
+  const chars = ['⠂', '⠆', '⠒', '⠲', '⠢', '⠖', '⠶'];
   return (
     <div
       className={`grid w-full grid-cols-7 border-2 border-solid border-green-600 `}
