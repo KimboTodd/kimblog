@@ -14,7 +14,7 @@ export const useBoard = (
     x: number;
     y: number;
     collided: boolean;
-    content: number;
+    content?: number;
   }) => void,
   resetPlayer: () => void,
   gravity: boolean,
@@ -46,12 +46,10 @@ export const useBoard = (
       if (player.collided) {
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
+          setChainsScored(prev => prev + 1);
+
           // if there were chains, reset the player position but not collided
           updatePlayerPos({ x: 3, y: 0, collided: true, content: EMPTY });
-
-          setChainsScored(prev => {
-            return prev + 1;
-          });
         } else {
           // if there were no chains formed, reset the player position and collided
           resetPlayer();
@@ -86,6 +84,12 @@ export const useBoard = (
         // add a new row at the end
         const row: Cell[] = newMergedRow();
         newGrid[prev.length - 1] = row;
+
+        // after adding the new row check if this created any chains for scoring
+        const chainsFormed: number = markScoringChains(newGrid);
+        if (chainsFormed > 0) {
+          setChainsScored(prev => prev + 1);
+        }
         return newGrid;
       });
     }
