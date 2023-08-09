@@ -11,8 +11,8 @@ const RowCounter = ({ links }) => {
           <div
             key={i}
             className={`aspect-square text-xl lg:text-4xl ${
-              i < links % 7 ? 'bg-green-600' : 'bg-slate-950'
-            } border-2 border-slate-950`}
+              i < links % 7 ? 'bg-green-600' : 'bg-slate-900'
+            } border-2 border-slate-900 text-slate-900`}
           >
             {chars[i]}
           </div>

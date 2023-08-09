@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { GRID_WIDTH } from './grid';
 import { Player } from './types';
-import { LINK, randomChain } from '../../components/dropchain/chains';
+import { LINK, randomChain } from '../../components/dropchain/links';
 
 export const usePlayer = (): [
   Player,

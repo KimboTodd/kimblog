@@ -1,7 +1,7 @@
 import { Link } from '../../lib/dropchain/types';
 
 export const LINK = [
-  { content: 0, color: 'text-black-100' },
+  { content: 0, color: 'text-slate-900' },
   { content: 1, color: 'text-yellow-600' },
   { content: 2, color: 'text-red-600' },
   { content: 3, color: 'text-blue-600' },

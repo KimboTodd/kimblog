@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LINK } from './chains';
+import { LINK } from './links';
 import { CellState } from '../../lib/dropchain/types';
 
 const Cell = ({ fill, cell, stagingRow }) => {

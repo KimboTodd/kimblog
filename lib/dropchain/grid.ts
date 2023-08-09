@@ -1,4 +1,4 @@
-import { EMPTY, UNBREAKABLE } from '../../components/dropchain/chains';
+import { EMPTY, UNBREAKABLE } from '../../components/dropchain/links';
 import { Cell, CellState, Grid } from './types';
 
 export const GRID_WIDTH = 7;

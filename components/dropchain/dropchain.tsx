@@ -10,6 +10,7 @@ import Board from './board';
 import InverseDisplay from './inverseDisplay';
 import RowCounter from './rowCounter';
 import { useScore } from '../../lib/dropchain/useScore';
+import InstructionsModal from './instructionsModal';
 
 const DropChain = () => {
   const [linksDropped, setLinksDropped] = useState<number>(0);
@@ -25,6 +26,7 @@ const DropChain = () => {
     setGameOver
   );
   const [score, level, resetScore] = useScore(chainsScored, linksDropped);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     setLinksDropped(prev => prev + 1);
@@ -113,8 +115,9 @@ const DropChain = () => {
       tabIndex={0}
       onKeyDown={e => move(e)}
       id="dropchain"
-      className="h-screen w-screen overflow-hidden bg-slate-950 p-4 md:p-12"
+      className="h-screen w-screen overflow-hidden bg-slate-900 p-4 md:p-12"
     >
+      <InstructionsModal open={modalOpen} setOpen={setModalOpen} />
       <div className="visible md:hidden">
         <Display
           text={`This game isn't ready for mobile play just yet. Instead, check it out with a keyboard and a larger screen.`}
@@ -137,11 +140,6 @@ const DropChain = () => {
 
             <Display
               flash={false}
-              text={`TO SCORE: FORM A CHAIN OF LINKS THE SAME LENGTH AS THE NUMBER THAT APPEARS ON A LINK.`}
-            />
-
-            <Display
-              flash={false}
               text={`GRAVITY: ${gravity ? 'ON' : 'OFF'} - PRESS [G] TO TOGGLE`}
             />
 
@@ -153,6 +151,13 @@ const DropChain = () => {
                   : 'LINKS: READY - PRESS [S] TO START'
               }`}
             />
+
+            <button
+              className="box-border w-full animate-crtBlurText cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
+              onClick={() => setModalOpen(true)}
+            >
+              View Instructions
+            </button>
 
             <StartButton callback={startGame} />
           </aside>

@@ -6,7 +6,7 @@ import {
   UNBREAKABLE,
   chainGenerator,
   randomChain,
-} from '../../components/dropchain/chains';
+} from '../../components/dropchain/links';
 
 export const useBoard = (
   player: Player,
