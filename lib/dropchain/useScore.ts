@@ -31,14 +31,14 @@ export const useScore = (
   }, [scoreSound]);
 
   useEffect(() => {
-    if (linksBroken <= 0) return;
+    if (linksBroken < 1) return;
 
     if (linksDropped >= level * 7) {
       setLevel(prev => prev + 1);
     }
 
     const multiplier: number[] = [10, 20, 30, 50, 80, 130, 210, 340, 550, 890];
-    setScore(prev => prev + multiplier[linksBroken - 1] * level);
+    setScore(prev => prev + multiplier[linksBroken - 1]);
   }, [linksBroken, level, linksDropped]);
 
   return [score, level, resetScore];
