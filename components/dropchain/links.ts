@@ -19,4 +19,4 @@ export const EMPTY = 0;
 // and the last which is the merged chain
 // temp TODO: remove this shorter length
 export const randomLink = (): Link =>
-  LINK[Math.floor(Math.random() * (LINK.length - 6) + 1)];
+  LINK[Math.floor(Math.random() * (LINK.length - 2) + 1)];
