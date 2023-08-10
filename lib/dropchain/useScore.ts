@@ -37,7 +37,14 @@ export const useScore = (
       setLevel(prev => prev + 1);
     }
 
-    const multiplier: number[] = [10, 20, 30, 50, 80, 130, 210, 340, 550, 890];
+    const fibonacci = (n: number) => {
+      if (n <= 1) {
+        return n;
+      }
+      return fibonacci(n - 1) + fibonacci(n - 2);
+    };
+
+    const multiplier = fibonacci(linksBroken);
     setScore(prev => prev + multiplier[linksBroken - 1]);
   }, [linksBroken, level, linksDropped]);
 
