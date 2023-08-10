@@ -18,11 +18,11 @@ const DropChain = () => {
   const [gameOver, setGameOver] = useState(null);
   const [gameOn, setGameOn] = useState(false);
   const [dropTime, setDropTime] = useState<number>(null);
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [player, updatePlayerPos, resetPlayer, resetPlayerForScoring] = usePlayer();
   const [gravity, setGravity] = useState(true);
   const [grid, setGrid, chainsScored] = useBoard(
     player,
-    updatePlayerPos,
+    resetPlayerForScoring,
     resetPlayer,
     gravity,
     linksDropped,

@@ -10,12 +10,7 @@ import {
 
 export const useBoard = (
   player: Player,
-  updatePlayerPos: (args: {
-    x: number;
-    y: number;
-    collided: boolean;
-    content?: number;
-  }) => void,
+  resetPlayerForScoring: () => void,
   resetPlayer: () => void,
   gravity: boolean,
   links: number,
@@ -49,7 +44,7 @@ export const useBoard = (
           setChainsScored(prev => prev + 1);
 
           // if there were chains, reset the player position but not collided
-          updatePlayerPos({ x: 3, y: 0, collided: true, content: EMPTY });
+          resetPlayerForScoring();
         } else {
           // if there were no chains formed, reset the player position and collided
           resetPlayer();
@@ -61,7 +56,7 @@ export const useBoard = (
 
     // TODO: revisit this idea for chained busting
     setGrid(prev => updatedGrid(prev));
-  }, [gravity, player, resetPlayer, updatePlayerPos]);
+  }, [gravity, player, resetPlayer, resetPlayerForScoring]);
 
   // TODO: make sure this scores any chains that are formed
   // every 7 drops, add a new row to the bottom
