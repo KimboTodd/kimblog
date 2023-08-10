@@ -22,8 +22,6 @@ export const useBoard = (
   const [linksBroken, setLinksBroken] = useState(0);
 
   useEffect(() => {
-    setLinksBroken(0);
-
     const updatedGrid = (prevGrid: Grid) => {
       // Note: clearing the board each game loop is what gives the illusion of animation
       let newGrid: Grid = clearBoard(prevGrid);
@@ -43,10 +41,10 @@ export const useBoard = (
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
           setLinksBroken(prev => prev + chainsFormed);
-
           // if there were chains, reset the player position but not collided
           resetPlayerForScoring();
         } else {
+          setLinksBroken(0);
           // if there were no chains formed, reset the player position and collided
           resetPlayer();
         }

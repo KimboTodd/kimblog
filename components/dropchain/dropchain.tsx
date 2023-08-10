@@ -18,7 +18,8 @@ const DropChain = () => {
   const [gameOver, setGameOver] = useState(null);
   const [gameOn, setGameOn] = useState(false);
   const [dropTime, setDropTime] = useState<number>(null);
-  const [player, updatePlayerPos, resetPlayer, resetPlayerForScoring] = usePlayer();
+  const [player, updatePlayerPos, resetPlayer, resetPlayerForScoring] =
+    usePlayer();
   const [gravity, setGravity] = useState(true);
   const [grid, setGrid, linksBroken] = useBoard(
     player,
@@ -27,7 +28,7 @@ const DropChain = () => {
     gravity,
     linksDropped,
     setGameOver,
-    setGameOn,
+    setGameOn
   );
   const [score, level, resetScore] = useScore(linksBroken, linksDropped);
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,7 +47,7 @@ const DropChain = () => {
     } else if (gameOn) {
       setDropTime(floatSpeed(level));
     }
-  }, [gameOn, gameOver, linksBroken, level]);
+  }, [gameOn, gameOver, level]);
 
   const fallSpeed = (): number => 40;
   const floatSpeed = (level: number): number =>
