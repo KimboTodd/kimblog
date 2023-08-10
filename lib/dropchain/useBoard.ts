@@ -13,15 +13,16 @@ export const useBoard = (
   resetPlayerForScoring: () => void,
   resetPlayer: () => void,
   gravity: boolean,
-  links: number,
-  setGameOver: React.Dispatch<React.SetStateAction<boolean>>
+  linksDropped: number,
+  setGameOver: React.Dispatch<React.SetStateAction<boolean>>,
+  setGameOn: React.Dispatch<React.SetStateAction<boolean>>
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
   const initialGrid: Grid = createGrid();
   const [grid, setGrid] = useState<Grid>(initialGrid);
-  const [chainsScored, setChainsScored] = useState(0);
+  const [linksBroken, setLinksBroken] = useState(0);
 
   useEffect(() => {
-    setChainsScored(0);
+    setLinksBroken(0);
 
     const updatedGrid = (prevGrid: Grid) => {
       // Note: clearing the board each game loop is what gives the illusion of animation
@@ -41,7 +42,7 @@ export const useBoard = (
       if (player.collided) {
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
-          setChainsScored(prev => prev + 1);
+          setLinksBroken(prev => prev + chainsFormed);
 
           // if there were chains, reset the player position but not collided
           resetPlayerForScoring();
@@ -62,12 +63,13 @@ export const useBoard = (
   // every 7 drops, add a new row to the bottom
   // and push everything up one row
   useEffect(() => {
-    if (links !== 0 && links % 7 === 0) {
+    if (linksDropped !== 0 && linksDropped % 7 === 0) {
       setGrid(prev => {
         const newGrid: Grid = prev.filter((row: Cell[], i: number) => {
           // if the first row of the board has contents, game over
           if (i === 1 && row.some((cell: Cell) => cell[0] !== 0)) {
             setGameOver(true);
+            setGameOn(false);
             return prev;
           }
           // if this is the first row of the grid, disregard (remove)
@@ -83,14 +85,14 @@ export const useBoard = (
         // after adding the new row check if this created any chains for scoring
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
-          setChainsScored(prev => prev + 1);
+          setLinksBroken(prev => prev + 1);
         }
         return newGrid;
       });
     }
-  }, [links, setGameOver, setGrid]);
+  }, [linksDropped, setGameOver, setGrid]);
 
-  return [grid, setGrid, chainsScored];
+  return [grid, setGrid, linksBroken];
 };
 
 /**

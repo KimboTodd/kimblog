@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export const useScore = (
-  chainsScored: number,
-  links: number
+  linksBroken: number,
+  linksDropped: number
 ): [number, number, () => void] => {
   const [score, setScore] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);
@@ -14,12 +14,12 @@ export const useScore = (
   }, []);
 
   useEffect(() => {
-    if (chainsScored > 0) {
+    if (linksBroken > 0) {
       const sound = new Audio('/assets/blog/dropchain/confirmation_001.ogg');
       sound.play();
       setScoreSound(sound);
     }
-  }, [chainsScored]);
+  }, [linksBroken]);
 
   useEffect(() => {
     if (scoreSound) {
@@ -31,15 +31,15 @@ export const useScore = (
   }, [scoreSound]);
 
   useEffect(() => {
-    if (chainsScored <= 0) return;
+    if (linksBroken <= 0) return;
 
-    if (links >= level * 7) {
+    if (linksDropped >= level * 7) {
       setLevel(prev => prev + 1);
     }
 
     const multiplier: number[] = [10, 20, 30, 50, 80, 130, 210, 340, 550, 890];
-    setScore(prev => prev + multiplier[chainsScored - 1] * level);
-  }, [chainsScored, level, links]);
+    setScore(prev => prev + multiplier[linksBroken - 1] * level);
+  }, [linksBroken, level, linksDropped]);
 
   return [score, level, resetScore];
 };
