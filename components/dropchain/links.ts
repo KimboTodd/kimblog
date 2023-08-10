@@ -17,5 +17,6 @@ export const EMPTY = 0;
 
 // Get a random chain, except for the first which is the placeholder
 // and the last which is the merged chain
-export const randomChain = (): Link =>
-  LINK[Math.floor(Math.random() * (LINK.length - 2) + 1)];
+// temp TODO: remove this shorter length
+export const randomLink = (): Link =>
+  LINK[Math.floor(Math.random() * (LINK.length - 6) + 1)];

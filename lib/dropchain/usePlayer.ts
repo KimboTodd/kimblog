@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { GRID_WIDTH } from './grid';
 import { Player } from './types';
-import { LINK, randomChain } from '../../components/dropchain/links';
+import { LINK, randomLink } from '../../components/dropchain/links';
 
 export const usePlayer = (): [
   Player,
@@ -39,7 +39,7 @@ export const usePlayer = (): [
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: Math.floor(GRID_WIDTH / 2), y: 0 },
-      content: randomChain().content,
+      content: randomLink().content,
       collided: false,
     });
   }, []);

@@ -5,7 +5,7 @@ import React from 'react';
 import {
   EMPTY,
   UNBREAKABLE,
-  randomChain,
+  randomLink,
 } from '../../components/dropchain/links';
 
 export const useBoard = (
@@ -204,19 +204,19 @@ function markScoringChains(newGrid: Grid): number {
     // Convert neighboring unbreakable links to breakable links
     const left = x - 1;
     if (left >= 0 && newGrid[y][left][0] === UNBREAKABLE) {
-      newGrid[y][left][0] = randomChain().content;
+      newGrid[y][left][0] = randomLink().content;
     }
     const right = x + 1;
     if (right < newGrid[y].length && newGrid[y][right][0] === UNBREAKABLE) {
-      newGrid[y][right][0] = randomChain().content;
+      newGrid[y][right][0] = randomLink().content;
     }
     const above = y - 1;
     if (above > 0 && newGrid[above][x][0] === UNBREAKABLE) {
-      newGrid[above][x][0] = randomChain().content;
+      newGrid[above][x][0] = randomLink().content;
     }
     const below = y + 1;
     if (below < newGrid.length && newGrid[below][x][0] === UNBREAKABLE) {
-      newGrid[below][x][0] = randomChain().content;
+      newGrid[below][x][0] = randomLink().content;
     }
   });
 

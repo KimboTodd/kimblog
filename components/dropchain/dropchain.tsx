@@ -11,10 +11,12 @@ import InverseDisplay from './inverseDisplay';
 import RowCounter from './rowCounter';
 import { useScore } from '../../lib/dropchain/useScore';
 import InstructionsModal from './instructionsModal';
+import { EMPTY } from './links';
 
 const DropChain = () => {
   const [linksDropped, setLinksDropped] = useState<number>(0);
   const [gameOver, setGameOver] = useState(null);
+  const [gameOn, setGameOn] = useState(false);
   const [dropTime, setDropTime] = useState<number>(null);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [gravity, setGravity] = useState(true);
@@ -30,17 +32,20 @@ const DropChain = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    setLinksDropped(prev => prev + 1);
+    if (player.content !== EMPTY) {
+      setLinksDropped(prev => prev + 1);
+    }
   }, [player.content]);
 
+  // Manage the game speed
   useEffect(() => {
-    if (gameOver) {
+    if (gameOver || gameOn === false) {
       setDropTime(null);
       new Audio('/assets/blog/dropchain/error_003.ogg').play();
-    } else if (level > 0) {
+    } else if (gameOn) {
       setDropTime(floatSpeed(level));
     }
-  }, [level, gameOver]);
+  }, [gameOn, gameOver, chainsScored, level]);
 
   const fallSpeed = (): number => 40;
   const floatSpeed = (level: number): number =>
@@ -52,36 +57,37 @@ const DropChain = () => {
     setDropTime(floatSpeed(level));
     resetPlayer();
     setGameOver(false);
+    setGameOn(true);
     resetScore();
     setLinksDropped(0);
   };
 
   const move = ({ keyCode }) => {
     switch (keyCode) {
-      case 37:
-        if (gameOver !== true) {
+      case 37: // Left arrow
+        if (gameOn) {
           if (checkCollision(player, grid, { x: -1, y: 0 }) === false) {
             updatePlayerPos({ x: -1, y: 0, collided: false });
           }
         }
         break;
-      case 39:
-        if (gameOver !== true) {
+      case 39: // Right arrow
+        if (gameOn) {
           if (checkCollision(player, grid, { x: 1, y: 0 }) === false) {
             updatePlayerPos({ x: 1, y: 0, collided: false });
           }
         }
         break;
-      case 40:
-        if (gameOver !== true) {
+      case 40: // Down arrow
+        if (gameOn) {
           setDropTime(fallSpeed());
           dropLink();
         }
         break;
-      case 83:
+      case 83: // S key
         startGame();
         break;
-      case 71:
+      case 71: // G key
         setGravity(!gravity);
         break;
       default:
@@ -95,6 +101,7 @@ const DropChain = () => {
 
       if (player.pos.y < 1) {
         setGameOver(true);
+        setGameOn(false);
         return;
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
