@@ -45,9 +45,15 @@ const DropChain = () => {
       setDropTime(null);
       new Audio('/assets/blog/dropchain/error_003.ogg').play();
     } else if (gameOn) {
-      setDropTime(floatSpeed(level));
+      if (linksBroken > 0) {
+        // if links were broken we are in a scoring state
+        setDropTime(null);
+      } else {
+        // if 0 links broken, continue the game
+        setDropTime(floatSpeed(level));
+      }
     }
-  }, [gameOn, gameOver, level]);
+  }, [gameOn, gameOver, level, linksBroken]);
 
   const fallSpeed = (): number => 40;
   const floatSpeed = (level: number): number =>

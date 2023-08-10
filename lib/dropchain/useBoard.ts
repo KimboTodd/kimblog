@@ -55,7 +55,7 @@ export const useBoard = (
 
     // TODO: revisit this idea for chained busting
     setGrid(prev => updatedGrid(prev));
-  }, [gravity, player, resetPlayer, resetPlayerForScoring]);
+  }, [gravity, player, resetPlayer, resetPlayerForScoring, linksBroken]);
 
   // TODO: make sure this scores any chains that are formed
   // every 7 drops, add a new row to the bottom
