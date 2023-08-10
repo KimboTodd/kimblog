@@ -196,7 +196,7 @@ function markScoringChains(newGrid: Grid): number {
 
   scoredCoordinates.forEach(({ x, y }: Position) => {
     // Mark each set coordinate as scored
-    newGrid[y][x][1] = CellState.Score;
+    newGrid[y][x] = [newGrid[y][x][0], CellState.Score];
 
     // Convert neighboring unbreakable links to breakable links
     const left = x - 1;
