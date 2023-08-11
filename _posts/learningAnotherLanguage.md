@@ -1,6 +1,6 @@
 ---
-title: 'Learning a Language'
-excerpt: 'The 4th Time Around'
+title: 'Public Speaking, Sponsorship and SB Women in STEM'
+excerpt: 'Learning a Language, the 4th time around'
 coverImage: '/assets/blog/fourCover.jpg'
 date: '2023-03-16T05:35:07.322Z'
 author:
@@ -10,7 +10,7 @@ ogImage:
   url: '/assets/blog/fourCover.jpg'
 ---
 
-## The 4th Time Around
+## Public Speaking
 
 In the spirit of sponsorship, I was encouraged by my manager to apply to speak at the Santa Barbara Women In STEM talk. Embracing the philosophy of Learning in Public, I submitted my application and was chosen as a speaker. Little did I know, this turned out to be a competition, as revealed during the prep meeting.
 
