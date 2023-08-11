@@ -31,21 +31,20 @@ export const useScore = (
   }, [scoreSound]);
 
   useEffect(() => {
-    if (linksBroken < 1) return;
+    const fibonacci = (n: number): number => {
+      if (n === 0) return 0;
+      if (n === 1) return 1;
+      return fibonacci(n - 1) + fibonacci(n - 2);
+    };
+
+    if (linksBroken <= 0) return;
 
     if (linksDropped >= level * 7) {
       setLevel(prev => prev + 1);
     }
 
-    const fibonacci = (n: number) => {
-      if (n <= 1) {
-        return n;
-      }
-      return fibonacci(n - 1) + fibonacci(n - 2);
-    };
-
-    const multiplier = fibonacci(linksBroken);
-    setScore(prev => prev + multiplier[linksBroken - 1]);
+    var multiplier = fibonacci(linksBroken) * 10;
+    setScore(prev => prev + multiplier);
   }, [linksBroken, level, linksDropped]);
 
   return [score, level, resetScore];
