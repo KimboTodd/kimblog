@@ -1,6 +1,6 @@
 ---
 title: 'See Sharp .NET'
-excerpt: 'C# and .NET through new lenses'
+excerpt: 'C# and .NET through new lenses.'
 coverImage: '/assets/blog/windowsCover.png'
 date: '2023-03-16T05:35:07.322Z'
 author:

@@ -1,6 +1,6 @@
 ---
 title: 'SVGs and Github READMEs'
-excerpt: 'A little about SVGs and a little about using them in a your github profile'
+excerpt: 'A little about SVGs and a little about using them in a your github profile.'
 coverImage: '/assets/blog/alohomora.svg'
 date: '2023-06-26T05:35:07.322Z'
 author:

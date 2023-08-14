@@ -1,6 +1,6 @@
 ---
 title: 'Public Speaking, Sponsorship and SB Women in STEM'
-excerpt: 'Learning a Language, the 4th time around'
+excerpt: 'Learning a Language, the 4th time around.'
 coverImage: '/assets/blog/fourCover.jpg'
 date: '2023-03-16T05:35:07.322Z'
 author:
