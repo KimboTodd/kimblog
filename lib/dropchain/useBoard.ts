@@ -10,9 +10,7 @@ import {
 
 export const useBoard = (
   player: Player,
-  resetPlayerForScoring: () => void,
   resetPlayer: () => void,
-  gravity: boolean,
   linksDropped: number,
   setGameOver: React.Dispatch<React.SetStateAction<boolean>>,
   setGameOn: React.Dispatch<React.SetStateAction<boolean>>
@@ -22,17 +20,55 @@ export const useBoard = (
   const [linksBroken, setLinksBroken] = useState(0);
 
   useEffect(() => {
+    const scoreGrid = (prevGrid: Grid) => {
+      console.log('scoreGrid about to clear prev scoring items');
+      // Note: clearing the board each game loop is what gives the illusion of animation
+      const newGrid: Grid = clearBoard(prevGrid);
+
+      let cellsShifted = gravitizeCellsOne(newGrid);
+      while (cellsShifted) {
+        cellsShifted = gravitizeCellsOne(newGrid);
+      }
+
+      // Only if the player has collided, check for chains and scoring
+      // if (player.collided) {
+      const chainsFormed: number = markScoringChains(newGrid);
+      if (chainsFormed > 0) {
+        setLinksBroken(prev => prev + chainsFormed);
+        // if there were chains, reset the player position but not collided
+        // resetPlayerForScoring();
+        // Take 2: a score has happened so we need to clear the board after a short delay
+        // and we need to call this function again to check for chains
+        setTimeout(() => {
+          console.log(
+            'scoreGrid setTimeout: clearing board because score happened'
+          );
+          setGrid(prev => scoreGrid(prev));
+        }, 400);
+      } else {
+        setLinksBroken(0);
+        // if there were no chains formed, reset the player position and collided
+        resetPlayer();
+      }
+      // }
+
+      return newGrid;
+    };
+
     const updatedGrid = (prevGrid: Grid) => {
       // Note: clearing the board each game loop is what gives the illusion of animation
-      let newGrid: Grid = clearBoard(prevGrid);
+      const newGrid: Grid = clearBoard(prevGrid);
 
-      if (gravity) {
-        newGrid = gravitizeGrid(newGrid);
+      // May be able to remove this and only have this function in scoreGrid
+      let cellsShifted = gravitizeCellsOne(newGrid);
+      while (cellsShifted) {
+        cellsShifted = gravitizeCellsOne(newGrid);
       }
 
       // Draw new active player link in position
       if (player.content !== EMPTY) {
         const cellState = player.collided ? CellState.Merged : CellState.Clear;
+        // the problem is that we are going to collide and we still move
         newGrid[player.pos.y][player.pos.x] = [player.content, cellState];
       }
 
@@ -42,7 +78,13 @@ export const useBoard = (
         if (chainsFormed > 0) {
           setLinksBroken(prev => prev + chainsFormed);
           // if there were chains, reset the player position but not collided
-          resetPlayerForScoring();
+          // resetPlayerForScoring();
+          // Take 2: a score has happened so we need to clear the board after a short delay
+          // and we need to call this function again to check for chains
+          setTimeout(() => {
+            console.log('updateGrid setTimeout');
+            setGrid(prev => scoreGrid(prev));
+          }, 400);
         } else {
           setLinksBroken(0);
           // if there were no chains formed, reset the player position and collided
@@ -53,9 +95,14 @@ export const useBoard = (
       return newGrid;
     };
 
-    // TODO: revisit this idea for chained busting
     setGrid(prev => updatedGrid(prev));
-  }, [gravity, player, resetPlayer, resetPlayerForScoring, linksBroken]);
+  }, [
+    resetPlayer,
+    player.content,
+    player.collided,
+    player.pos.y,
+    player.pos.x,
+  ]);
 
   // TODO: make sure this scores any chains that are formed
   // every 7 drops, add a new row to the bottom
@@ -88,30 +135,34 @@ export const useBoard = (
         return newGrid;
       });
     }
-  }, [linksDropped, setGameOver, setGrid]);
+  }, [linksDropped, setGameOn, setGameOver, setGrid]);
 
   return [grid, setGrid, linksBroken];
 };
 
 /**
- * Shifts any non-null/non-zero cells down, like gravity is turned on.
+ * Shifts any non-null/non-zero cells down one space.
  * @param newGrid The current game grid.
- * @returns The updated game grid with cells shifted down.
+ * @returns bool if any cells were shifted down.
  */
-function gravitizeGrid(grid: Grid): Grid {
-  const newGrid: Grid = createGrid();
+function gravitizeCellsOne(grid: Grid): boolean {
+  let cellsShifted = false;
 
-  // loop through each column
   for (let x = 0; x < grid[0].length; x++) {
-    let filledPointer = grid.length - 1;
     for (let y = grid.length - 1; y > 0; y--) {
-      if (grid[y][x][0] !== 0) {
-        newGrid[filledPointer][x] = grid[y][x];
-        filledPointer--;
+      // Loop through each column, starting at the bottom row
+      // if the cell is empty, and the one above is not
+      // shift the cell above it down
+      // replace the cell above with an empty cell.
+      if (grid[y][x][0] === 0 && grid[y - 1][x][0] !== 0) {
+        cellsShifted = true;
+        grid[y][x] = grid[y - 1][x];
+        grid[y - 1][x] = [EMPTY, CellState.Clear];
       }
     }
   }
-  return newGrid;
+
+  return cellsShifted;
 }
 
 /**

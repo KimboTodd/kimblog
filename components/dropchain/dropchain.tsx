@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Display from './display';
 import StartButton from './startButton';
 import { usePlayer } from '../../lib/dropchain/usePlayer';
 import { useBoard } from '../../lib/dropchain/useBoard';
 import { createGrid } from '../../lib/dropchain/grid';
-import { useInterval } from '../../lib/dropchain/useInterval';
 import { checkCollision } from '../../lib/dropchain/checkCollision';
 import Board from './board';
 import InverseDisplay from './inverseDisplay';
@@ -17,21 +16,18 @@ const DropChain = () => {
   const [linksDropped, setLinksDropped] = useState<number>(0);
   const [gameOver, setGameOver] = useState(null);
   const [gameOn, setGameOn] = useState(false);
-  const [dropTime, setDropTime] = useState<number>(null);
-  const [player, updatePlayerPos, resetPlayer, resetPlayerForScoring] =
+  const [player, updatePlayerPos, resetPlayer] =
     usePlayer();
-  const [gravity, setGravity] = useState(true);
   const [grid, setGrid, linksBroken] = useBoard(
     player,
-    resetPlayerForScoring,
     resetPlayer,
-    gravity,
     linksDropped,
     setGameOver,
     setGameOn
   );
   const [score, level, resetScore] = useScore(linksBroken, linksDropped);
   const [modalOpen, setModalOpen] = useState(false);
+  const playerRef = useRef(player);
 
   useEffect(() => {
     if (player.content !== EMPTY) {
@@ -42,27 +38,13 @@ const DropChain = () => {
   // Manage the game speed
   useEffect(() => {
     if (gameOver || gameOn === false) {
-      setDropTime(null);
       new Audio('/assets/blog/dropchain/error_003.ogg').play();
-    } else if (gameOn) {
-      if (linksBroken > 0) {
-        // if links were broken we are in a scoring state
-        setDropTime(null);
-      } else {
-        // if 0 links broken, continue the game
-        setDropTime(floatSpeed(level));
-      }
     }
   }, [gameOn, gameOver, level, linksBroken]);
-
-  const fallSpeed = (): number => 40;
-  const floatSpeed = (level: number): number =>
-    Math.max(500, 2000 - level * 20);
 
   const startGame = () => {
     // Reset everything
     setGrid(createGrid());
-    setDropTime(floatSpeed(level));
     resetPlayer();
     setGameOver(false);
     setGameOn(true);
@@ -88,15 +70,11 @@ const DropChain = () => {
         break;
       case 40: // Down arrow
         if (gameOn) {
-          setDropTime(fallSpeed());
           dropLink();
         }
         break;
       case 83: // S key
         startGame();
-        break;
-      case 71: // G key
-        setGravity(!gravity);
         break;
       default:
         break;
@@ -104,25 +82,39 @@ const DropChain = () => {
   };
 
   const dropLink = () => {
-    if (checkCollision(player, grid, { x: 0, y: 1 })) {
-      new Audio('/assets/blog/dropchain/glass_006.ogg').play();
+    const dropPlayer = () => {
+      // Consider doing this instead of setting a player ref
+      // setGrid(prev => scoreGrid(prev));
 
-      if (player.pos.y < 1) {
-        setGameOver(true);
-        setGameOn(false);
-        return;
+      if (checkCollision(playerRef.current, grid, { x: 0, y: 1 })) {
+        // Current link is unable to move down without colliding
+        if (playerRef.current.pos.y < 1) {
+          setGameOver(true);
+          setGameOn(false);
+          return true;
+        }
+
+        new Audio('/assets/blog/dropchain/glass_006.ogg').play();
+        updatePlayerPos({ x: 0, y: 0, collided: true });
+        return true;
+      } else {
+        new Audio('/assets/blog/dropchain/glass_002.ogg').play();
+        updatePlayerPos({ x: 0, y: 1, collided: false });
+        return false;
       }
-      updatePlayerPos({ x: 0, y: 0, collided: true });
-      setDropTime(floatSpeed(level));
-    } else {
-      updatePlayerPos({ x: 0, y: 1, collided: false });
-    }
+    };
+
+    const timerId = setInterval(() => {
+      const collided = dropPlayer();
+      if (collided) {
+        clearInterval(timerId);
+      }
+    }, 70);
   };
 
-  useInterval(() => {
-    new Audio('/assets/blog/dropchain/glass_002.ogg').play();
-    dropLink();
-  }, dropTime);
+  useEffect(() => {
+    playerRef.current = player;
+  }, [player]);
 
   return (
     <div
@@ -156,13 +148,8 @@ const DropChain = () => {
 
             <Display
               flash={false}
-              text={`GRAVITY: ${gravity ? 'ON' : 'OFF'} - PRESS [G] TO TOGGLE`}
-            />
-
-            <Display
-              flash={false}
               text={`${
-                dropTime
+                gameOn
                   ? `LINK: ${linksDropped}`
                   : 'LINKS: READY - PRESS [S] TO START'
               }`}
