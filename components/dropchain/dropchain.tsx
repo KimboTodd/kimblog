@@ -82,9 +82,8 @@ const DropChain = () => {
 
   const dropLink = () => {
     const dropPlayer = () => {
-      // Consider doing this instead of setting a player ref
+      // TODO Consider doing this instead of setting a player ref
       // setGrid(prev => scoreGrid(prev));
-
       if (checkCollision(playerRef.current, grid, { x: 0, y: 1 })) {
         // Current link is unable to move down without colliding
         if (playerRef.current.pos.y < 1) {
@@ -133,17 +132,29 @@ const DropChain = () => {
       </div>
 
       <div className="invisible mx-auto max-w-7xl md:visible">
-        <InverseDisplay
-          text={gameOver ? 'DROPCHAIN --------- GAME OVER --------- ' : 'DROPCHAIN'}
-          gameOver={gameOver}
-        />
-
         <div className="mx-auto flex flex-col justify-between md:flex-row">
           <Board grid={grid} />
           <aside className="flex w-full flex-col justify-between px-4 lg:px-10 ">
+            <InverseDisplay
+              text={
+                gameOver
+                  ? 'DROPCHAIN --------- GAME OVER --------- '
+                  : 'DROPCHAIN'
+              }
+              gameOver={gameOver}
+            />
+
+            <RowCounter links={linksDropped} />
+
+            <button
+              className="box-border w-full cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
+              onClick={() => setModalOpen(true)}
+            >
+              View Instructions
+            </button>
+
             <Display text={`SCORE: ${score}`} flash={true} />
             <Display text={`LEVEL: ${level}`} flash={true} />
-            <RowCounter links={linksDropped} />
 
             <Display
               flash={false}
@@ -153,13 +164,6 @@ const DropChain = () => {
                   : 'LINKS: READY - PRESS [S] TO START'
               }`}
             />
-
-            <button
-              className="box-border w-full cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
-              onClick={() => setModalOpen(true)}
-            >
-              View Instructions
-            </button>
 
             <StartButton callback={startGame} />
           </aside>
