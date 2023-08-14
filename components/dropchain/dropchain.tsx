@@ -16,8 +16,7 @@ const DropChain = () => {
   const [linksDropped, setLinksDropped] = useState<number>(0);
   const [gameOver, setGameOver] = useState(null);
   const [gameOn, setGameOn] = useState(false);
-  const [player, updatePlayerPos, resetPlayer] =
-    usePlayer();
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [grid, setGrid, linksBroken] = useBoard(
     player,
     resetPlayer,
@@ -135,7 +134,7 @@ const DropChain = () => {
 
       <div className="invisible mx-auto max-w-7xl md:visible">
         <InverseDisplay
-          text={gameOver ? 'GAME OVER' : '*  * * DROPCHAIN * * *'}
+          text={gameOver ? 'DROPCHAIN --------- GAME OVER --------- ' : 'DROPCHAIN'}
           gameOver={gameOver}
         />
 
@@ -156,7 +155,7 @@ const DropChain = () => {
             />
 
             <button
-              className="box-border w-full animate-crtBlurText cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
+              className="box-border w-full cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
               onClick={() => setModalOpen(true)}
             >
               View Instructions
