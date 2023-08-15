@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createGrid, newMergedRow } from './grid';
 import { Cell, CellState, Player, Grid, Position } from './types';
 import React from 'react';
@@ -19,51 +19,40 @@ export const useBoard = (
   const [grid, setGrid] = useState<Grid>(initialGrid);
   const [linksBroken, setLinksBroken] = useState(0);
 
-  useEffect(() => {
-    const scoreGrid = (prevGrid: Grid) => {
-      console.log('scoreGrid about to clear prev scoring items');
-      // Note: clearing the board each game loop is what gives the illusion of animation
+  const scoreGrid = useCallback(
+    (prevGrid: Grid) => {
       const newGrid: Grid = clearBoard(prevGrid);
 
-      let cellsShifted = gravitizeCellsOne(newGrid);
-      while (cellsShifted) {
-        cellsShifted = gravitizeCellsOne(newGrid);
+      const cellsShifted = gravitizeGrid(newGrid);
+      if (cellsShifted) {
+        setTimeout(() => {
+          setGrid(prev => scoreGrid(prev));
+        }, 350);
+        return newGrid;
       }
 
-      // Only if the player has collided, check for chains and scoring
-      // if (player.collided) {
       const chainsFormed: number = markScoringChains(newGrid);
       if (chainsFormed > 0) {
         setLinksBroken(prev => prev + chainsFormed);
-        // if there were chains, reset the player position but not collided
-        // resetPlayerForScoring();
-        // Take 2: a score has happened so we need to clear the board after a short delay
-        // and we need to call this function again to check for chains
+
         setTimeout(() => {
-          console.log(
-            'scoreGrid setTimeout: clearing board because score happened'
-          );
           setGrid(prev => scoreGrid(prev));
-        }, 400);
+        }, 350);
       } else {
         setLinksBroken(0);
         // if there were no chains formed, reset the player position and collided
         resetPlayer();
       }
-      // }
 
       return newGrid;
-    };
+    },
+    [resetPlayer]
+  );
 
+  useEffect(() => {
     const updatedGrid = (prevGrid: Grid) => {
       // Note: clearing the board each game loop is what gives the illusion of animation
       const newGrid: Grid = clearBoard(prevGrid);
-
-      // May be able to remove this and only have this function in scoreGrid
-      let cellsShifted = gravitizeCellsOne(newGrid);
-      while (cellsShifted) {
-        cellsShifted = gravitizeCellsOne(newGrid);
-      }
 
       // Draw new active player link in position
       if (player.content !== EMPTY) {
@@ -77,14 +66,9 @@ export const useBoard = (
         const chainsFormed: number = markScoringChains(newGrid);
         if (chainsFormed > 0) {
           setLinksBroken(prev => prev + chainsFormed);
-          // if there were chains, reset the player position but not collided
-          // resetPlayerForScoring();
-          // Take 2: a score has happened so we need to clear the board after a short delay
-          // and we need to call this function again to check for chains
           setTimeout(() => {
-            console.log('updateGrid setTimeout');
             setGrid(prev => scoreGrid(prev));
-          }, 400);
+          }, 350);
         } else {
           setLinksBroken(0);
           // if there were no chains formed, reset the player position and collided
@@ -102,9 +86,9 @@ export const useBoard = (
     player.collided,
     player.pos.y,
     player.pos.x,
+    scoreGrid,
   ]);
 
-  // TODO: make sure this scores any chains that are formed
   // every 7 drops, add a new row to the bottom
   // and push everything up one row
   useEffect(() => {
@@ -127,15 +111,13 @@ export const useBoard = (
         const row: Cell[] = newMergedRow();
         newGrid[prev.length - 1] = row;
 
-        // after adding the new row check if this created any chains for scoring
-        const chainsFormed: number = markScoringChains(newGrid);
-        if (chainsFormed > 0) {
-          setLinksBroken(prev => prev + 1);
-        }
+        setTimeout(() => {
+          setGrid(prev => scoreGrid(prev));
+        }, 350);
         return newGrid;
       });
     }
-  }, [linksDropped, setGameOn, setGameOver, setGrid]);
+  }, [linksDropped, scoreGrid, setGameOn, setGameOver]);
 
   return [grid, setGrid, linksBroken];
 };
@@ -145,7 +127,7 @@ export const useBoard = (
  * @param newGrid The current game grid.
  * @returns bool if any cells were shifted down.
  */
-function gravitizeCellsOne(grid: Grid): boolean {
+function gravitizeGrid(grid: Grid): boolean {
   let cellsShifted = false;
 
   for (let x = 0; x < grid[0].length; x++) {
