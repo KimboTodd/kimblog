@@ -23,7 +23,7 @@ This side project is just that – a personal endeavor for fun and learning, fre
 
 ## The Blueprint: A Game Plan
 
-Efficiency matters, especially when you're working solo. So, I've decided to leverage the React ecosystem to expedite the development process along with Tailwind which has been easy to learn and enjoyable to work with. Since this blog itself is built using Next.js, React and tailwind and is already hosted on Vercel, I've got a convenient setup to work within. No need to fuss over hosting – I can focus on the core code and learning.
+Efficiency matters, especially when you're working solo. So, I've decided to leverage the React ecosystem to expedite the development process along with Tailwind which has been easy to learn and enjoyable to work with. Since this blog itself is built using Next.js, React and tailwind and is already hosted on Vercel, I've got a convenient setup to work within. No need to fuss over hosting or deployments – I can focus on the core code and learning.
 
 ## React's Place in Game Development
 
@@ -59,16 +59,37 @@ Use `Array.from` and pass in a function as the second argument if we'll need to 
 Array.from(LENGTH, () => [value, state]);
 ```
 
+#### Update:
+
+After rewriting dropchain in Blazor, the experience has really reinforced my understanding of how a particular language informs that way one thinks. The first day of thinking and planning what I would do differently in Blazor, I just kept thinking about React ways of doing things.
+
 ## Challenges of React in Game Development
 
 As with any approach, there are challenges. React isn't inherently tailored for mobile play, which presents hurdles and I will create some buttons for mobile sized screens but won't be creating a native app.
 
+When I move on to adding in more features (like multiplayer), I'll update this section.
+
 ## What Lies Ahead
 
-The completion of Dropchain in React isn't the end - next up, I'm going to create Dropchain in Blazor. The plan is to rewrite Dropchain using Blazor then Elixir to compare the experience in both. I'd like to also add the feature of a leader board using redis, a simple modal for instructions, and eventually multiplayer. This project is a testament to the iterative nature of learning and development.
+The completion of Dropchain in React isn't the end - the plan is to rewrite it using Blazor then Elixir to compare the experience in both. Then once I have a basic game working, I'd like to add a few features like a leader board using redis, an effective way to convey how to play, and eventually multiplayer. This project is a testament to the iterative nature of learning and development so I'll come back and update this section as I work.
+
+[x] React
+
+[ ] Blazor: now a work in progress
+
+[ ] Elixir
+
+[ ] Leader Board
+
+[ ] Effective tutorial/instructions
+
+[ ] Multiplayer
+
+Update: the Blazor version is now a work in progress progress! Because I'd like to be able to make the game multiplayer, I went with Blazor Server and am hosting it in Azure. For now I'm going to keep it hosted for free (unless it gets really popular 🙃) at this address: <https://dropchain.azurewebsites.net/>.
 
 ### Links
 
 The inspiration for this game is Blockchain, a game within a game. But Blockchain itself appears to be another game, originally called Drop7, that's no longer available. Here is a video so you can see Blockchain in action: <https://youtu.be/r11NsHGLExU?t=130/>.
 
-And here is my version: <https://www.kimbo.dev/dropchain-react/>
+Here is my version in react: <https://www.kimbo.dev/dropchain-react/>
+And Blazor: <https://dropchain.azurewebsites.net/>
