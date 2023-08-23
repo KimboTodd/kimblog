@@ -1,6 +1,6 @@
 Kim's Blog
 
-## Created With:
+## Created With
 
 - [Tailwind CSS](https://tailwindcss.com)
 - Template: [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter)
