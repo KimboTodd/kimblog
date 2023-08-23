@@ -3,7 +3,7 @@ title: 'Exploring Languages Through Game Dev'
 excerpt: 'I am Building the same game in a few different languages.'
 coverImage: '/assets/blog/dropchainCover.png'
 coverLink: 'https://www.kimbo.dev/dropchain-react/'
-date: '2023-08-06T05:35:07.322Z'
+date: '2023-08-14T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'

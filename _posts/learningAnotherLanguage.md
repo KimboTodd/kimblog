@@ -2,7 +2,7 @@
 title: 'Public Speaking, Sponsorship and SB Women in STEM'
 excerpt: 'Learning a Language, the 4th time around.'
 coverImage: '/assets/blog/fourCover.jpg'
-date: '2023-03-16T05:35:07.322Z'
+date: '2023-05-16T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'

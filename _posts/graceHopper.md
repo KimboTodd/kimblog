@@ -1,13 +1,13 @@
 ---
 title: 'Navigating Growth and Embracing Discomfort'
 excerpt: 'An Unforgettable Experience at Grace Hopper Conference'
-coverImage: '/assets/blog/placeholderCover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+coverImage: '/assets/blog/graceHopper.gif'
+date: '2023-08-06T05:35:07.322Z'
 author:
   name: Kim Todd
   picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: '/assets/blog/placeholderCover.jpg'
+  url: '/assets/blog/graceHopper.gif'
 ---
 
 ## An Unexpected Opportunity
@@ -20,7 +20,7 @@ Is this foreshadowing imposter syndrome? Yes, yes it is.
 
 ### Why Share My Experience
 
-I am considering attending the Grace Hopper Conference again this year and reflecting on the impact it's had on my career and trajectory. Spoiler alert: after attending, I very quickly got an internship at a unicorn startup, and now have a new voice in my head that continues to remind me I can do this and I deserve the opportunity to prove it.
+I am considering attending the Grace Hopper Conference again this year and reflecting on the impact it's had on my career and trajectory. Spoiler alert: after attending, I started applying to internships and very quickly landed one at a unicorn startup, and now have a new voice in my head that continues to remind me I can do this and I deserve the opportunity to prove it.
 
 Over time, I've had the chance to share my experience with other women and girls still in school. If my journey can inspire even one person to overcome self-doubt or at least accept self-doubt but still seize opportunities, then this slightly vulnerable, possibly cheesy blog post is worth sharing.
 
