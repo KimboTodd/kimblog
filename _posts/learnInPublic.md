@@ -12,7 +12,7 @@ ogImage:
 
 ## Why I'm Making This Blog
 
-Some time ago, I stumbled upon this, <https://www.swyx.io/learn-in-public>, inspiring blog post on how to get better faster.
+Some time ago, I stumbled upon this inspiring blog post on how to get better faster: [Learn In Public](https://www.swyx.io/learn-in-public).
 
 Here are some key takeaways:
 
@@ -24,21 +24,21 @@ Here are some key takeaways:
 
 And that is pretty much it. That summarizes the reason this blog exists.
 
-If you're interested in improving, I highly recommend this article to you and you may enjoy my blog too.
+If you're interested in improving, I highly recommend this article to you, and you may enjoy my blog too.
 
 ---
 
-The following is for myself, but to stretch my learning-in-public muscles I'm going to put it out there.
+The following is for myself, but to stretch my learning-in-public muscles, I'm going to put it out there.
 
 - [x] Take daily notes using only [Obsidian](https://obsidian.md/) because it is searchable and legible. Use the links feature.
 - [x] Make the thing you wish you had found.
 - [x] Write blogs and tutorials and cheatsheets.
 - [x] Speak at meetups and conferences.
 - [ ] Ask and answer discussions online.
-- [ ] Create Youtube videos or Twitch streams.
+- [ ] Create YouTube videos or Twitch streams.
 - [ ] Start a newsletter.
 - [ ] Draw cartoons.
-- [ ] Enjoyed a coding video? Reach out to the speaker/instructor and thank them, and ask questions.
+- [ ] Enjoyed a coding video? Reach out to the speaker/instructor and thank them and ask questions.
 - [ ] Attend conferences and summarize what you learned.
 - [ ] Make PR’s to libraries you use.
 - [ ] Teach workshops.

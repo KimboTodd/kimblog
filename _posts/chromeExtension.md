@@ -14,9 +14,9 @@ Extensions – those nifty little bits of code that add let us personalize the b
 
 ## The Why Behind the Code
 
-Previously, I had GitHub styles colorizer extension that brought rainbow color to the monochrome world of GitHub. Over time, however, the extension lost its functionality due to GitHub's evolving styles. But lately, I've been wanting less grey from my day to day - this prompted me to revive the extension.
+Previously, I had a GitHub styles colorizer extension that brought rainbow color to the monochrome world of GitHub. Over time, however, the extension lost its functionality due to GitHub's evolving styles. But lately, I've been wanting less grey from my day to day - this prompted me to revive the extension.
 
-I've created a chrome extension before and just installed it locally on my own laptop, but at the time I wasn't as enthusiastic about note taking as I am now. So now that I am creating an extension for the second time, I'm going to keep my own notes on how to do it.
+I've created a Chrome extension before and just installed it locally on my own laptop, but at the time I wasn't as enthusiastic about note-taking as I am now. So now that I am creating an extension for the second time, I'm going to keep my own notes on how to do it.
 
 Disclaimer: It's worth noting that these notes focus on the process of creating an extension rather than the practicality of targeting specific CSS classes for color changes. While this project doesn't warrant ongoing maintenance and therefore I'm not going to publish the extension, the experience itself is a valuable learning opportunity.
 
@@ -26,7 +26,7 @@ The best source is the official [Chrome Docs](https://developer.chrome.com/docs/
 
 1. Create a manifest.json file like so:
 
-Every Chrome extension starts with a manifest.json file, a fairly industry standard way to give some metadata about the code. In my case, it looks like this:
+Every Chrome extension starts with a manifest.json file, a fairly industry-standard way to provide metadata about the code. In my case, it looks like this:
 
 ```json
 {
@@ -81,8 +81,7 @@ The content.css file is where the visual styling happens. This is where you defi
 Enabling Developer Mode in Chrome is a necessary step. You can do this by toggling the switch next to "Developer mode" on the Extensions page (accessed via chrome://extensions). Then, you simply click the "Load unpacked" button and select the directory containing your extension.
 
 ### Parting Insights and Future Explorations
-
-Through this experience, reminded myself the importance of writing down what I've learned and had a little fun along the way.
+Through this experience, I reminded myself of the importance of writing down what I've learned and had a little fun along the way.
 
 If you're enticed by the idea of adding a little color to your most visited sites, consider creating a quick little extension for fun and learning.
 

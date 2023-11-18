@@ -1,6 +1,6 @@
 ---
 title: 'SVGs and Github READMEs'
-excerpt: 'A little about SVGs and a little about using them in a your github profile.'
+excerpt: 'A little about SVGs and a little about using them in your GitHub profile.'
 coverImage: '/assets/blog/alohomora.svg'
 date: '2023-06-26T05:35:07.322Z'
 author:
@@ -49,16 +49,16 @@ The main parts of an SVG document are as follows:
 
 ### Foreign Object
 
-Using Foreign Object means we can put our own html and styling into an SVG. This blog post hero image is an SVG. I'll show you how we can add animations to the image.
+Using Foreign Object means we can put our html and styling into an SVG. This blog post hero image is an SVG. I'll show you how we can add animations to the image.
 
-But what's a little more fun is that we can insert SVGs into a github markdown file like the readme.md, which we can use to create a custom styled profile for our personal github page or for a little more interesting readme file for repos we maintain.
+But what's a little more fun is that we can insert SVGs into a GitHub markdown file like the `README.md`, which we can use to create a custom styled profile for our personal GitHub page or for a little more interesting `README` file for repos we maintain.
 
 ## How To
 
 1. In VSCode, create a file and give it a name with the extension `.svg`. This example will be: `alohomora.svg`
 1. Copy and paste this code into the file to create the initial content:
 
-```css
+```xml
 <svg fill="none" viewBox="0 0 600 300" width="600" height="300" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
@@ -96,9 +96,9 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
   ...
 ```
 
-5. Add animation using CSS keyframes. Below is an example of defining `wave` and `gradient` keyframes that are used on the wand emoji and background respectively. If you want to pick out your own colors, drop an image in here to pick out the hex values that you want to use. In the hero image, I used colors from the cover of Harry Potter and teh Sorcerer's Stone.
+5. Add animation using CSS keyframes. Below is an example of defining `wave` and `gradient` keyframes that are used on the wand emoji and background respectively. If you want to pick out your own colors, drop an image in here to pick out the hex values that you want to use. In the hero image, I used colors from the cover of Harry Potter and the Sorcerer's Stone.
 
-```css
+```xml
   ...
     <style>
         @keyframes wave  {
@@ -161,9 +161,9 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
       ...
 ```
 
-6. Let's respect the preference for folks to who want motion turned off by using a [media query](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries):
+6. Let's respect the preference for folks who want motion turned off by using a [media query](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries):
 
-```css
+```xml
   ...
     <style>
       ....
@@ -187,7 +187,7 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
     ...
 ```
 
-7. What about folks that want dark mode? I'll let you add in the content of this media query, make it whatever you like. If you're new to CSS keep in mind the selectors for each element look just a little different: type selectors look like `h1`, class selectors have a `.` like `.container` and ID selectors use `#` like so `#someID`. [Mozilla docs here](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors)
+7. What about folks that want dark mode? I'll let you add in the content of this media query; make it whatever you like. If you're new to CSS keep in mind the selectors for each element look just a little different: type selectors look like `h1`, class selectors have a `.` like `.container` and ID selectors use `#` like so `#someID`. [Mozilla docs here](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors)
 
 ```css
 @media (prefers-reduced-motion) {
@@ -211,17 +211,17 @@ But what's a little more fun is that we can insert SVGs into a github markdown f
 }
 ```
 
-Check out codepen.io for more ideas. Here is a fun one: https://codepen.io/GeorgePark/pen/MrjbEr. But if you are going to use this in a github readme, I've noticed that it is not possible to `@import` other fonts.
+Check out [CodePen](https://codepen.io) for more ideas. Here is a fun one: [Magical Code Animation](https://codepen.io/GeorgePark/pen/MrjbEr). But if you are going to use this in a GitHub readme, I've noticed that it is not possible to `@import` other fonts.
 
 If you want to, you can use the SVG now. This is essentially what I am using for the hero image of this site.
 
-Or if you want to use this as an image in your personal github profile do the following:
+Or if you want to use this as an image in your personal GitHub profile, do the following:
 
-1. To create a Profile, follow the instructions here: https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme#adding-a-profile-readme
-1. After your repository is created, either clone the repo, or just edit the markdown file in github by going to your own url that looks like: github.com/yourusename/yourusername.
-1. We now need to do two things. Add the svg we created to the repository and reference the svg from the README.md file.
-1. To do this in the github UI, click the dropdown button that says `Add File`, add a commit message like "added a custom svg", then click `Upload Files`.
-1. Click into the README and click the edit pencil icon. Add this below code to your readme, but update the `alohomora.svg` file name to whatever your file actually named.
+1. To create a Profile, follow the instructions [here](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme#adding-a-profile-readme).
+1. After your repository is created, either clone the repo or edit the markdown file on GitHub by going to your own URL that looks like: `github.com/yourusename/yourusername`.
+1. Now, we need to do two things: Add the SVG we created to the repository and reference the SVG from the `README.md` file.
+1. To do this in the GitHub UI, click the dropdown button that says `Add File`, add a commit message like "added a custom SVG," then click `Upload Files`.
+1. Click into the README and click the edit pencil icon. Add the following code to your readme, but update the `alohomora.svg` file name to whatever your file is actually named.
 
 ```html
 <div style="width: 100%;">
@@ -229,13 +229,13 @@ Or if you want to use this as an image in your personal github profile do the fo
 </div>
 ```
 
-1. Go to your profile at a url like: github.com/yourProfileName
+1. Go to your profile at a URL like: github.com/yourProfileName
 
 ### Helpful Links
 
-If you want a more accurate way to see what this will look like in the github rendered, check out this post: <https://pragmaticpineapple.com/adding-custom-html-and-css-to-github-readme/>.
+If you want a more accurate way to see what this will look like in the GitHub rendered, check out this post: <https://pragmaticpineapple.com/adding-custom-html-and-css-to-github-readme/>.
 
 This is similar information, but at the bottom is an understated, effective use of adding a little animation that isn't overdone:
 <https://omrilotan.medium.com/rich-html-in-github-readme-bfb3de791441>
 
-Some fun things you can do to turn your github profile into your myspace page: https://github.com/DenverCoder1/readme-typing-svg and a little inspiration https://github.com/8BitJonny
+Some fun things you can do to turn your GitHub profile into your MySpace page: [Readme Typing SVG](https://github.com/DenverCoder1/readme-typing-svg) and a little inspiration [8BitJonny's GitHub](https://github.com/8BitJonny).

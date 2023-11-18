@@ -23,11 +23,11 @@ This side project is just that – a personal endeavor for fun and learning, fre
 
 ## The Blueprint: A Game Plan
 
-Efficiency matters, especially when you're working solo. So, I've decided to leverage the React ecosystem to expedite the development process along with Tailwind which has been easy to learn and enjoyable to work with. Since this blog itself is built using Next.js, React and tailwind and is already hosted on Vercel, I've got a convenient setup to work within. No need to fuss over hosting or deployments – I can focus on the core code and learning.
+Efficiency matters, especially when you're working solo. So, I've decided to leverage the React ecosystem to expedite the development process along with Tailwind which has been easy to learn and enjoyable to work with. Since this blog itself is built using Next.js, React, and Tailwind and is already hosted on Vercel, I've got a convenient setup to work within. No need to fuss over hosting or deployments – I can focus on the core code and learning.
 
 ## React's Place in Game Development
 
-It's no secret that React isn't the go-to choice for high-performance game development, and that's for good reason. Feel free to do a quick google search if you want to find out more about that topic. But for the purpose of learning more programming languages in depth, and for the specifics of my game, which follows a more leisurely tempo, React's potential performance issues aren't a major concern.
+It's no secret that React isn't the go-to choice for high-performance game development, and that's for a good reason. Feel free to do a quick google search if you want to find out more about that topic. But for the purpose of learning more programming languages in-depth, and for the specifics of my game, which follows a more leisurely tempo, React's potential performance issues aren't a major concern.
 
 I will be very interested to see if the game runs sluggishly, and learn more about what we can do to fix it. That would also serve as valuable benchmarks for comparing implementations in other languages.
 
@@ -37,15 +37,15 @@ Let me introduce you to the game – Dropchain. Think of it as a number matching
 
 After a collision, I need to scan for contiguous chains of non-empty cells, both vertically and horizontally. Comparing the chain's length with the values in each contiguous cell is the key. If a match is found, the cell is removed, making room for more cells that continue falling. There's a twist though – the falling speed increases over time, demanding quick decisions akin to Tetris. And, to set it apart, every seven cells materializes a fresh row at the base, pushing all the rest of the cells upwards, adding a layer of complexity. The game ends when there is no more room for the player to land another cell.
 
-Check out the current iteration here: <https://www.kimbo.dev/dropchain-react/>
+Check out the current iteration here: [Dropchain React](https://www.kimbo.dev/dropchain-react/)
 
 ## Learning and Adapting
 
-Throughout this journey, I've encountered a couple of essential lessons. Firstly, while feature planning and scoping is crucial to the success of a project, it's a lot more difficult to do when working alone on a side project. And diving down rabbit holes, meandering and enjoying the creative process rather than a rigid schedule of tasks is equally important to staying engaged. Striking the right balance between "must-haves" and creative exploration is the key to consistent progress towards a finished game.
+Throughout this journey, I've encountered a couple of essential lessons. Firstly, while feature planning and scoping are crucial to the success of a project, it's a lot more difficult to do when working alone on a side project. And diving down rabbit holes, meandering, and enjoying the creative process rather than a rigid schedule of tasks are equally important to staying engaged. Striking the right balance between "must-haves" and creative exploration is the key to consistent progress towards a finished game.
 
-Secondly, the value of not abstracting prematurely. With just a rough idea of the broad features I would need, it was easy to create the game code one way, then later realize that I wanted to add on another feature that was incompatible with the way I had assumed the game would work. I fell into relying heavily on too many custom hooks too early and creating a complex, intertwined structure that was difficult to debug.
+Secondly, the value of not abstracting prematurely. With just a rough idea of the broad features I would need, it was easy to create the game code one way, then later realize that I wanted to add another feature that was incompatible with the way I had assumed the game would work. I fell into relying heavily on too many custom hooks too early and creating a complex, intertwined structure that was difficult to debug.
 
-Of course there were also small bugs along the way that were a good reminder to read the docs closely.
+Of course, there were also small bugs along the way that were a good reminder to read the docs closely.
 
 `.fill` fills an array with static values that will all be the **same reference**. Don't try to change one of these values later thinking only one will change.
 
@@ -61,17 +61,17 @@ Array.from(LENGTH, () => [value, state]);
 
 #### Update:
 
-After rewriting dropchain in Blazor, the experience has really reinforced my understanding of how a particular language informs that way one thinks. The first day of thinking and planning what I would do differently in Blazor, I just kept thinking about React ways of doing things.
+After rewriting Dropchain in Blazor, the experience has really reinforced my understanding of how a particular language informs the way one thinks. The first day of thinking and planning what I would do differently in Blazor, I just kept thinking about React ways of doing things.
 
 ## Challenges of React in Game Development
 
-As with any approach, there are challenges. React isn't inherently tailored for mobile play, which presents hurdles and I will create some buttons for mobile sized screens but won't be creating a native app.
+As with any approach, there are challenges. React isn't inherently tailored for mobile play, which presents hurdles and I will create some buttons for mobile-sized screens but won't be creating a native app.
 
 When I move on to adding in more features (like multiplayer), I'll update this section.
 
 ## What Lies Ahead
 
-The completion of Dropchain in React isn't the end - the plan is to rewrite it using Blazor then Elixir to compare the experience in both. Then once I have a basic game working, I'd like to add a few features like a leader board using redis, an effective way to convey how to play, and eventually multiplayer. This project is a testament to the iterative nature of learning and development so I'll come back and update this section as I work.
+The completion of Dropchain in React isn't the end - the plan is to rewrite it using Blazor then Elixir to compare the experience in both. Then once I have a basic game working, I'd like to add a few features like a leaderboard using Redis, an effective way to convey how to play, and eventually multiplayer. This project is a testament to the iterative nature of learning and development so I'll come back and update this section as I work.
 
 [x] React
 
@@ -85,11 +85,11 @@ The completion of Dropchain in React isn't the end - the plan is to rewrite it u
 
 [ ] Multiplayer
 
-Update: the Blazor version is now a work in progress progress! Because I'd like to be able to make the game multiplayer, I went with Blazor Server and am hosting it in Azure. For now I'm going to keep it hosted for free (unless it gets really popular 🙃) at this address: <https://dropchain.azurewebsites.net/>.
+Update: the Blazor version is now a work in progress! Because I'd like to be able to make the game multiplayer, I went with Blazor Server and am hosting it on Azure. For now, I'm going to keep it hosted for free (unless it gets really popular 🙃) at this address: <https://dropchain.azurewebsites.net/>.
 
 ### Links
 
-The inspiration for this game is Blockchain, a game within a game. But Blockchain itself appears to be another game, originally called Drop7, that's no longer available. Here is a video so you can see Blockchain in action: <https://youtu.be/r11NsHGLExU?t=130/>.
+The inspiration for this game is Blockchain, a game within a game. But Blockchain itself appears to be another game, originally called Drop7, that's no longer available. Here is a video so you can see Blockchain in action: [Blockchain Game Video](https://youtu.be/r11NsHGLExU?t=130/).
 
-Here is my version in react: <https://www.kimbo.dev/dropchain-react/>
-And Blazor: <https://dropchain.azurewebsites.net/>
+Here is my version in React: [Dropchain React](https://www.kimbo.dev/dropchain-react/)
+And Blazor: [Dropchain Blazor](https://dropchain.azurewebsites.net/)
