@@ -1,1 +1,1 @@
-export const BLOG_NAME = "Kimblog";
+export const BLOG_NAME = 'Kimblog';

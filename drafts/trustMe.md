@@ -1,13 +1,13 @@
 ---
-title: "Trust Me"
-excerpt: "Trust me."
-coverImage: "/assets/blog/placeholderCover.jpg"
-date: "2020-03-16T05:35:07.322Z"
+title: 'Trust Me'
+excerpt: 'Trust me.'
+coverImage: '/assets/blog/placeholderCover.jpg'
+date: '2020-03-16T05:35:07.322Z'
 author:
   name: Kim Todd
-  picture: "/assets/blog/authors/KimPossibleAvatar.jpeg"
+  picture: '/assets/blog/authors/KimPossibleAvatar.jpeg'
 ogImage:
-  url: "/assets/blog/placeholderCover.jpg"
+  url: '/assets/blog/placeholderCover.jpg'
 ---
 
 ⚠️ this article is a work in progress

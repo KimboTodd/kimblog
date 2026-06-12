@@ -29,7 +29,7 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
           </Link>
         </div>
       </div>
-      <h3 className="mb-1 md:mb-3 text-3xl leading-snug">
+      <h3 className="mb-1 text-3xl leading-snug md:mb-3">
         <Link
           as={`/posts/${slug}`}
           href="/posts/[slug]"
@@ -38,7 +38,7 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
           {title}
         </Link>
       </h3>
-      <div className="mb-1 md:mb-4 text-lg">
+      <div className="mb-1 text-lg md:mb-4">
         <DateFormatter dateString={date} />
       </div>
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>

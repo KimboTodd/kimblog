@@ -134,7 +134,7 @@ const DropChain = () => {
       <div className="invisible mx-auto max-w-7xl md:visible">
         <div className="mx-auto flex flex-col justify-between md:flex-row">
           <Board grid={grid} />
-          
+
           <aside className="flex w-full flex-col justify-between px-4 lg:px-10">
             <InverseDisplay
               text={

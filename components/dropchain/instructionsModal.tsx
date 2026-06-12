@@ -55,7 +55,8 @@ const InstructionsModal = ({ open, setOpen }) => {
                   <div className="grid grid-cols-2 grid-rows-2 gap-2">
                     <div className="border border-dashed border-green-500 p-4">
                       <p className="pb-2 font-mono text-sm text-green-500">
-                        This is a chain of two links. The length is 2. So, the link with (2) inside scores.
+                        This is a chain of two links. The length is 2. So, the
+                        link with (2) inside scores.
                       </p>
                       <div
                         className={`m-auto grid w-14 grid-cols-1 border-4 border-b-4 border-double border-green-600`}
@@ -81,10 +82,11 @@ const InstructionsModal = ({ open, setOpen }) => {
                     </div>
                     <div className="border border-dashed border-green-500 p-4">
                       <p className="pb-2 font-mono text-sm text-green-500">
-                        This is a chain of 3. Link(3) scores, (5) and (6) do not. 
+                        This is a chain of 3. Link(3) scores, (5) and (6) do
+                        not.
                       </p>
                       <div
-                        className={`m-auto w-44 grid  grid-cols-3 border-4 border-b-4 border-double border-green-600`}
+                        className={`m-auto grid w-44  grid-cols-3 border-4 border-b-4 border-double border-green-600`}
                       >
                         {[
                           [
@@ -137,8 +139,8 @@ const InstructionsModal = ({ open, setOpen }) => {
                     </div>
                     <div className="border border-dashed border-green-500 p-4">
                       <p className="pb-2 font-mono text-sm text-green-500">
-                        Link(3) scores. Then, it unlocks link(0), turning it into a
-                        random breakable link.
+                        Link(3) scores. Then, it unlocks link(0), turning it
+                        into a random breakable link.
                       </p>
                       <div
                         className={`m-auto grid w-14 grid-cols-1 border-4 border-b-4 border-double border-green-600`}

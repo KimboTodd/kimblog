@@ -81,6 +81,7 @@ The content.css file is where the visual styling happens. This is where you defi
 Enabling Developer Mode in Chrome is a necessary step. You can do this by toggling the switch next to "Developer mode" on the Extensions page (accessed via chrome://extensions). Then, you simply click the "Load unpacked" button and select the directory containing your extension.
 
 ### Parting Insights and Future Explorations
+
 Through this experience, I reminded myself of the importance of writing down what I've learned and had a little fun along the way.
 
 If you're enticed by the idea of adding a little color to your most visited sites, consider creating a quick little extension for fun and learning.

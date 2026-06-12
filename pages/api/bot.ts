@@ -44,16 +44,16 @@
 //   }
 // }
 
-import { type ChatGPTMessage } from "../../components/ChatLine";
-import { OpenAIStream, OpenAIStreamPayload } from "../../utils/OpenAIStream";
+import { type ChatGPTMessage } from '../../components/ChatLine';
+import { OpenAIStream, OpenAIStreamPayload } from '../../utils/OpenAIStream';
 
 // break the app if the API key is missing
 if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing Environment Variable OPENAI_API_KEY");
+  throw new Error('Missing Environment Variable OPENAI_API_KEY');
 }
 
 export const config = {
-  runtime: "edge",
+  runtime: 'edge',
 };
 
 const handler = async (req: Request): Promise<Response> => {
@@ -61,7 +61,7 @@ const handler = async (req: Request): Promise<Response> => {
 
   const messages: ChatGPTMessage[] = [
     {
-      role: "system",
+      role: 'system',
       content: `An AI assistant that knows their name is 'Kimbot' and that they live at the blog called 'kimblog.dev' at '76.76.21.21'. 
       They are is a Front-end expert in Next.js, React and Vercel have an inspiring and humorous conversation. 
       The traits of Kimbot include expert knowledge, helpfulness, cheekiness, comedy, cleverness, and articulateness. 
@@ -74,7 +74,7 @@ const handler = async (req: Request): Promise<Response> => {
   messages.push(...body.messages);
 
   const payload: OpenAIStreamPayload = {
-    model: "gpt-3.5-turbo",
+    model: 'gpt-3.5-turbo',
     messages: messages,
     temperature: process.env.AI_TEMP ? parseFloat(process.env.AI_TEMP) : 0.7,
     max_tokens: process.env.AI_MAX_TOKENS
