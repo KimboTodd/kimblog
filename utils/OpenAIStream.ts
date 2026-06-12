@@ -1,88 +1,35 @@
-import {
-  createParser,
-  ParsedEvent,
-  ReconnectInterval,
-} from 'eventsource-parser';
+import OpenAI from 'openai';
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
-export type ChatGPTAgent = 'user' | 'system' | 'assistant';
+export type { ChatCompletionMessageParam as ChatGPTMessage };
 
-export interface ChatGPTMessage {
-  role: ChatGPTAgent;
-  content: string;
-}
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export interface OpenAIStreamPayload {
-  model: string;
-  messages: ChatGPTMessage[];
-  temperature: number;
-  top_p: number;
-  frequency_penalty: number;
-  presence_penalty: number;
-  max_tokens: number;
-  stream: boolean;
-  stop?: string[];
-  user?: string;
-  n: number;
-}
-
-export async function OpenAIStream(payload: OpenAIStreamPayload) {
-  const encoder = new TextEncoder();
-  const decoder = new TextDecoder();
-
-  let counter = 0;
-
-  const requestHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ''}`,
-  };
-
-  if (process.env.OPENAI_API_ORG) {
-    requestHeaders['OpenAI-Organization'] = process.env.OPENAI_API_ORG;
-  }
-
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
-    headers: requestHeaders,
-    method: 'POST',
-    body: JSON.stringify(payload),
+export async function OpenAIStream(
+  messages: ChatCompletionMessageParam[],
+  options: { temperature: number; maxTokens: number }
+) {
+  const response = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages,
+    stream: true,
+    temperature: options.temperature,
+    max_tokens: options.maxTokens,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
   });
 
-  const stream = new ReadableStream({
+  const encoder = new TextEncoder();
+  return new ReadableStream<Uint8Array>({
     async start(controller) {
-      // callback
-      function onParse(event: ParsedEvent | ReconnectInterval) {
-        if (event.type === 'event') {
-          const data = event.data;
-          // https://beta.openai.com/docs/api-reference/completions/create#completions/create-stream
-          if (data === '[DONE]') {
-            console.log('DONE');
-            controller.close();
-            return;
-          }
-          try {
-            const json = JSON.parse(data);
-            const text = json.choices[0].delta?.content || '';
-            if (counter < 2 && (text.match(/\n/) || []).length) {
-              // this is a prefix character (i.e., "\n\n"), do nothing
-              return;
-            }
-            const queue = encoder.encode(text);
-            controller.enqueue(queue);
-            counter++;
-          } catch (e) {
-            // maybe parse error
-            controller.error(e);
-          }
+      for await (const chunk of response) {
+        const text = chunk.choices[0]?.delta?.content ?? '';
+        if (text) {
+          controller.enqueue(encoder.encode(text));
         }
       }
-
-      // stream response (SSE) from OpenAI may be fragmented into multiple chunks
-      // this ensures we properly read chunks and invoke an event for each SSE event stream
-      const parser = createParser(onParse);
-      for await (const chunk of res.body as any) {
-        parser.feed(decoder.decode(chunk));
-      }
+      controller.close();
     },
   });
-
-  return stream;
 }
