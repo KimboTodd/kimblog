@@ -27,13 +27,13 @@ export default function Post({ post, morePosts, preview }: Props) {
   return (
     <Layout preview={preview}>
       <Container>
-        <h2 className="mb-9 mt-5 text-2xl font-bold leading-tight tracking-tight md:mb-20 md:mt-8 md:text-4xl md:tracking-tighter">
+        <h2 className="mt-5 mb-9 text-2xl leading-tight font-bold tracking-tight md:mt-8 md:mb-20 md:text-4xl md:tracking-tighter">
           <Link href="/" className="hover:underline">
             kimblog
           </Link>
         </h2>
         {router.isFallback ? (
-          <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
+          <h1 className="mb-12 text-center text-5xl leading-tight font-bold tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
             Loading…
           </h1>
         ) : (
@@ -46,7 +46,7 @@ export default function Post({ post, morePosts, preview }: Props) {
 
               {/* header */}
               <div className="mx-auto max-w-6xl">
-                <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
+                <h1 className="mb-12 text-center text-5xl leading-tight font-bold tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
                   {title}
                 </h1>
                 <div className="mb-6 block">

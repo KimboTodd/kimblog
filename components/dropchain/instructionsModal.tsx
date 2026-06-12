@@ -22,7 +22,7 @@ const InstructionsModal = ({ open, setOpen }) => {
         From: "opacity-100"
         To: "opacity-0"
     --> */}
-      <div className="fixed inset-0 bg-slate-900 bg-opacity-75 transition-opacity"></div>
+      <div className="bg-opacity-75 fixed inset-0 bg-slate-900 transition-opacity"></div>
 
       <div className="fixed inset-0 z-10 overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4 sm:items-center sm:p-0">
@@ -37,11 +37,11 @@ const InstructionsModal = ({ open, setOpen }) => {
             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         --> */}
           <div className="relative transform overflow-hidden border-4 border-double border-green-500 bg-slate-900 text-left transition-all sm:my-8 sm:w-full sm:max-w-3xl">
-            <div className="pb-4 pt-5 sm:p-3 sm:pb-4">
+            <div className="pt-5 pb-4 sm:p-3 sm:pb-4">
               <div className="sm:flex sm:items-start">
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <h3
-                    className="font-mono text-base font-semibold leading-6 text-green-500"
+                    className="font-mono text-base leading-6 font-semibold text-green-500"
                     id="modal-title"
                   >
                     INSTRUCTIONS

@@ -61,7 +61,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
 
   return stagingRow ? (
     <div
-      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-b-2 border-t-2 border-green-600 text-xl lg:text-3xl`}
+      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-t-2 border-b-2 border-green-600 text-xl lg:text-3xl`}
     >
       ({cellState.content})
     </div>

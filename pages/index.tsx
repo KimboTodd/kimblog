@@ -22,8 +22,8 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           {/* intro */}
-          <section className="mb-16 mt-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
-            <h1 className="text-5xl font-bold leading-tight tracking-tighter md:pr-8 md:text-8xl">
+          <section className="mt-16 mb-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
+            <h1 className="text-5xl leading-tight font-bold tracking-tighter md:pr-8 md:text-8xl">
               {BLOG_NAME}
             </h1>
             <h4 className="mt-5 text-center text-lg md:pl-8 md:text-left">
@@ -31,7 +31,7 @@ export default function Index({ allPosts }: Props) {
             </h4>
           </section>
 
-          <hr className="mb-1 mt-1 border-neutral-200 md:mb-24 md:mt-24" />
+          <hr className="mt-1 mb-1 border-neutral-200 md:mt-24 md:mb-24" />
 
           {heroPost && (
             <HeroPost
@@ -44,11 +44,11 @@ export default function Index({ allPosts }: Props) {
             />
           )}
 
-          <hr className="mb-6 mt-1 border-neutral-200 md:mb-24 md:mt-24" />
+          <hr className="mt-1 mb-6 border-neutral-200 md:mt-24 md:mb-24" />
 
           {morePosts.length > 0 && (
             <section>
-              <h2 className="mb-8 text-5xl font-bold leading-tight tracking-tighter md:text-7xl">
+              <h2 className="mb-8 text-5xl leading-tight font-bold tracking-tighter md:text-7xl">
                 More Stories
               </h2>
               <div className="mb-32 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-16 md:gap-y-32 lg:gap-x-32">

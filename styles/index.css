@@ -1,3 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@keyframes flashWhite {
+  from {
+    color: white;
+  }
+  to {
+    color: inherit;
+  }
+}
+
+@theme {
+  /* Custom colors */
+  --color-breige-50: #fdf8f6;
+  --color-breige-100: #f2e8e5;
+  --color-breige-200: #eaddd7;
+  --color-breige-300: #e0cec7;
+  --color-breige-400: #d2bab0;
+  --color-breige-500: #ecd5a6;
+  --color-breige-600: #a18072;
+  --color-breige-700: #977669;
+  --color-breige-800: #846358;
+  --color-breige-900: #43302b;
+  --color-slate-550: #5a7071;
+  --color-slate-950: #000101;
+  --color-accent-1: #fafafa;
+  --color-accent-2: #eaeaea;
+  --color-accent-7: #333;
+  --color-success: #0070f3;
+  --color-cyan: #79ffe1;
+
+  /* Animation */
+  --animate-flash-white: flashWhite 0.1s infinite;
+
+  /* Spacing */
+  --spacing-28: 7rem;
+
+  /* Letter spacing */
+  --letter-spacing-tighter: -0.04em;
+
+  /* Line height */
+  --line-height-tight: 1.2;
+
+  /* Font sizes */
+  --font-size-5xl: 2.5rem;
+  --font-size-6xl: 2.75rem;
+  --font-size-7xl: 4.5rem;
+  --font-size-8xl: 6.25rem;
+
+  /* Shadows */
+  --shadow-sm: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+}

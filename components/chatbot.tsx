@@ -72,7 +72,7 @@ const Chatbot = () => {
           type="text"
           aria-label="chat input"
           required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-2 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/10 sm:text-sm"
+          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-2 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 focus:outline-none sm:text-sm"
           value={input}
           onKeyDown={e => {
             if (e.key === 'Enter') {
