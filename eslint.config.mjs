@@ -1,21 +1,12 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
+import nextConfig from 'eslint-config-next/core-web-vitals';
+import prettier from 'eslint-config-prettier';
+import tailwind from 'eslint-plugin-tailwindcss';
 
 const config = [
   { ignores: ['.next/', 'node_modules/'] },
-  js.configs.recommended,
-  ...compat.extends('next/core-web-vitals', 'prettier'),
-  ...compat.plugins('tailwindcss'),
+  ...nextConfig,
+  ...tailwind.configs['flat/recommended'],
+  prettier,
   {
     rules: {
       eqeqeq: ['warn', 'smart'],
@@ -23,6 +14,10 @@ const config = [
       'no-unused-vars': 'warn',
       'prefer-const': 'warn',
       'prefer-template': 'warn',
+      // React Compiler not adopted
+      'react-compiler/react-compiler': 'off',
+      // Dropchain game uses setState in effects intentionally
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ];

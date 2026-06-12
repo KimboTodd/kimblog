@@ -16,7 +16,7 @@ const Display = ({ text, flash }) => {
   return (
     <div
       className={`box-border flex w-full p-1 ${
-        flashing ? 'animate-flashWhite' : ''
+        flashing ? 'animate-flash-white' : ''
       } border-2 border-dashed border-green-700 p-2 text-center font-mono text-base text-green-500 md:text-base lg:text-2xl`}
     >
       {text}
