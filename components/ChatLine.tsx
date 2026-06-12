@@ -9,7 +9,7 @@ export interface ChatGPTMessage {
 
 // loading placeholder animation for the chat line
 export const LoadingChatLine = () => (
-  <div className=" mb-5 flex min-w-full animate-pulse rounded-lg bg-white p-3 shadow-sm shadow-orange-500/10 ring-1 ring-orange-600/20 hover:ring-2 sm:px-6">
+  <div className="mb-5 flex min-w-full animate-pulse rounded-lg bg-white p-3 shadow-sm shadow-orange-500/10 ring-1 ring-orange-600/20 hover:ring-2 sm:px-6">
     <div className="flex flex-grow space-x-3">
       <div className="min-w-0 flex-1">
         <Avatar
@@ -52,7 +52,7 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
               name={'kimbot'}
               picture={'/assets/blog/kimbotAvatarSmall.png'}
             />
-            <p className={'text font- '}>{formattedMessage}</p>
+            <p className={'text font-'}>{formattedMessage}</p>
           </div>
         </div>
       </div>

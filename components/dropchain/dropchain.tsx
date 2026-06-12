@@ -22,7 +22,7 @@ const DropChain = () => {
     resetPlayer,
     linksDropped,
     setGameOver,
-    setGameOn
+    setGameOn,
   );
   const [score, level, resetScore] = useScore(linksBroken, linksDropped);
   const [modalOpen, setModalOpen] = useState(false);

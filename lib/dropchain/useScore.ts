@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useScore = (
   linksBroken: number,
-  linksDropped: number
+  linksDropped: number,
 ): [number, number, () => void] => {
   const [score, setScore] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);

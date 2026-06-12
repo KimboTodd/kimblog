@@ -12,7 +12,7 @@ const Board = ({ grid }: { grid: Grid }) => {
           return (
             <Cell key={x} cell={cell} fill={cell[0]} stagingRow={i === 0} />
           );
-        })
+        }),
       )}
     </div>
   );

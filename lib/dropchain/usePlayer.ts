@@ -6,7 +6,7 @@ import { LINK, randomLink } from '../../components/dropchain/links';
 export const usePlayer = (): [
   Player,
   (args: { x: number; y: number; collided: boolean; content?: number }) => void,
-  () => void
+  () => void,
 ] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },

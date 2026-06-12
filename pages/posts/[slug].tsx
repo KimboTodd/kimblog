@@ -65,7 +65,7 @@ export default function Post({ post, morePosts, preview }: Props) {
                         <Image
                           priority
                           src={post.coverImage}
-                          className="w-full "
+                          className="w-full"
                           alt={`Cover Image for ${title}`}
                           fill={true}
                           style={{ objectFit: 'cover' }}
@@ -76,7 +76,7 @@ export default function Post({ post, morePosts, preview }: Props) {
                       <Image
                         priority
                         src={post.coverImage}
-                        className="w-full "
+                        className="w-full"
                         alt={`Cover Image for ${title}`}
                         fill={true}
                         style={{ objectFit: 'cover' }}

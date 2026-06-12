@@ -13,7 +13,7 @@ export const useBoard = (
   resetPlayer: () => void,
   linksDropped: number,
   setGameOver: React.Dispatch<React.SetStateAction<boolean>>,
-  setGameOn: React.Dispatch<React.SetStateAction<boolean>>
+  setGameOn: React.Dispatch<React.SetStateAction<boolean>>,
 ): [Grid, React.Dispatch<React.SetStateAction<Grid>>, number] => {
   const initialGrid: Grid = createGrid();
   const [grid, setGrid] = useState<Grid>(initialGrid);
@@ -46,7 +46,7 @@ export const useBoard = (
 
       return newGrid;
     },
-    [resetPlayer]
+    [resetPlayer],
   );
 
   useEffect(() => {

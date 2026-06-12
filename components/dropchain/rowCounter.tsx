@@ -4,7 +4,7 @@ const RowCounter = ({ links }) => {
   const chars = ['⠂', '⠆', '⠒', '⠲', '⠢', '⠖', '⠶'];
   return (
     <div
-      className={`grid w-full grid-cols-7 border-2 border-solid border-green-600 `}
+      className={`grid w-full grid-cols-7 border-2 border-solid border-green-600`}
     >
       {Array.from(Array(7).keys()).map((_, i) => {
         return (

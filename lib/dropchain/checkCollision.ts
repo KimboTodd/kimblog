@@ -10,7 +10,7 @@ const isMoveBlocked = (grid: Grid, nextY: number, nextX: number) =>
 export const checkCollision = (
   player: Player,
   grid: Grid,
-  nextPosition: Position
+  nextPosition: Position,
 ): boolean => {
   if (player.content !== 0) {
     const nextY = player.pos.y + nextPosition.y;

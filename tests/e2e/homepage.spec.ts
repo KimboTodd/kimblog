@@ -7,7 +7,7 @@ test.describe('Homepage', () => {
 
   test('renders the blog title', async ({ page }) => {
     await expect(
-      page.getByRole('heading', { name: 'kimblog', level: 1 })
+      page.getByRole('heading', { name: 'kimblog', level: 1 }),
     ).toBeVisible();
   });
 
@@ -19,7 +19,10 @@ test.describe('Homepage', () => {
   test('clicking a post preview navigates to the post page', async ({
     page,
   }) => {
-    await page.getByRole('heading', { name: 'Creating a Chrome Extension' }).getByRole('link').dispatchEvent('click');
+    await page
+      .getByRole('heading', { name: 'Creating a Chrome Extension' })
+      .getByRole('link')
+      .dispatchEvent('click');
     await expect(page).toHaveURL(/\/posts\/chromeExtension/);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   });

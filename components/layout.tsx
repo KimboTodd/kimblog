@@ -27,7 +27,7 @@ const Layout = ({ preview, children }: Props) => {
                   className="mr-4 hidden h-10 w-10 rounded-full ring-green-500/20 hover:ring-4 lg:block"
                   alt="Image of Kim's avatar"
                 />
-                <span className="ml-3 text-xl text-gray-500 sm:ml-4  sm:border-r-2 sm:border-gray-200 sm:py-2 sm:pr-4">
+                <span className="ml-3 text-xl text-gray-500 sm:ml-4 sm:border-r-2 sm:border-gray-200 sm:py-2 sm:pr-4">
                   Kim Todd
                 </span>
               </a>
