@@ -1,84 +1,84 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Display from './display';
-import StartButton from './startButton';
-import { usePlayer } from '../../lib/dropchain/usePlayer';
-import { useBoard } from '../../lib/dropchain/useBoard';
-import { createGrid } from '../../lib/dropchain/grid';
-import { checkCollision } from '../../lib/dropchain/checkCollision';
-import Board from './board';
-import InverseDisplay from './inverseDisplay';
-import RowCounter from './rowCounter';
-import { useScore } from '../../lib/dropchain/useScore';
-import InstructionsModal from './instructionsModal';
-import { EMPTY } from './links';
+import React, { useEffect, useRef, useState } from 'react'
+import { checkCollision } from '../../lib/dropchain/checkCollision'
+import { createGrid } from '../../lib/dropchain/grid'
+import { useBoard } from '../../lib/dropchain/useBoard'
+import { usePlayer } from '../../lib/dropchain/usePlayer'
+import { useScore } from '../../lib/dropchain/useScore'
+import Board from './board'
+import Display from './display'
+import InstructionsModal from './instructionsModal'
+import InverseDisplay from './inverseDisplay'
+import { EMPTY } from './links'
+import RowCounter from './rowCounter'
+import StartButton from './startButton'
 
 const DropChain = () => {
-  const [linksDropped, setLinksDropped] = useState<number>(0);
-  const [gameOver, setGameOver] = useState(null);
-  const [gameOn, setGameOn] = useState(false);
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [linksDropped, setLinksDropped] = useState<number>(0)
+  const [gameOver, setGameOver] = useState(null)
+  const [gameOn, setGameOn] = useState(false)
+  const [player, updatePlayerPos, resetPlayer] = usePlayer()
   const [grid, setGrid, linksBroken] = useBoard(
     player,
     resetPlayer,
     linksDropped,
     setGameOver,
     setGameOn,
-  );
-  const [score, level, resetScore] = useScore(linksBroken, linksDropped);
-  const [modalOpen, setModalOpen] = useState(false);
-  const playerRef = useRef(player);
+  )
+  const [score, level, resetScore] = useScore(linksBroken, linksDropped)
+  const [modalOpen, setModalOpen] = useState(false)
+  const playerRef = useRef(player)
 
   useEffect(() => {
     if (player.content !== EMPTY) {
-      setLinksDropped(prev => prev + 1);
+      setLinksDropped(prev => prev + 1)
     }
-  }, [player.content]);
+  }, [player.content])
 
   // Manage the game speed
   useEffect(() => {
     if (gameOver || gameOn === false) {
-      new Audio('/assets/blog/dropchain/error_003.ogg').play();
+      new Audio('/assets/blog/dropchain/error_003.ogg').play()
     }
-  }, [gameOn, gameOver, level, linksBroken]);
+  }, [gameOn, gameOver])
 
   const startGame = () => {
     // Reset everything
-    setGrid(createGrid());
-    resetPlayer();
-    setGameOver(false);
-    setGameOn(true);
-    resetScore();
-    setLinksDropped(0);
-  };
+    setGrid(createGrid())
+    resetPlayer()
+    setGameOver(false)
+    setGameOn(true)
+    resetScore()
+    setLinksDropped(0)
+  }
 
   const move = ({ keyCode }) => {
     switch (keyCode) {
       case 37: // Left arrow
         if (gameOn) {
           if (checkCollision(player, grid, { x: -1, y: 0 }) === false) {
-            updatePlayerPos({ x: -1, y: 0, collided: false });
+            updatePlayerPos({ x: -1, y: 0, collided: false })
           }
         }
-        break;
+        break
       case 39: // Right arrow
         if (gameOn) {
           if (checkCollision(player, grid, { x: 1, y: 0 }) === false) {
-            updatePlayerPos({ x: 1, y: 0, collided: false });
+            updatePlayerPos({ x: 1, y: 0, collided: false })
           }
         }
-        break;
+        break
       case 40: // Down arrow
         if (gameOn) {
-          dropLink();
+          dropLink()
         }
-        break;
+        break
       case 83: // S key
-        startGame();
-        break;
+        startGame()
+        break
       default:
-        break;
+        break
     }
-  };
+  }
 
   const dropLink = () => {
     const dropPlayer = () => {
@@ -87,32 +87,32 @@ const DropChain = () => {
       if (checkCollision(playerRef.current, grid, { x: 0, y: 1 })) {
         // Current link is unable to move down without colliding
         if (playerRef.current.pos.y < 1) {
-          setGameOver(true);
-          setGameOn(false);
-          return true;
+          setGameOver(true)
+          setGameOn(false)
+          return true
         }
 
-        new Audio('/assets/blog/dropchain/glass_006.ogg').play();
-        updatePlayerPos({ x: 0, y: 0, collided: true });
-        return true;
+        new Audio('/assets/blog/dropchain/glass_006.ogg').play()
+        updatePlayerPos({ x: 0, y: 0, collided: true })
+        return true
       } else {
-        new Audio('/assets/blog/dropchain/glass_002.ogg').play();
-        updatePlayerPos({ x: 0, y: 1, collided: false });
-        return false;
+        new Audio('/assets/blog/dropchain/glass_002.ogg').play()
+        updatePlayerPos({ x: 0, y: 1, collided: false })
+        return false
       }
-    };
+    }
 
     const timerId = setInterval(() => {
-      const collided = dropPlayer();
+      const collided = dropPlayer()
       if (collided) {
-        clearInterval(timerId);
+        clearInterval(timerId)
       }
-    }, 70);
-  };
+    }, 70)
+  }
 
   useEffect(() => {
-    playerRef.current = player;
-  }, [player]);
+    playerRef.current = player
+  }, [player])
 
   return (
     <div
@@ -148,7 +148,7 @@ const DropChain = () => {
             <RowCounter links={linksDropped} />
 
             <button
-              className="box-border w-full cursor-pointer border-4 border-double border-green-600 p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
+              className="box-border w-full cursor-pointer border-4 border-green-600 border-double p-4 font-mono text-green-500 sm:text-xl lg:text-2xl"
               onClick={() => setModalOpen(true)}
             >
               View Instructions
@@ -171,7 +171,7 @@ const DropChain = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DropChain;
+export default DropChain

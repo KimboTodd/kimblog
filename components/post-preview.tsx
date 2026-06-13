@@ -1,16 +1,16 @@
-import DateFormatter from './date-formatter';
-import Image from 'next/image';
-import Link from 'next/link';
-import type Author from '../interfaces/author';
+import Image from 'next/image'
+import Link from 'next/link'
+import type Author from '../interfaces/author'
+import DateFormatter from './date-formatter'
 
 type Props = {
-  title: string;
-  coverImage: string;
-  date: string;
-  excerpt: string;
-  author: Author;
-  slug: string;
-};
+  title: string
+  coverImage: string
+  date: string
+  excerpt: string
+  author: Author
+  slug: string
+}
 
 const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
   return (
@@ -43,7 +43,7 @@ const PostPreview = ({ title, coverImage, date, excerpt, slug }: Props) => {
       </div>
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
     </div>
-  );
-};
+  )
+}
 
-export default PostPreview;
+export default PostPreview

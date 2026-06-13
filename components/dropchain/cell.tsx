@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { LINK } from './links';
-import { CellState } from '../../lib/dropchain/types';
+import React, { useEffect, useState } from 'react'
+import { CellState } from '../../lib/dropchain/types'
+import { LINK } from './links'
 
 const Cell = ({ fill, cell, stagingRow }) => {
-  const [animationTimeoutId, setAnimationTimeoutId] = useState(null);
-  const [animating, setAnimating] = useState(false);
+  const [animationTimeoutId, setAnimationTimeoutId] = useState(null)
+  const [animating, setAnimating] = useState(false)
   const [cellState, setCellState] = useState({
     state: cell[1],
     content: LINK[fill].content ?? LINK[0].content,
     color: LINK[fill]?.color ?? LINK[0].color,
-  });
+  })
 
   // To prevent tailwind tree-shaking these colors again, we must include them here
   // eslint-disable-next-line no-unused-vars
-  const CHAIN_COLORS = [
+  const _CHAIN_COLORS = [
     'text-yellow-600',
     'text-green-600',
     'text-blue-600',
@@ -23,11 +23,11 @@ const Cell = ({ fill, cell, stagingRow }) => {
     'text-teal-600',
     'text-pink-600',
     'animate-ping',
-  ];
+  ]
 
   useEffect(() => {
     if (animating) {
-      return;
+      return
     }
 
     if (cell[1] === CellState.Score) {
@@ -35,33 +35,33 @@ const Cell = ({ fill, cell, stagingRow }) => {
         ...prevState,
         content: LINK[fill]?.content,
         state: CellState.Score,
-      }));
-      setAnimating(true);
+      }))
+      setAnimating(true)
 
-      clearTimeout(animationTimeoutId);
+      clearTimeout(animationTimeoutId)
       const newTimeoutId = setTimeout(() => {
         setCellState(prevState => ({
           ...prevState,
           content: LINK[fill]?.content,
           state: cell[1],
           color: LINK[fill].color,
-        }));
-        setAnimating(false);
-      }, 500);
-      setAnimationTimeoutId(newTimeoutId);
+        }))
+        setAnimating(false)
+      }, 500)
+      setAnimationTimeoutId(newTimeoutId)
     } else {
       setCellState(prevState => ({
         ...prevState,
         content: LINK[fill]?.content,
         state: cell[1],
         color: LINK[fill].color,
-      }));
+      }))
     }
-  }, [cell, animationTimeoutId, fill, animating, cellState.state]);
+  }, [cell, animationTimeoutId, fill, animating])
 
   return stagingRow ? (
     <div
-      className={`aspect-square font-mono ${cellState.color} border-top-2 flex items-center justify-center border-t-2 border-b-2 border-green-600 text-xl lg:text-3xl`}
+      className={`aspect-square font-mono ${cellState.color} flex items-center justify-center border-green-600 border-top-2 border-t-2 border-b-2 text-xl lg:text-3xl`}
     >
       ({cellState.content})
     </div>
@@ -73,7 +73,7 @@ const Cell = ({ fill, cell, stagingRow }) => {
     >
       ({cellState.content})
     </div>
-  );
-};
+  )
+}
 
-export default React.memo(Cell);
+export default React.memo(Cell)

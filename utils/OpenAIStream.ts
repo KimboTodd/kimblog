@@ -1,9 +1,9 @@
-import OpenAI from 'openai';
-import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+import OpenAI from 'openai'
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions'
 
-export type { ChatCompletionMessageParam as ChatGPTMessage };
+export type { ChatCompletionMessageParam as ChatGPTMessage }
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export async function OpenAIStream(
   messages: ChatCompletionMessageParam[],
@@ -18,18 +18,18 @@ export async function OpenAIStream(
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-  });
+  })
 
-  const encoder = new TextEncoder();
+  const encoder = new TextEncoder()
   return new ReadableStream<Uint8Array>({
     async start(controller) {
       for await (const chunk of response) {
-        const text = chunk.choices[0]?.delta?.content ?? '';
+        const text = chunk.choices[0]?.delta?.content ?? ''
         if (text) {
-          controller.enqueue(encoder.encode(text));
+          controller.enqueue(encoder.encode(text))
         }
       }
-      controller.close();
+      controller.close()
     },
-  });
+  })
 }

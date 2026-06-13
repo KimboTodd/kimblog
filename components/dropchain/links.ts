@@ -1,4 +1,4 @@
-import { Link } from '../../lib/dropchain/types';
+import { Link } from '../../lib/dropchain/types'
 
 export const LINK = [
   { content: 0, color: 'text-slate-900' },
@@ -10,13 +10,13 @@ export const LINK = [
   { content: 6, color: 'text-orange-600' },
   { content: 7, color: 'text-teal-600' },
   { content: 0, color: 'text-green-600' }, // this is index 8, represents appearance of links
-];
+]
 
-export const UNBREAKABLE = 8;
-export const EMPTY = 0;
+export const UNBREAKABLE = 8
+export const EMPTY = 0
 
 // Get a random chain, except for the first which is the placeholder
 // and the last which is the merged chain
 // temp TODO: remove this shorter length
 export const randomLink = (): Link =>
-  LINK[Math.floor(Math.random() * (LINK.length - 2) + 1)];
+  LINK[Math.floor(Math.random() * (LINK.length - 2) + 1)]

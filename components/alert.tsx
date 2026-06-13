@@ -1,8 +1,8 @@
-import Container from './container';
+import Container from './container'
 
 type Props = {
-  preview?: boolean;
-};
+  preview?: boolean
+}
 
 const Alert = ({ preview }: Props) => {
   return preview ? (
@@ -26,7 +26,7 @@ const Alert = ({ preview }: Props) => {
     </div>
   ) : (
     <></>
-  );
-};
+  )
+}
 
-export default Alert;
+export default Alert

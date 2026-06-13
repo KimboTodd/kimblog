@@ -1,27 +1,27 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react'
 
 const Display = ({ text, flash }) => {
-  const [flashing, setFlashing] = useState(false);
+  const [flashing, setFlashing] = useState(false)
 
   useEffect(() => {
-    if (!flash) return;
+    if (!flash) return
 
-    setFlashing(true);
+    setFlashing(true)
     const timeout = setTimeout(() => {
-      setFlashing(false);
-    }, 200);
-    return () => clearTimeout(timeout);
-  }, [text, flash]);
+      setFlashing(false)
+    }, 200)
+    return () => clearTimeout(timeout)
+  }, [flash])
 
   return (
     <div
       className={`box-border flex w-full p-1 ${
         flashing ? 'animate-flash-white' : ''
-      } border-2 border-dashed border-green-700 p-2 text-center font-mono text-base text-green-500 md:text-base lg:text-2xl`}
+      } border-2 border-green-700 border-dashed p-2 text-center font-mono text-base text-green-500 md:text-base lg:text-2xl`}
     >
       {text}
     </div>
-  );
-};
+  )
+}
 
-export default memo(Display);
+export default memo(Display)

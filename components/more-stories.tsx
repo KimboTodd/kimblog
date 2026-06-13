@@ -1,14 +1,14 @@
-import PostPreview from './post-preview';
-import type Post from '../interfaces/post';
+import type Post from '../interfaces/post'
+import PostPreview from './post-preview'
 
 type Props = {
-  posts: Post[];
-};
+  posts: Post[]
+}
 
 const MoreStories = ({ posts }: Props) => {
   return (
     <section>
-      <h2 className="mb-8 text-5xl leading-tight font-bold tracking-tighter md:text-7xl">
+      <h2 className="mb-8 font-bold text-5xl leading-tight tracking-tighter md:text-7xl">
         More Stories
       </h2>
       <div className="mb-32 grid grid-cols-1 gap-y-20 md:grid-cols-2 md:gap-x-16 md:gap-y-32 lg:gap-x-32">
@@ -25,7 +25,7 @@ const MoreStories = ({ posts }: Props) => {
         ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default MoreStories;
+export default MoreStories

@@ -1,19 +1,19 @@
-import Container from '../components/container';
-import HeroPost from '../components/hero-post';
-import Layout from '../components/layout';
-import { getAllPosts } from '../lib/posts';
-import Head from 'next/head';
-import { BLOG_NAME } from '../lib/constants';
-import Post from '../interfaces/post';
-import PostPreview from '../components/post-preview';
+import Head from 'next/head'
+import Container from '../components/container'
+import HeroPost from '../components/hero-post'
+import Layout from '../components/layout'
+import PostPreview from '../components/post-preview'
+import Post from '../interfaces/post'
+import { BLOG_NAME } from '../lib/constants'
+import { getAllPosts } from '../lib/posts'
 
 type Props = {
-  allPosts: Post[];
-};
+  allPosts: Post[]
+}
 
 export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  const heroPost = allPosts[0]
+  const morePosts = allPosts.slice(1)
   return (
     <>
       <Layout>
@@ -23,7 +23,7 @@ export default function Index({ allPosts }: Props) {
         <Container>
           {/* intro */}
           <section className="mt-16 mb-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
-            <h1 className="text-5xl leading-tight font-bold tracking-tighter md:pr-8 md:text-8xl">
+            <h1 className="font-bold text-5xl leading-tight tracking-tighter md:pr-8 md:text-8xl">
               {BLOG_NAME}
             </h1>
             <h4 className="mt-5 text-center text-lg md:pl-8 md:text-left">
@@ -48,7 +48,7 @@ export default function Index({ allPosts }: Props) {
 
           {morePosts.length > 0 && (
             <section>
-              <h2 className="mb-8 text-5xl leading-tight font-bold tracking-tighter md:text-7xl">
+              <h2 className="mb-8 font-bold text-5xl leading-tight tracking-tighter md:text-7xl">
                 More Stories
               </h2>
               <div className="mb-32 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-16 md:gap-y-32 lg:gap-x-32">
@@ -70,7 +70,7 @@ export default function Index({ allPosts }: Props) {
         </Container>
       </Layout>
     </>
-  );
+  )
 }
 
 export const getStaticProps = async () => {
@@ -81,9 +81,9 @@ export const getStaticProps = async () => {
     'author',
     'coverImage',
     'excerpt',
-  ]);
+  ])
 
   return {
     props: { allPosts },
-  };
-};
+  }
+}

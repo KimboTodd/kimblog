@@ -1,16 +1,16 @@
-import { type ChatGPTMessage } from '../../components/ChatLine';
-import { OpenAIStream } from '../../utils/OpenAIStream';
+import { type ChatGPTMessage } from '../../components/ChatLine'
+import { OpenAIStream } from '../../utils/OpenAIStream'
 
 if (!process.env.OPENAI_API_KEY) {
-  throw new Error('Missing Environment Variable OPENAI_API_KEY');
+  throw new Error('Missing Environment Variable OPENAI_API_KEY')
 }
 
 export const config = {
   runtime: 'edge',
-};
+}
 
 const handler = async (req: Request): Promise<Response> => {
-  const body = await req.json();
+  const body = await req.json()
 
   const messages: ChatGPTMessage[] = [
     {
@@ -24,16 +24,16 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     },
     ...body.messages,
-  ];
+  ]
 
   const stream = await OpenAIStream(messages, {
     temperature: process.env.AI_TEMP ? parseFloat(process.env.AI_TEMP) : 0.7,
     maxTokens: process.env.AI_MAX_TOKENS
       ? parseInt(process.env.AI_MAX_TOKENS)
       : 100,
-  });
+  })
 
-  return new Response(stream);
-};
+  return new Response(stream)
+}
 
-export default handler;
+export default handler

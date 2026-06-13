@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import { BLOG_NAME } from '../lib/constants';
+import Head from 'next/head'
+import { BLOG_NAME } from '../lib/constants'
 
 const Meta = () => {
   return (
@@ -41,7 +41,7 @@ const Meta = () => {
         content="http:www.kimbo.dev/assets/blog/authors/KimPossibleAvatar.jpeg"
       />
     </Head>
-  );
-};
+  )
+}
 
-export default Meta;
+export default Meta

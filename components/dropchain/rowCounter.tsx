@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
 const RowCounter = ({ links }) => {
-  const chars = ['⠂', '⠆', '⠒', '⠲', '⠢', '⠖', '⠶'];
+  const chars = ['⠂', '⠆', '⠒', '⠲', '⠢', '⠖', '⠶']
   return (
     <div
-      className={`grid w-full grid-cols-7 border-2 border-solid border-green-600`}
+      className={`grid w-full grid-cols-7 border-2 border-green-600 border-solid`}
     >
       {Array.from(Array(7).keys()).map((_, i) => {
         return (
@@ -16,10 +16,10 @@ const RowCounter = ({ links }) => {
           >
             {chars[i]}
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default memo(RowCounter);
+export default memo(RowCounter)

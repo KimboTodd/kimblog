@@ -1,39 +1,39 @@
-import { useRouter } from 'next/router';
-import ErrorPage from 'next/error';
-import Container from '../../components/container';
-import Layout from '../../components/layout';
-import { getPostBySlug, getAllPosts } from '../../lib/posts';
-import Head from 'next/head';
-import type PostType from '../../interfaces/post';
-import Link from 'next/link';
-import Avatar from '../../components/avatar';
-import DateFormatter from '../../components/date-formatter';
-import Chatbot from '../../components/chatbot';
-import Markdown from 'markdown-to-jsx';
-import Image from 'next/image';
+import Markdown from 'markdown-to-jsx'
+import ErrorPage from 'next/error'
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Avatar from '../../components/avatar'
+import Chatbot from '../../components/chatbot'
+import Container from '../../components/container'
+import DateFormatter from '../../components/date-formatter'
+import Layout from '../../components/layout'
+import type PostType from '../../interfaces/post'
+import { getAllPosts, getPostBySlug } from '../../lib/posts'
 
 type Props = {
-  post: PostType;
-  morePosts: PostType[];
-  preview?: boolean;
-};
+  post: PostType
+  morePosts: PostType[]
+  preview?: boolean
+}
 
 export default function Post({ post, morePosts, preview }: Props) {
-  const router = useRouter();
-  const title = `${post.title}`;
+  const router = useRouter()
+  const title = `${post.title}`
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+    return <ErrorPage statusCode={404} />
   }
   return (
     <Layout preview={preview}>
       <Container>
-        <h2 className="mt-5 mb-9 text-2xl leading-tight font-bold tracking-tight md:mt-8 md:mb-20 md:text-4xl md:tracking-tighter">
+        <h2 className="mt-5 mb-9 font-bold text-2xl leading-tight tracking-tight md:mt-8 md:mb-20 md:text-4xl md:tracking-tighter">
           <Link href="/" className="hover:underline">
             kimblog
           </Link>
         </h2>
         {router.isFallback ? (
-          <h1 className="mb-12 text-center text-5xl leading-tight font-bold tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
+          <h1 className="mb-12 text-center font-bold text-5xl leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
             Loading…
           </h1>
         ) : (
@@ -46,7 +46,7 @@ export default function Post({ post, morePosts, preview }: Props) {
 
               {/* header */}
               <div className="mx-auto max-w-6xl">
-                <h1 className="mb-12 text-center text-5xl leading-tight font-bold tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
+                <h1 className="mb-12 text-center font-bold text-5xl leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
                   {title}
                 </h1>
                 <div className="mb-6 block">
@@ -93,8 +93,6 @@ export default function Post({ post, morePosts, preview }: Props) {
               <div className="mx-auto max-w-3xl">
                 <div className="prose lg:prose-xl">
                   <Markdown
-                    // eslint-disable-next-line react/no-children-prop
-                    children={post.content}
                     options={{
                       overrides: {
                         Chatbot: {
@@ -102,7 +100,9 @@ export default function Post({ post, morePosts, preview }: Props) {
                         },
                       },
                     }}
-                  />
+                  >
+                    {post.content}
+                  </Markdown>
                 </div>
               </div>
             </article>
@@ -110,14 +110,14 @@ export default function Post({ post, morePosts, preview }: Props) {
         )}
       </Container>
     </Layout>
-  );
+  )
 }
 
 type Params = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
@@ -129,7 +129,7 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
     'coverLink',
-  ]);
+  ])
 
   return {
     props: {
@@ -137,11 +137,11 @@ export async function getStaticProps({ params }: Params) {
         ...post,
       },
     },
-  };
+  }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug']);
+  const posts = getAllPosts(['slug'])
 
   return {
     paths: posts.map(post => {
@@ -149,8 +149,8 @@ export async function getStaticPaths() {
         params: {
           slug: post.slug,
         },
-      };
+      }
     }),
     fallback: false,
-  };
+  }
 }

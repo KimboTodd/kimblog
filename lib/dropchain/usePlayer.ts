@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
-import { GRID_WIDTH } from './grid';
-import { Player } from './types';
-import { LINK, randomLink } from '../../components/dropchain/links';
+import { useCallback, useState } from 'react'
+import { LINK, randomLink } from '../../components/dropchain/links'
+import { GRID_WIDTH } from './grid'
+import { Player } from './types'
 
 export const usePlayer = (): [
   Player,
@@ -12,7 +12,7 @@ export const usePlayer = (): [
     pos: { x: 0, y: 0 },
     content: LINK[0].content,
     collided: false,
-  });
+  })
 
   const updatePlayerPos = ({
     x,
@@ -20,10 +20,10 @@ export const usePlayer = (): [
     collided,
     content,
   }: {
-    x: number;
-    y: number;
-    collided: boolean;
-    content?: number;
+    x: number
+    y: number
+    collided: boolean
+    content?: number
   }) => {
     setPlayer(prev => ({
       ...prev,
@@ -33,16 +33,16 @@ export const usePlayer = (): [
       },
       collided,
       content: content !== undefined ? content : prev.content,
-    }));
-  };
+    }))
+  }
 
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: Math.floor(GRID_WIDTH / 2), y: 0 },
       content: randomLink().content,
       collided: false,
-    });
-  }, []);
+    })
+  }, [])
 
-  return [player, updatePlayerPos, resetPlayer];
-};
+  return [player, updatePlayerPos, resetPlayer]
+}

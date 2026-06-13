@@ -1,13 +1,13 @@
-import Alert from './alert';
-import Avatar from './avatar';
-import Container from './container';
-import Meta from './meta';
-import * as React from 'react';
+import * as React from 'react'
+import Alert from './alert'
+import Avatar from './avatar'
+import Container from './container'
+import Meta from './meta'
 
 type Props = {
-  preview?: boolean;
-  children: React.ReactNode;
-};
+  preview?: boolean
+  children: React.ReactNode
+}
 
 const Layout = ({ preview, children }: Props) => {
   return (
@@ -17,7 +17,7 @@ const Layout = ({ preview, children }: Props) => {
         <Alert preview={preview} />
         <main>{children}</main>
       </div>
-      <footer className="border-t border-neutral-200 bg-neutral-50">
+      <footer className="border-neutral-200 border-t bg-neutral-50">
         <Container>
           <div className="flex flex-col items-center py-8 lg:flex-row">
             <div className="flex flex-row content-center items-center justify-center p-5">
@@ -27,7 +27,7 @@ const Layout = ({ preview, children }: Props) => {
                   className="mr-4 hidden h-10 w-10 rounded-full ring-green-500/20 hover:ring-4 lg:block"
                   alt="Image of Kim's avatar"
                 />
-                <span className="ml-3 text-xl text-gray-500 sm:ml-4 sm:border-r-2 sm:border-gray-200 sm:py-2 sm:pr-4">
+                <span className="ml-3 text-gray-500 text-xl sm:ml-4 sm:border-gray-200 sm:border-r-2 sm:py-2 sm:pr-4">
                   Kim Todd
                 </span>
               </a>
@@ -98,7 +98,7 @@ const Layout = ({ preview, children }: Props) => {
             </div>
 
             {/* <span className="mt-4 inline-flex justify-center  sm:mt-0 sm:justify-start"> */}
-            <p className="text-sm text-gray-500 sm:ml-auto">
+            <p className="text-gray-500 text-sm sm:ml-auto">
               © 2023{' '}
               <a
                 href="https://github.com/KimboTodd"
@@ -114,7 +114,7 @@ const Layout = ({ preview, children }: Props) => {
         </Container>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
