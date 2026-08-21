@@ -16,7 +16,7 @@
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^9",
     "next": "^16",
-    "openai": "^6.42.0",
+    "openai": "^7.5.0",
     "react": "^19",
     "react-dom": "^19",
     "typescript": "^6"
